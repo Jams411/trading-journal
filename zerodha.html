@@ -8,167 +8,223 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a18; padding: 2rem 1rem; }
-  .container { max-width: 900px; margin: 0 auto; }
+  .container { max-width: 960px; margin: 0 auto; }
   h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
   .subtitle { font-size: 13px; color: #888780; margin-bottom: 2rem; }
   .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
-  .grid-3-even { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
   .metric { background: #ebebea; border-radius: 8px; padding: 1rem; }
   .metric-label { font-size: 12px; color: #888780; margin-bottom: 4px; }
   .metric-value { font-size: 22px; font-weight: 500; }
+  .metric-sub { font-size: 11px; color: #888780; margin-top: 2px; }
   .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
   .card-title { font-size: 13px; font-weight: 500; margin-bottom: 1rem; }
   .green { color: #1D9E75; }
   .red { color: #D85A30; }
   .muted { color: #888780; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-  .row-item { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 0.5px solid rgba(0,0,0,0.06); font-size: 12px; }
+  .row-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 0.5px solid rgba(0,0,0,0.06); font-size: 12px; }
   .row-item:last-child { border-bottom: none; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
   .tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+  .tag-learn { background: #F0EDFF; color: #5B4FBF; }
+  .tag-break { background: #FFF3DC; color: #8A5C00; }
+  .tag-profit { background: #EAF3DE; color: #3B6D11; }
   .tag-loss { background: #FAECE7; color: #993C1D; }
   .tag-gain { background: #EAF3DE; color: #3B6D11; }
-  .nav-link { font-size: 12px; color: #378ADD; text-decoration: none; }
-  .nav-link:hover { text-decoration: underline; }
-  @media (max-width: 600px) { .grid-3, .grid-3-even { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { text-align: left; padding: 6px 8px; font-weight: 500; font-size: 11px; color: #888780; border-bottom: 0.5px solid rgba(0,0,0,0.1); }
+  td { padding: 7px 8px; border-bottom: 0.5px solid rgba(0,0,0,0.05); }
+  tr:last-child td { border-bottom: none; }
+  tr.total-row td { font-weight: 600; border-top: 1px solid rgba(0,0,0,0.1); border-bottom: none; }
+  .note { font-size: 11px; color: #888780; margin-top: 8px; }
+  @media (max-width: 600px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.25rem;">
-    <h1>Zerodha — Learning Phase</h1>
-    <span></span>
-  </div>
-  <p class="subtitle">Jameel Shaikh · EKV211 · Jan 2021 – Jan 2022 · NSE + MCX</p>
+  <h1>Zerodha — Options Strategy</h1>
+  <p class="subtitle">Jameel Shaikh · EKV211 · FY2021-22 → FY2025-26 · NSE F&O + MCX</p>
 
+  <!-- Top metrics: profitable years only (FY24-25, FY25-26) -->
   <div class="grid-3">
     <div class="metric">
-      <div class="metric-label">Realized P&L</div>
-      <div class="metric-value red">-₹35,565</div>
+      <div class="metric-label">Net P&L (all 5 yrs)</div>
+      <div class="metric-value green">+₹3,05,403</div>
+      <div class="metric-sub">F&O carried entire portfolio</div>
     </div>
     <div class="metric">
-      <div class="metric-label">Total charges</div>
-      <div class="metric-value">₹3,664</div>
+      <div class="metric-label">ROI on avg capital — FY2024-25</div>
+      <div class="metric-value green">+22.3%</div>
+      <div class="metric-sub">Peak cap basis: +10.4%</div>
     </div>
     <div class="metric">
-      <div class="metric-label">Net P&L</div>
-      <div class="metric-value red">-₹39,421</div>
+      <div class="metric-label">ROI on avg capital — FY2025-26</div>
+      <div class="metric-value green">+15.3%</div>
+      <div class="metric-sub">Peak cap basis: +8.8%</div>
     </div>
   </div>
 
-  <div class="grid-3-even">
-
-    <div class="card" style="margin-bottom:0;">
-      <div class="card-title"><span class="dot" style="background:#7F77DD;"></span>F&O</div>
-      <div style="font-size:22px;font-weight:500;margin-bottom:0.75rem;" class="red">-₹37,194 <span style="font-size:12px;color:#888780;font-weight:400;">net</span></div>
-      <div style="font-size:12px;display:grid;gap:4px;">
-        <div class="muted">Realized: <span style="color:#D85A30;">-₹34,099</span></div>
-        <div class="muted">Charges: ₹3,095</div>
-        <div class="muted">Contracts: 12</div>
-        <div class="muted">NIFTY &amp; BANKNIFTY options</div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:0;">
-      <div class="card-title"><span class="dot" style="background:#378ADD;"></span>Equity</div>
-      <div style="font-size:22px;font-weight:500;margin-bottom:0.75rem;" class="red">-₹491 <span style="font-size:12px;color:#888780;font-weight:400;">net</span></div>
-      <div style="font-size:12px;display:grid;gap:4px;">
-        <div class="muted">Realized: <span style="color:#1D9E75;">+₹109</span></div>
-        <div class="muted">Charges: ₹510</div>
-        <div class="muted">Stocks: 13 positions</div>
-        <div class="muted">Large-cap, mixed sectors</div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:0;">
-      <div class="card-title"><span class="dot" style="background:#BA7517;"></span>Commodity</div>
-      <div style="font-size:22px;font-weight:500;margin-bottom:0.75rem;" class="red">-₹1,735 <span style="font-size:12px;color:#888780;font-weight:400;">net</span></div>
-      <div style="font-size:12px;display:grid;gap:4px;">
-        <div class="muted">Realized: <span style="color:#D85A30;">-₹1,576</span></div>
-        <div class="muted">Charges: ₹59</div>
-        <div class="muted">1 trade: Silver Mini futures</div>
-        <div class="muted">MCX</div>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
-
-    <div class="card">
-      <div class="card-title">F&O contracts</div>
-      <div id="foRows"></div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Equity positions</div>
-      <div id="eqRows"></div>
-    </div>
-
-  </div>
-
+  <!-- Year-by-year table -->
   <div class="card">
-    <div class="card-title">P&L by segment</div>
+    <div class="card-title">Year-by-year performance</div>
+    <table>
+      <thead>
+        <tr>
+          <th>FY</th>
+          <th>Phase</th>
+          <th style="text-align:right">Net P&L</th>
+          <th style="text-align:right">Avg Capital</th>
+          <th style="text-align:right">ROI (avg)</th>
+          <th style="text-align:right">Peak Capital</th>
+          <th style="text-align:right">ROI (peak)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>FY2021-22</td>
+          <td><span class="tag tag-learn">Learning</span></td>
+          <td style="text-align:right" class="red">-₹46,226</td>
+          <td style="text-align:right" class="muted">₹6,500</td>
+          <td style="text-align:right" class="muted">—</td>
+          <td style="text-align:right" class="muted">₹39,858</td>
+          <td style="text-align:right" class="muted">—</td>
+        </tr>
+        <tr>
+          <td>FY2022-23</td>
+          <td><span class="tag tag-learn">Learning</span></td>
+          <td style="text-align:right" class="red">-₹75,999</td>
+          <td style="text-align:right" class="muted">₹59,145</td>
+          <td style="text-align:right" class="muted">—</td>
+          <td style="text-align:right" class="muted">₹2,52,612</td>
+          <td style="text-align:right" class="muted">—</td>
+        </tr>
+        <tr>
+          <td>FY2023-24</td>
+          <td><span class="tag tag-break">Breakeven</span></td>
+          <td style="text-align:right" class="green">+₹1,913</td>
+          <td style="text-align:right">₹6,81,098</td>
+          <td style="text-align:right" class="muted">+0.3%</td>
+          <td style="text-align:right">₹29,39,424</td>
+          <td style="text-align:right" class="muted">+0.1%</td>
+        </tr>
+        <tr>
+          <td>FY2024-25</td>
+          <td><span class="tag tag-profit">Profitable</span></td>
+          <td style="text-align:right" class="green">+₹2,36,065</td>
+          <td style="text-align:right">₹10,57,237</td>
+          <td style="text-align:right" class="green"><strong>+22.3%</strong></td>
+          <td style="text-align:right">₹22,79,344</td>
+          <td style="text-align:right" class="green">+10.4%</td>
+        </tr>
+        <tr>
+          <td>FY2025-26</td>
+          <td><span class="tag tag-profit">Profitable</span></td>
+          <td style="text-align:right" class="green">+₹1,89,651</td>
+          <td style="text-align:right">₹12,43,013</td>
+          <td style="text-align:right" class="green"><strong>+15.3%</strong></td>
+          <td style="text-align:right">₹21,59,495</td>
+          <td style="text-align:right" class="green">+8.8%</td>
+        </tr>
+        <tr class="total-row">
+          <td>All 5 Years</td>
+          <td></td>
+          <td style="text-align:right" class="green">+₹3,05,403</td>
+          <td colspan="4" style="text-align:left;padding-left:12px;" class="muted">Learning phase losses fully recovered in FY24-25 + FY25-26</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">ROI = Net P&L ÷ capital deployed (avg / peak balance from ledger). Learning-phase ROI omitted — capital base (₹6.5K–₹59K) too small to be meaningful as a percentage.</p>
+  </div>
+
+  <!-- Net P&L bar chart -->
+  <div class="card">
+    <div class="card-title">Net P&L by year (₹)</div>
+    <div style="position:relative;height:220px;">
+      <canvas id="yearChart" role="img" aria-label="Bar chart: yearly net P&L FY2021-22 to FY2025-26"></canvas>
+    </div>
+  </div>
+
+  <!-- Segment breakdown -->
+  <div class="grid-2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title">Segment totals (5 yrs)</div>
+      <div class="row-item">
+        <span><span class="dot" style="background:#7F77DD;"></span>F&O (NSE)</span>
+        <span class="green" style="font-weight:500;">+₹3,99,046</span>
+      </div>
+      <div class="row-item">
+        <span><span class="dot" style="background:#D85A30;"></span>Commodity (MCX)</span>
+        <span class="red">-₹83,775</span>
+      </div>
+      <div class="row-item">
+        <span><span class="dot" style="background:#378ADD;"></span>Equity (NSE)</span>
+        <span class="red">-₹9,868</span>
+      </div>
+      <div class="row-item" style="border-top: 0.5px solid rgba(0,0,0,0.1); margin-top:4px; padding-top:8px;">
+        <span style="font-weight:500;">Net total</span>
+        <span class="green" style="font-weight:600;">+₹3,05,403</span>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title">F&O by year</div>
+      <div class="row-item">
+        <span>FY2021-22</span>
+        <span class="red">-₹37,194</span>
+      </div>
+      <div class="row-item">
+        <span>FY2022-23</span>
+        <span class="red">-₹19,275</span>
+      </div>
+      <div class="row-item">
+        <span>FY2023-24</span>
+        <span class="green">+₹29,304</span>
+      </div>
+      <div class="row-item">
+        <span>FY2024-25</span>
+        <span class="green" style="font-weight:500;">+₹2,36,373</span>
+      </div>
+      <div class="row-item">
+        <span>FY2025-26</span>
+        <span class="green" style="font-weight:500;">+₹1,89,839</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROI chart: profitable years only -->
+  <div class="card">
+    <div class="card-title">Return on capital — FY2023-24 onwards</div>
     <div style="position:relative;height:200px;">
-      <canvas id="segChart" role="img" aria-label="Bar chart: F&O net -37194, Equity net -491, Commodity net -1735"></canvas>
+      <canvas id="roiChart" role="img" aria-label="Bar chart: ROI on avg and peak capital FY2023-24 to FY2025-26"></canvas>
+    </div>
+    <p class="note">ROI (avg) = Net P&L ÷ average ledger balance · ROI (peak) = Net P&L ÷ highest ledger balance — conservative floor</p>
+  </div>
+
+  <!-- Strategy note -->
+  <div class="card">
+    <div class="card-title">Strategy overview</div>
+    <div style="font-size:12px; line-height:1.7; color:#444;">
+      <strong>Instrument:</strong> NIFTY &amp; BankNifty options (NSE) + commodity futures (MCX, discontinued after FY2023-24)<br>
+      <strong>Approach:</strong> Hedged options strategies (margin benefits via multi-leg positions)<br>
+      <strong>Capital efficiency:</strong> Margin optimisation through options hedging reduced actual capital at risk vs notional exposure<br>
+      <strong>Trajectory:</strong> FY2021-22 → FY2022-23 active learning, FY2023-24 breakeven, FY2024-25 → FY2025-26 consistent profitability<br>
+      <strong>Commodity:</strong> MCX futures active FY2021-22 to FY2023-24, exited after consistent losses (-₹83.8K total)
     </div>
   </div>
 
 </div>
 
 <script>
-const fo = [
-  {sym:'BANKNIFTY Aug 5 \'21 36000 PE', pnl:-6575},
-  {sym:'BANKNIFTY Aug 5 \'21 36200 CE', pnl:3296.25},
-  {sym:'BANKNIFTY Aug 12 \'21 36200 CE', pnl:500},
-  {sym:'BANKNIFTY Aug 12 \'21 36600 CE', pnl:-2200},
-  {sym:'BANKNIFTY Sep 2 \'21 37000 CE', pnl:-1600},
-  {sym:'NIFTY Aug 12 \'21 16400 CE', pnl:-3400},
-  {sym:'NIFTY Aug 18 \'21 16700 CE', pnl:365},
-  {sym:'NIFTY Sep 2 \'21 17150 CE', pnl:250},
-  {sym:'NIFTY Sep 9 \'21 17400 CE', pnl:-15395},
-  {sym:'NIFTY Sep 9 \'21 17500 CE', pnl:300},
-  {sym:'NIFTY Sep 23 \'21 17650 CE', pnl:850},
-  {sym:'NIFTY Sep 23 \'21 17750 CE', pnl:-10490},
-];
-const eq = [
-  {sym:'BANDHANBNK', pnl:-220, pct:-1.4},
-  {sym:'BERGEPAINT',  pnl:-40,  pct:-0.2},
-  {sym:'BHARTIARTL',  pnl:15,   pct:0.3},
-  {sym:'CIPLA',       pnl:96.9, pct:0.1},
-  {sym:'ETERNAL (Zomato)', pnl:755, pct:1.4},
-  {sym:'HDFCBANK',    pnl:25,   pct:0.2},
-  {sym:'IDEA',        pnl:-125, pct:-1.0},
-  {sym:'INDIAMART',   pnl:15,   pct:0.2},
-  {sym:'RELIANCE',    pnl:-282, pct:-1.0},
-  {sym:'SUNPHARMA',   pnl:-89,  pct:-0.1},
-  {sym:'TATVA',       pnl:2,    pct:0.1},
-  {sym:'TATA MOTORS DVR', pnl:-57.5, pct:-0.1},
-  {sym:'TORNTPOWER',  pnl:14,   pct:0.3},
-];
-
-const foContainer = document.getElementById('foRows');
-fo.forEach(f => {
-  const c = f.pnl >= 0 ? '#1D9E75' : '#D85A30';
-  const tag = f.pnl >= 0 ? '<span class="tag tag-gain">win</span>' : '<span class="tag tag-loss">loss</span>';
-  foContainer.innerHTML += `<div class="row-item"><span style="color:#888780;max-width:65%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${f.sym}</span><span style="display:flex;align-items:center;gap:6px;">${tag}<span style="color:${c};font-weight:500;">${f.pnl >= 0 ? '+' : ''}₹${f.pnl.toLocaleString('en-IN',{minimumFractionDigits:0,maximumFractionDigits:0})}</span></span></div>`;
-});
-
-const eqContainer = document.getElementById('eqRows');
-eq.forEach(e => {
-  const c = e.pnl >= 0 ? '#1D9E75' : '#D85A30';
-  const tag = e.pnl >= 0 ? '<span class="tag tag-gain">win</span>' : '<span class="tag tag-loss">loss</span>';
-  eqContainer.innerHTML += `<div class="row-item"><span style="font-weight:500;">${e.sym}</span><span style="display:flex;align-items:center;gap:6px;">${tag}<span style="color:${c};">${e.pnl >= 0 ? '+' : ''}₹${e.pnl.toLocaleString('en-IN',{minimumFractionDigits:0,maximumFractionDigits:0})}</span></span></div>`;
-});
-
-new Chart(document.getElementById('segChart'), {
+// Year P&L chart
+new Chart(document.getElementById('yearChart'), {
   type: 'bar',
   data: {
-    labels: ['F&O', 'Equity', 'Commodity'],
+    labels: ['FY2021-22','FY2022-23','FY2023-24','FY2024-25','FY2025-26'],
     datasets: [{
       label: 'Net P&L',
-      data: [-37194, -491, -1735],
-      backgroundColor: ['#7F77DD', '#378ADD', '#BA7517'],
+      data: [-46226, -75999, 1913, 236065, 189651],
+      backgroundColor: d => d.raw >= 0 ? '#1D9E75' : '#D85A30',
       borderRadius: 4
     }]
   },
@@ -176,8 +232,38 @@ new Chart(document.getElementById('segChart'), {
     responsive: true, maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: {
-      x: { ticks: { font: { size: 12 } }, grid: { color: 'rgba(0,0,0,0.05)' } },
-      y: { ticks: { callback: v => (v < 0 ? '-' : '') + '₹' + (Math.abs(v)/1000).toFixed(0) + 'K' }, grid: { color: 'rgba(0,0,0,0.05)' } }
+      x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.04)' } },
+      y: { ticks: { callback: v => (v<0?'-':'') + '₹' + (Math.abs(v)/1000).toFixed(0)+'K' }, grid: { color: 'rgba(0,0,0,0.04)' } }
+    }
+  }
+});
+
+// ROI chart — FY23-24 onwards
+new Chart(document.getElementById('roiChart'), {
+  type: 'bar',
+  data: {
+    labels: ['FY2023-24','FY2024-25','FY2025-26'],
+    datasets: [
+      {
+        label: 'ROI on avg capital',
+        data: [0.3, 22.3, 15.3],
+        backgroundColor: '#1D9E75',
+        borderRadius: 4
+      },
+      {
+        label: 'ROI on peak capital (conservative)',
+        data: [0.1, 10.4, 8.8],
+        backgroundColor: '#A8D5C2',
+        borderRadius: 4
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } } },
+    scales: {
+      x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.04)' } },
+      y: { ticks: { callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.04)' } }
     }
   }
 });
