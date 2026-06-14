@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading Performance — Jameel Shaikh</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a18; padding: 2rem 1rem; }
+  .container { max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #888780; margin-bottom: 2rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  .metric { background: #ebebea; border-radius: 8px; padding: 1rem; }
+  .metric-label { font-size: 12px; color: #888780; margin-bottom: 4px; }
+  .metric-value { font-size: 22px; font-weight: 500; }
+  .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 1.25rem; }
+  .card-title { font-size: 13px; font-weight: 500; margin-bottom: 1rem; }
+  .green { color: #1D9E75; }
+  .red { color: #D85A30; }
+  .muted { color: #888780; }
+  .bar-track { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 6px 0; }
+  .legend { display: flex; gap: 12px; font-size: 11px; color: #888780; }
+  .legend span { display: flex; align-items: center; gap: 4px; }
+  .swatch { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+  .eq-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 0.5px solid rgba(0,0,0,0.07); font-size: 12px; }
+  .eq-row:last-child { border-bottom: none; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { padding: 8px 12px; text-align: left; font-weight: 500; color: #888780; background: #f5f5f3; }
+  th:not(:first-child) { text-align: right; }
+  td { padding: 7px 12px; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+  td:not(:first-child) { text-align: right; }
+  tfoot td { font-weight: 500; background: #f5f5f3; border-top: 1px solid rgba(0,0,0,0.1); }
+  .resume-box { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
+  .resume-box .label { font-size: 12px; font-weight: 500; color: #888780; margin-bottom: 0.75rem; }
+  .resume-bullets { border-left: 2px solid rgba(0,0,0,0.15); padding-left: 1rem; display: flex; flex-direction: column; gap: 10px; }
+  .resume-bullets p { font-size: 13px; line-height: 1.7; }
+  .footer { font-size: 11px; color: #888780; margin-top: 2rem; text-align: center; }
+  @media (max-width: 600px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Trading Performance</h1>
+  <p class="subtitle">Jameel Shaikh · Angel One (S51433409) · Jan 2023 – Jan 2026 · NSE</p>
+
+  <div class="grid-3">
+    <div class="metric">
+      <div class="metric-label">Total realized P&L</div>
+      <div class="metric-value green">₹5,27,790</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Total charges</div>
+      <div class="metric-value">₹92,453</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Net realized P&L</div>
+      <div class="metric-value green">₹4,35,337</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+
+    <div class="card">
+      <div class="card-title">F&O — Derivatives</div>
+      <div style="font-size: 26px; font-weight: 500; margin-bottom: 1rem;" class="green">₹3,49,306 <span style="font-size:13px;color:#888780;font-weight:400;">net</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;margin-bottom:1rem;">
+        <div><div class="muted">Gross P&L</div><div style="font-weight:500;">₹4,36,709</div></div>
+        <div><div class="muted">Charges</div><div style="font-weight:500;">₹87,403</div></div>
+        <div><div class="muted">Win rate</div><div style="font-weight:500;">53%</div></div>
+        <div><div class="muted">Contracts</div><div style="font-weight:500;">745</div></div>
+        <div><div class="muted">Underlyings</div><div style="font-weight:500;">NIFTY, BankNifty</div></div>
+        <div><div class="muted">Profitable months</div><div style="font-weight:500;">11 / 15</div></div>
+      </div>
+      <div style="border-top:0.5px solid rgba(0,0,0,0.08);padding-top:0.75rem;">
+        <div style="font-size:11px;color:#888780;font-weight:500;margin-bottom:6px;">Style split (entry vs exit date)</div>
+        <div class="bar-track">
+          <div style="width:73.1%;background:#378ADD;"></div>
+          <div style="width:26.9%;background:#B5D4F4;"></div>
+        </div>
+        <div class="legend">
+          <span><span class="swatch" style="background:#378ADD;"></span>Positional 73%</span>
+          <span><span class="swatch" style="background:#B5D4F4;"></span>Intraday 27%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Equity — Cash</div>
+      <div style="font-size: 26px; font-weight: 500; margin-bottom: 1rem;" class="green">₹86,031 <span style="font-size:13px;color:#888780;font-weight:400;">net</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;margin-bottom:1rem;">
+        <div><div class="muted">Gross P&L</div><div style="font-weight:500;">₹91,081</div></div>
+        <div><div class="muted">Charges</div><div style="font-weight:500;">₹5,050</div></div>
+        <div><div class="muted">Style</div><div style="font-weight:500;">Short-term positional</div></div>
+        <div><div class="muted">Holding</div><div style="font-weight:500;">&lt;1 year</div></div>
+      </div>
+      <div style="border-top:0.5px solid rgba(0,0,0,0.08);padding-top:0.75rem;">
+        <div style="font-size:11px;color:#888780;font-weight:500;margin-bottom:4px;">Positions (all profitable)</div>
+        <div id="eqRows"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title">Monthly net P&L</div>
+    <div style="position:relative;height:260px;">
+      <canvas id="monthlyChart" role="img" aria-label="Monthly net P&L bar chart Jul 2023 to Aug 2024"></canvas>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title">Monthly breakdown</div>
+    <table>
+      <thead><tr><th>Month</th><th>Realized P&L</th><th>Charges</th><th>Net P&L</th></tr></thead>
+      <tbody id="monthlyTable"></tbody>
+      <tfoot><tr><td>Total (visible)</td><td id="totRealized" style="text-align:right;"></td><td id="totCharges" style="text-align:right;"></td><td id="totNet" style="text-align:right;"></td></tr></tfoot>
+    </table>
+    <p style="font-size:11px;color:#888780;margin-top:8px;">* Earlier months (pre Jul 2023) not visible in downloaded statement. App total: ₹4,35,337 net.</p>
+  </div>
+
+  <div class="resume-box">
+    <div class="label">Resume bullets</div>
+    <div class="resume-bullets">
+      <p><strong style="font-weight:500;">F&O:</strong> Traded NIFTY & BankNifty options on NSE — 73% positional (multi-day holds across monthly expiry cycles), 27% intraday — net P&amp;L <strong style="font-weight:500;">₹3,49,306</strong> over 3 years, 53% win rate across 745 contracts</p>
+      <p><strong style="font-weight:500;">Equity:</strong> Short-term positional trades (&lt;1 year) in PSU & banking stocks — net P&amp;L <strong style="font-weight:500;">₹86,031</strong> across SAIL, PFC, AXISBANK, POWERGRID, HAL; all positions profitable</p>
+    </div>
+  </div>
+
+  <p class="footer">Data source: Angel One broker statements · Grouped by trade open date · Charges include brokerage, GST, STT, exchange fees, stamp duty</p>
+
+</div>
+
+<script>
+const equity = [
+  {sym:'SAIL',      buy:110.35, sell:132,     qty:1000, net:21384.77},
+  {sym:'PFC',       buy:388.57, sell:400.63,  qty:3050, net:34104.13},
+  {sym:'AXISBANK',  buy:1132,   sell:1174.85, qty:300,  net:12084.77},
+  {sym:'POWERGRID', buy:214.3,  sell:231.65,  qty:1000, net:16854.81},
+  {sym:'HAL',       buy:2976,   sell:3000,    qty:100,  net:1734.16},
+];
+const eqContainer = document.getElementById('eqRows');
+equity.forEach(e => {
+  const ret = ((e.sell - e.buy) / e.buy * 100).toFixed(1);
+  eqContainer.innerHTML += `<div class="eq-row"><span style="font-weight:500;">${e.sym}</span><span class="muted">×${e.qty.toLocaleString()}</span><span class="green">+${ret}%</span><span class="green">+₹${Math.round(e.net).toLocaleString('en-IN')}</span></div>`;
+});
+
+const monthly = [
+  {m:"Jul '23",  realized:6216.47,    charges:null,     net:6216.47},
+  {m:"Aug '23",  realized:197214.49,  charges:null,     net:197214.49},
+  {m:"Sep '23",  realized:-188196.04, charges:null,     net:-188196.04},
+  {m:"Oct '23",  realized:-10383.06,  charges:null,     net:-10383.06},
+  {m:"Nov '23",  realized:29869.76,   charges:null,     net:29869.76},
+  {m:"Dec '23",  realized:129977.77,  charges:null,     net:129977.77},
+  {m:"Jan '24",  realized:7656.93,    charges:null,     net:7656.93},
+  {m:"Feb '24",  realized:-25994.37,  charges:null,     net:-25994.37},
+  {m:"Mar '24",  realized:54044.50,   charges:null,     net:54044.50},
+  {m:"Apr '24",  realized:69378.75,   charges:4157.40,  net:65221.35},
+  {m:"May '24",  realized:-72330.00,  charges:5181.73,  net:-77511.73},
+  {m:"Jun '24",  realized:41550.00,   charges:3297.36,  net:38252.64},
+  {m:"Jul '24",  realized:36115.00,   charges:3987.06,  net:32127.94},
+  {m:"Aug '24",  realized:26971.85,   charges:9366.68,  net:17604.57},
+];
+
+const tbody = document.getElementById('monthlyTable');
+const fmt = n => (n < 0 ? '-' : '+') + '₹' + Math.abs(n).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
+monthly.forEach((d, i) => {
+  const nc = d.net >= 0 ? '#1D9E75' : '#D85A30';
+  const rc = d.realized >= 0 ? '#1D9E75' : '#D85A30';
+  const note = d.charges == null ? '<span style="color:#888780;font-size:10px;"> *</span>' : '';
+  tbody.innerHTML += `<tr style="${i%2===1?'background:#fafaf9':''}">
+    <td style="font-weight:500;">${d.m}</td>
+    <td style="color:${rc};">${fmt(d.realized)}${note}</td>
+    <td style="color:#888780;">${d.charges != null ? '₹'+d.charges.toLocaleString('en-IN',{minimumFractionDigits:2}) : '—'}</td>
+    <td style="color:${nc};font-weight:500;">${fmt(d.net)}${note}</td>
+  </tr>`;
+});
+const totR = monthly.reduce((s,d)=>s+d.realized,0);
+const totN = monthly.reduce((s,d)=>s+d.net,0);
+const totC = monthly.filter(d=>d.charges!=null).reduce((s,d)=>s+d.charges,0);
+document.getElementById('totRealized').textContent = fmt(totR);
+document.getElementById('totCharges').textContent = '₹'+totC.toLocaleString('en-IN',{minimumFractionDigits:2});
+document.getElementById('totNet').textContent = fmt(totN);
+
+new Chart(document.getElementById('monthlyChart'), {
+  type: 'bar',
+  data: {
+    labels: monthly.map(d => d.m),
+    datasets: [{
+      data: monthly.map(d => d.net),
+      backgroundColor: monthly.map(d => d.net >= 0 ? '#1D9E75' : '#D85A30'),
+      borderRadius: 3
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { font: { size: 10 }, maxRotation: 45, autoSkip: false }, grid: { color: 'rgba(0,0,0,0.05)' } },
+      y: { ticks: { callback: v => (v<0?'-':'')+'₹'+(Math.abs(v)/1000).toFixed(0)+'K' }, grid: { color: 'rgba(0,0,0,0.05)' } }
+    }
+  }
+});
+</script>
+</body>
+</html>
