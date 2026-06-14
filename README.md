@@ -2,7 +2,8 @@
 
 Personal trading performance across F&O derivatives and equity, tracked on Angel One (NSE).
 
-**Period:** Jan 2023 – Jan 2026
+**Period:** 5 Jun 2023 – 29 Aug 2024 (~15 months)
+**Financial years:** FY2023-24 (full) · FY2024-25 (partial, Apr–Aug 2024)
 
 ---
 
@@ -68,7 +69,7 @@ Personal trading performance across F&O derivatives and equity, tracked on Angel
 
 ## Resume Bullets
 
-> **F&O:** Traded NIFTY & BankNifty options on NSE — 73% positional (multi-day holds across monthly expiry cycles), 27% intraday — net P&L ₹3,49,306 over 3 years, 53% win rate across 745 contracts
+> **F&O:** Traded NIFTY & BankNifty options on NSE — 73% positional (multi-day holds across monthly expiry cycles), 27% intraday — net P&L ₹3,49,306 over ~15 months (Jun 2023–Aug 2024), 53% win rate across 745 contracts
 >
 > **Equity:** Short-term positional trades (&lt;1 year) in PSU & banking stocks — net P&L ₹86,031 across SAIL, PFC, AXISBANK, POWERGRID, HAL; all positions profitable
 
