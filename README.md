@@ -1,18 +1,9 @@
 # Trading Journal — Jameel Shaikh
 
-Personal trading performance across two brokers, three segments, and three years — from learning phase losses to consistent profitability.
+Personal trading performance tracked across brokers and segments.
 
-**Interactive dashboard:** [index.html](index.html) · [Angel One](analysis.html) · [Zerodha](zerodha.html)
-
----
-
-## Overall summary
-
-| | Period | Net P&L | Phase |
-|---|---|---|---|
-| **Zerodha (EKV211)** | Jan 2021 – Jan 2022 | -₹39,421 | Learning |
-| **Angel One (S51433409)** | Jun 2023 – Aug 2024 | +₹4,35,337 | Profitable |
-| **Combined** | 2021 – 2024 | **+₹3,95,916** | |
+**Angel One dashboard:** [analysis.html](analysis.html)
+**Zerodha dashboard:** [zerodha.html](zerodha.html)
 
 ---
 
