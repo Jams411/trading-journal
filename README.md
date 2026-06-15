@@ -1,6 +1,6 @@
 # Trading Journal — Jameel Shaikh
 
-Personal trading performance across NSE F&O, Equity & Commodity. Two broker accounts, 5 financial years, all figures verified from source statements.
+Personal trading performance across NSE F&O, Currency F&O, MCX Commodity & Equity. Two broker accounts, 5 financial years, all figures verified from source statements.
 
 **Live dashboards:** https://jams411.github.io/trading-journal/
 
