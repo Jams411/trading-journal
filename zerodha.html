@@ -12,6 +12,7 @@
   h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
   .subtitle { font-size: 13px; color: #888780; margin-bottom: 2rem; }
   .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
   .metric { background: #ebebea; border-radius: 8px; padding: 1rem; }
   .metric-label { font-size: 12px; color: #888780; margin-bottom: 4px; }
@@ -49,7 +50,7 @@
   .resume-bullets { border-left: 2px solid rgba(0,0,0,0.15); padding-left: 1rem; display: flex; flex-direction: column; gap: 10px; }
   .resume-bullets p { font-size: 13px; line-height: 1.7; }
   .footer { font-size: 11px; color: #888780; margin-top: 1rem; text-align: center; }
-  @media (max-width: 600px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
 <body>
@@ -60,7 +61,7 @@
   <p class="subtitle">Jameel Shaikh · EKV211 · NSE F&O + MCX · FY2021-22 → FY2025-26</p>
 
   <!-- 2. TOP METRICS -->
-  <div class="grid-3">
+  <div class="grid-4">
     <div class="metric">
       <div class="metric-label">Net P&L (5 years)</div>
       <div class="metric-value green">+₹3,05,403</div>
@@ -75,6 +76,11 @@
       <div class="metric-label">ROI on avg capital — FY2025-26</div>
       <div class="metric-value green">+15.3%</div>
       <div class="metric-sub">Avg deployed: ₹12.43L</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Total trades executed</div>
+      <div class="metric-value">5,053</div>
+      <div class="metric-sub">FY2021-22 → FY2025-26 · all realized</div>
     </div>
   </div>
 
