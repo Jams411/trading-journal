@@ -115,6 +115,6 @@ Personal trading performance across NSE F&O, Equity & Commodity. Two broker acco
 - **Capital denominator:** Monthly avg ledger balance (Zerodha) · FY avg balance (Angel One)
 - **Nifty 50:** Verified via Yahoo Finance (^NSEI) monthly closing prices
 - **Zerodha P&L:** Tax P&L is gross (sell − buy before charges). Net figures subtract brokerage, STT, exchange fees, SEBI fees, stamp duty.
-- **Apr 2025:** Excluded from combined series — insufficient ledger data for that month
+- **Combined series:** 25 months (Jul 2023 – Aug 2025); Apr 2025 excluded as no trades were executed that month
 
 *Data as of Aug 2025. Raw statements available on request.*
