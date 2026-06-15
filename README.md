@@ -10,7 +10,7 @@ Personal trading performance across NSE F&O, Equity & Commodity. Two broker acco
 
 | Metric | Value |
 |---|---|
-| Total net P&L | **+₹6,90,060** |
+| Total net P&L | **+₹6,90,051** |
 | Period | FY2021-22 → FY2025-26 (5 years) |
 | Total trades executed | **5,457+** (all realized) |
 | Best year ROI on avg capital | **+22.3%** (FY2024-25) |
@@ -38,11 +38,11 @@ Personal trading performance across NSE F&O, Equity & Commodity. Two broker acco
 | FY | Trades | Net P&L | Nifty 50 | Phase |
 |---|---|---|---|---|
 | FY2021-22 | 114 | −₹46,226 | +18.88% | Learning |
-| FY2022-23 | 743 | −₹1,21,803 | −0.60% | Learning |
+| FY2022-23 | 743 | −₹1,21,811 | −0.60% | Learning |
 | FY2023-24 | 508+ | +₹2,70,648 | +28.61% | Breakeven |
 | FY2024-25 | 3,673 | +₹3,97,791 | +5.34% | Profitable |
 | FY2025-26 | 419 | +₹1,89,651 | +3.86% (partial) | Profitable |
-| **Total** | **5,457+** | **+₹6,90,060** | | |
+| **Total** | **5,457+** | **+₹6,90,051** | | |
 
 ---
 
@@ -53,20 +53,20 @@ Personal trading performance across NSE F&O, Equity & Commodity. Two broker acco
 | F&O — index & stock options | 4,696 | +₹7,48,352 | NIFTY & BankNifty · primary strategy |
 | Equity — cash | ~41 | +₹76,163 | Positional holdings |
 | Commodity (MCX) | 547 | −₹83,775 | FY2021-22 to FY2023-24 · discontinued |
-| Currency F&O (NSE) | 173 | −₹50,680 | USDINR/EURINR/GBPINR · FY2022-23 & FY2023-24 · discontinued · net verified via Zerodha Console |
-| **Total** | **5,457+** | **+₹6,90,060** | |
+| Currency F&O (NSE) | 173 | −₹50,689 | USDINR/EURINR/GBPINR · FY2022-23 & FY2023-24 · discontinued · net verified via Zerodha Console |
+| **Total** | **5,457+** | **+₹6,90,051** | |
 
 ---
 
 ## Zerodha (EKV***)
 
-**Period:** FY2021-22 → FY2025-26 · **Total:** 5,226 trades · +₹2,54,723
+**Period:** FY2021-22 → FY2025-26 · **Total:** 5,226 trades · +₹2,54,714
 
 | FY | Trades | Net P&L | Avg Capital | ROI |
 |---|---|---|---|---|
 | FY2021-22 | 114 | −₹46,226 | ₹6,500 | — |
-| FY2022-23 | 743 | −₹1,21,803 | ₹59,145 | — |
-| FY2023-24 | 508 | −₹2,963 | ₹6,81,098 | — |
+| FY2022-23 | 743 | −₹1,21,811 | ₹59,145 | — |
+| FY2023-24 | 508 | −₹2,964 | ₹6,81,098 | — |
 | FY2024-25 | 3,442 | +₹2,36,065 | ₹10,57,237 | +22.3% |
 | FY2025-26 | 419 | +₹1,89,651 | ₹12,43,013 | +15.3% |
 
