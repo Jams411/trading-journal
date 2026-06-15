@@ -10,9 +10,9 @@ Personal trading performance across NSE F&O, Equity & Commodity. Two broker acco
 
 | Metric | Value |
 |---|---|
-| Total net P&L | **+₹7,40,740** |
+| Total net P&L | **+₹6,91,406** |
 | Period | FY2021-22 → FY2025-26 (5 years) |
-| Total trades executed | **5,284+** (all realized) |
+| Total trades executed | **5,457+** (all realized) |
 | Best year ROI on avg capital | **+22.3%** (FY2024-25) |
 | Monthly win rate | **64%** (16/25 months) |
 | Sharpe ratio | **0.42** (RF 7% p.a.) |
@@ -28,8 +28,8 @@ Personal trading performance across NSE F&O, Equity & Commodity. Two broker acco
 | Dashboard | Description |
 |---|---|
 | [Overall Portfolio](combined.html) | Combined 25-month series · Nifty benchmark · quant metrics · equity curve |
-| [Zerodha (EKV211)](zerodha.html) | 5-year breakdown · F&O + Equity + Commodity · 5,053 trades |
-| [Angel One (S51433409)](angelone.html) | 15-month F&O + Equity · 231+ trades |
+| [Zerodha (EKV***)](zerodha.html) | 5-year breakdown · F&O + Currency F&O + Commodity + Equity · 5,226 trades |
+| [Angel One (S5143****)](angelone.html) | 15-month F&O + Equity · 231+ trades |
 
 ---
 
@@ -38,11 +38,11 @@ Personal trading performance across NSE F&O, Equity & Commodity. Two broker acco
 | FY | Trades | Net P&L | Nifty 50 | Phase |
 |---|---|---|---|---|
 | FY2021-22 | 114 | −₹46,226 | +18.88% | Learning |
-| FY2022-23 | 592 | −₹75,999 | −0.60% | Learning |
-| FY2023-24 | 486+ | +₹2,75,524 | +28.61% | Breakeven |
+| FY2022-23 | 743 | −₹1,20,583 | −0.60% | Learning |
+| FY2023-24 | 508+ | +₹2,70,774 | +28.61% | Breakeven |
 | FY2024-25 | 3,673 | +₹3,97,791 | +5.34% | Profitable |
 | FY2025-26 | 419 | +₹1,89,651 | +3.86% (partial) | Profitable |
-| **Total** | **5,284+** | **+₹7,40,741** | | |
+| **Total** | **5,457+** | **+₹6,91,407** | | |
 
 ---
 
@@ -50,22 +50,23 @@ Personal trading performance across NSE F&O, Equity & Commodity. Two broker acco
 
 | Segment | Trades | Net P&L | Notes |
 |---|---|---|---|
-| F&O — options & futures | 4,696 | +₹7,48,352 | NIFTY & BankNifty · primary strategy |
+| F&O — index & stock options | 4,696 | +₹7,48,352 | NIFTY & BankNifty · primary strategy |
 | Equity — cash | ~41 | +₹76,163 | Positional holdings |
-| Commodity | 547 | −₹83,775 | MCX · FY2021-22 to FY2023-24 · discontinued |
-| **Total** | **5,284+** | **+₹7,40,740** | |
+| Commodity (MCX) | 547 | −₹83,775 | FY2021-22 to FY2023-24 · discontinued |
+| Currency F&O (NSE) | 173 | −₹49,334 | USDINR/EURINR/GBPINR · FY2022-23 & FY2023-24 · discontinued |
+| **Total** | **5,457+** | **+₹6,91,406** | |
 
 ---
 
-## Zerodha (EKV211)
+## Zerodha (EKV***)
 
-**Period:** FY2021-22 → FY2025-26 · **Total:** 5,053 trades · +₹3,05,403
+**Period:** FY2021-22 → FY2025-26 · **Total:** 5,226 trades · +₹2,56,069
 
 | FY | Trades | Net P&L | Avg Capital | ROI |
 |---|---|---|---|---|
 | FY2021-22 | 114 | −₹46,226 | ₹6,500 | — |
-| FY2022-23 | 592 | −₹75,999 | ₹59,145 | — |
-| FY2023-24 | 486 | +₹1,913 | ₹6,81,098 | +0.3% |
+| FY2022-23 | 743 | −₹1,20,583 | ₹59,145 | — |
+| FY2023-24 | 508 | −₹2,837 | ₹6,81,098 | — |
 | FY2024-25 | 3,442 | +₹2,36,065 | ₹10,57,237 | +22.3% |
 | FY2025-26 | 419 | +₹1,89,651 | ₹12,43,013 | +15.3% |
 
@@ -73,7 +74,7 @@ Personal trading performance across NSE F&O, Equity & Commodity. Two broker acco
 
 ---
 
-## Angel One (S51433409)
+## Angel One (S5143****)
 
 **Period:** Jun 2023 – Aug 2024 · **Total:** 231+ trades · +₹4,35,337
 
@@ -82,7 +83,7 @@ Personal trading performance across NSE F&O, Equity & Commodity. Two broker acco
 | FY2023-24 | 10 (Jun–Mar) | n/a* | +₹2,73,611 | ₹29.97L | +9.1% |
 | FY2024-25 | 5 (Apr–Aug) | 231 | +₹1,61,726 | ₹9.71L | +16.7% |
 
-*\*FY2023-24 individual trade records not available in current source files.*
+*\*FY2023-24 individual trade records not available in current source files (Trading Insights export covers FY2024-25 only). Monthly P&L figures for FY2023-24 are from the Angel One P&L statement, not individual trade data.*
 
 ### F&O Monthly P&L
 
