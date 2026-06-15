@@ -42,7 +42,7 @@ Personal trading performance across NSE F&O, Equity & Commodity. Two broker acco
 | FY2023-24 | 508+ | +₹2,70,774 | +28.61% | Breakeven |
 | FY2024-25 | 3,673 | +₹3,97,791 | +5.34% | Profitable |
 | FY2025-26 | 419 | +₹1,89,651 | +3.86% (partial) | Profitable |
-| **Total** | **5,457+** | **+₹6,91,407** | | |
+| **Total** | **5,457+** | **+₹6,91,406** | | |
 
 ---
 
@@ -117,5 +117,6 @@ Personal trading performance across NSE F&O, Equity & Commodity. Two broker acco
 - **Nifty 50:** Verified via Yahoo Finance (^NSEI) monthly closing prices
 - **Zerodha P&L:** Tax P&L is gross (sell − buy before charges). Net figures subtract brokerage, STT, exchange fees, SEBI fees, stamp duty.
 - **Combined series:** 25 months (Jul 2023 – Aug 2025); Apr 2025 excluded as no trades were executed that month
+- **Quant metrics scope:** Sharpe, drawdown, win rate, profit factor, Calmar all cover the 25-month monthly series (Jul 2023 – Aug 2025). Currency F&O (173 trades, all exited before Jul 2023) appears in lifetime segment totals only and is excluded from the monthly series.
 
 *Data as of Aug 2025. Raw statements available on request.*
