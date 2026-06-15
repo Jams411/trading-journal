@@ -61,7 +61,7 @@
   <div class="grid-4">
     <div class="metric good">
       <div class="metric-label">Total net P&L</div>
-      <div class="metric-value">+₹6,91,406</div>
+      <div class="metric-value">+₹6,90,060</div>
       <div class="metric-sub">5 financial years · all segments included</div>
     </div>
     <div class="metric good">
@@ -104,14 +104,14 @@
         </tr>
         <tr style="background:#fafaf9;">
           <td style="font-weight:500;">FY2022-23</td>
-          <td class="red">−₹1,20,583</td>
+          <td class="red">−₹1,21,803</td>
           <td class="muted">743</td>
           <td class="red">−0.60%</td>
           <td><span class="tag tag-learn">Learning</span></td>
         </tr>
         <tr>
           <td style="font-weight:500;">FY2023-24</td>
-          <td class="green">+₹2,70,774</td>
+          <td class="green">+₹2,70,648</td>
           <td class="muted">508+ <span style="font-size:10px;" title="Angel One FY2023-24 count not available from current files">ⓘ</span></td>
           <td class="green">+28.61%</td>
           <td><span class="tag tag-break">Breakeven</span></td>
@@ -134,7 +134,7 @@
       <tfoot>
         <tr>
           <td>Total</td>
-          <td class="green">+₹6,91,406</td>
+          <td class="green">+₹6,90,060</td>
           <td>5,457+</td>
           <td>—</td>
           <td></td>
@@ -212,9 +212,9 @@
         <tr><td style="font-weight:500;">F&O — index &amp; stock options</td><td class="green">+₹7,48,352</td><td class="muted">4,696</td><td class="muted">Primary strategy · NIFTY + BankNifty + stock options</td></tr>
         <tr style="background:#fafaf9;"><td style="font-weight:500;">Equity — cash</td><td class="green">+₹76,163</td><td class="muted">~41</td><td class="muted">Positional stock holdings</td></tr>
         <tr><td style="font-weight:500;">Commodity (MCX)</td><td class="red">−₹83,775</td><td class="muted">547</td><td class="muted">MCX · FY2021-22 to FY2023-24 · discontinued</td></tr>
-        <tr style="background:#fafaf9;"><td style="font-weight:500;">Currency F&O (NSE)</td><td class="red">−₹49,334</td><td class="muted">173</td><td class="muted">USDINR/EURINR/GBPINR · FY2022-23 &amp; FY2023-24 · discontinued</td></tr>
+        <tr style="background:#fafaf9;"><td style="font-weight:500;">Currency F&O (NSE)</td><td class="red">−₹50,680</td><td class="muted">173</td><td class="muted">USDINR/EURINR/GBPINR · FY2022-23 &amp; FY2023-24 · discontinued · verified via Zerodha Console</td></tr>
       </tbody>
-      <tfoot><tr><td>Total</td><td class="green">+₹6,91,406</td><td>5,457+</td><td></td></tr></tfoot>
+      <tfoot><tr><td>Total</td><td class="green">+₹6,90,060</td><td>5,457+</td><td></td></tr></tfoot>
     </table>
   </div>
 
@@ -489,10 +489,10 @@ monthly.forEach((d,i) => {
 const niftyFinal = niftyCum[niftyCum.length-1];
 const portFinal  = portCum[portCum.length-1];
 document.getElementById('resumeBullets').innerHTML = `
-  <p><strong style="font-weight:500;">Absolute returns:</strong> Total net P&L <strong style="font-weight:500;">+₹6,91,406</strong> across both brokers over 5 FYs (all segments — NSE F&O, Currency F&O, MCX Commodity, Equity); annualised portfolio return <strong style="font-weight:500;">${fmtPct(annRet)}</strong> on avg deployed capital (25-month combined series)</p>
+  <p><strong style="font-weight:500;">Absolute returns:</strong> Total net P&L <strong style="font-weight:500;">+₹6,90,060</strong> across both brokers over 5 FYs (all segments — NSE F&O, Currency F&O, MCX Commodity, Equity); annualised portfolio return <strong style="font-weight:500;">${fmtPct(annRet)}</strong> on avg deployed capital (25-month combined series)</p>
   <p><strong style="font-weight:500;">vs Nifty 50:</strong> Portfolio cumulative return <strong style="font-weight:500;">${fmtPct(portFinal-100)}</strong> vs Nifty 50 <strong style="font-weight:500;">${fmtPct(niftyFinal-100)}</strong> over the same 25 months (Jul 2023 – Aug 2025); outperformed in <strong style="font-weight:500;">${alphaWins}/${n}</strong> months; avg monthly alpha <strong style="font-weight:500;">${fmtPct(mean(alpha))}</strong></p>
   <p><strong style="font-weight:500;">Risk-adjusted:</strong> Sharpe ratio <strong style="font-weight:500;">${fmt2(sharpe)}</strong> (RF 7% p.a.); max drawdown <strong style="font-weight:500;">${fmt2(maxDD)}%</strong>; Calmar ratio <strong style="font-weight:500;">${fmt2(calmar)}</strong>; win rate <strong style="font-weight:500;">${fmt2(winRate)}%</strong> (${wins}/${n} months), profit factor <strong style="font-weight:500;">${fmt2(pf)}</strong></p>
-  <p><strong style="font-weight:500;">Strategy:</strong> Directional F&O (NSE index + stock options) across two broker accounts; capital grew from ₹3.0L (Angel One FY2023-24) to ₹12.43L (Zerodha FY2025-26); profitable in 3 of 5 FYs after 2-year learning phase. Currency F&O (173 trades, −₹49,334) and MCX Commodity (547 trades, −₹83,775) both discontinued after FY2023-24.</p>
+  <p><strong style="font-weight:500;">Strategy:</strong> Directional F&O (NSE index + stock options) across two broker accounts; capital grew from ₹3.0L (Angel One FY2023-24) to ₹12.43L (Zerodha FY2025-26); profitable in 3 of 5 FYs after 2-year learning phase. Currency F&O (173 trades, −₹50,680) and MCX Commodity (547 trades, −₹83,775) both discontinued after FY2023-24.</p>
 `;
 </script>
 </body>
