@@ -10,371 +10,489 @@
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a18; padding: 2rem 1rem; }
   .container { max-width: 960px; margin: 0 auto; }
   h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+  h2 { font-size: 13px; font-weight: 500; margin: 2rem 0 1rem; color: #1a1a18; border-bottom: 0.5px solid rgba(0,0,0,0.1); padding-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em; }
   .subtitle { font-size: 13px; color: #888780; margin-bottom: 2rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
   .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
   .metric { background: #ebebea; border-radius: 8px; padding: 1rem; }
-  .metric-label { font-size: 12px; color: #888780; margin-bottom: 4px; }
-  .metric-value { font-size: 22px; font-weight: 500; }
-  .metric-sub { font-size: 11px; color: #888780; margin-top: 2px; }
+  .metric.good { background: #EAF3DE; }
+  .metric.warn { background: #FFF3DC; }
+  .metric.bad  { background: #FAECE7; }
+  .metric-label { font-size: 11px; color: #888780; margin-bottom: 4px; }
+  .metric-value { font-size: 20px; font-weight: 500; }
+  .metric-sub { font-size: 10px; color: #888780; margin-top: 2px; }
   .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
   .card-title { font-size: 13px; font-weight: 500; margin-bottom: 1rem; }
   .green { color: #1D9E75; }
   .red { color: #D85A30; }
   .muted { color: #888780; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-  .row-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 0.5px solid rgba(0,0,0,0.06); font-size: 12px; }
-  .row-item:last-child { border-bottom: none; }
-  .bar-track { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 6px 0; }
-  .legend { display: flex; gap: 12px; font-size: 11px; color: #888780; }
-  .legend span { display: flex; align-items: center; gap: 4px; }
-  .swatch { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
-  .eq-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 0.5px solid rgba(0,0,0,0.07); font-size: 12px; }
-  .eq-row:last-child { border-bottom: none; }
-  .tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 500; }
-  .tag-learn  { background: #F0EDFF; color: #5B4FBF; }
-  .tag-break  { background: #FFF3DC; color: #8A5C00; }
-  .tag-profit { background: #EAF3DE; color: #3B6D11; }
-  .tag-zr { background: #E6F1FB; color: #185FA5; }
-  .tag-ao { background: #FAECE7; color: #993C1D; }
+  .amber { color: #8A5C00; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
   table { width: 100%; border-collapse: collapse; font-size: 12px; }
   th { padding: 8px 10px; text-align: left; font-weight: 500; font-size: 11px; color: #888780; background: #f5f5f3; }
   th:not(:first-child) { text-align: right; }
   td { padding: 7px 10px; border-bottom: 0.5px solid rgba(0,0,0,0.05); }
   td:not(:first-child) { text-align: right; }
   tfoot td { font-weight: 500; background: #f5f5f3; border-top: 1px solid rgba(0,0,0,0.1); border-bottom: none; }
-  tr.total-row td { font-weight: 600; border-top: 1px solid rgba(0,0,0,0.1); border-bottom: none; background: #fafaf9; }
   .note { font-size: 11px; color: #888780; margin-top: 8px; }
-  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; margin-bottom: 1rem; }
-  .broker-badge { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 4px; font-weight: 500; margin-left: 6px; vertical-align: middle; }
-  .badge-zr { background: #E6F1FB; color: #185FA5; }
-  .badge-ao { background: #FAECE7; color: #993C1D; }
+  .tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+  .tag-learn  { background: #F0EDFF; color: #5B4FBF; }
+  .tag-break  { background: #FFF3DC; color: #8A5C00; }
+  .tag-profit { background: #EAF3DE; color: #3B6D11; }
+  .swatch { width: 10px; height: 10px; border-radius: 3px; display: inline-block; margin-right: 4px; }
+  .legend { display: flex; gap: 16px; font-size: 11px; color: #888780; flex-wrap: wrap; }
+  .legend span { display: flex; align-items: center; }
   .resume-box { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
   .resume-box .label { font-size: 12px; font-weight: 500; color: #888780; margin-bottom: 0.75rem; }
   .resume-bullets { border-left: 2px solid rgba(0,0,0,0.15); padding-left: 1rem; display: flex; flex-direction: column; gap: 10px; }
   .resume-bullets p { font-size: 13px; line-height: 1.7; }
   .footer { font-size: 11px; color: #888780; margin-top: 1rem; text-align: center; }
-  @media (max-width: 600px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .grid-4, .grid-3 { grid-template-columns: 1fr 1fr; } .grid-2 { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <!-- 1. HEADER -->
   <h1>Overall Trading Performance</h1>
-  <p class="subtitle">Jameel Shaikh · Zerodha EKV211 + Angel One S51433409 · NSE F&O + MCX · FY2021-22 → FY2025-26</p>
+  <p class="subtitle">Jameel Shaikh · NSE F&O + Equity · FY2021-22 → FY2025-26</p>
 
-  <!-- 2. TOP METRICS -->
-  <div class="grid-3">
-    <div class="metric">
-      <div class="metric-label">Total net P&L (5 years, 2 brokers)</div>
-      <div class="metric-value green">+₹7,40,740</div>
-      <div class="metric-sub">Zerodha ₹3,05,403 · Angel One ₹4,35,337</div>
+  <!-- ── 1. TOP METRICS ── -->
+  <div class="grid-4">
+    <div class="metric good">
+      <div class="metric-label">Total net P&L</div>
+      <div class="metric-value">+₹7,40,740</div>
+      <div class="metric-sub">5 financial years · NSE F&O + Equity</div>
+    </div>
+    <div class="metric good">
+      <div class="metric-label">Best year ROI on avg capital</div>
+      <div class="metric-value">+22.3%</div>
+      <div class="metric-sub">FY2024-25 · avg capital ₹10.57L</div>
+    </div>
+    <div class="metric good">
+      <div class="metric-label">ROI on avg capital — FY2023-24</div>
+      <div class="metric-value">+18.8%</div>
+      <div class="metric-sub">Net on avg deployed capital</div>
     </div>
     <div class="metric">
-      <div class="metric-label">Combined ROI on avg capital — FY2024-25</div>
-      <div class="metric-value green">+19.6%</div>
-      <div class="metric-sub">Combined avg deployed: ₹20.28L</div>
-    </div>
-    <div class="metric">
-      <div class="metric-label">ROI on avg capital — FY2025-26</div>
-      <div class="metric-value green">+15.3%</div>
-      <div class="metric-sub">Zerodha only · ₹12.43L deployed</div>
+      <div class="metric-label">Total trades executed</div>
+      <div class="metric-value">5,284+</div>
+      <div class="metric-sub">5,053 Zerodha · 231+ Angel One</div>
     </div>
   </div>
 
-  <!-- 3. FY COMBINED TABLE -->
+  <!-- ── 2. FY BREAKDOWN TABLE ── -->
+  <h2>Year-by-year performance</h2>
   <div class="card">
-    <div class="card-title">Year-by-year performance — combined</div>
     <table>
       <thead>
         <tr>
-          <th>FY</th>
+          <th>Financial Year</th>
+          <th>Net P&L</th>
+          <th>Trades</th>
+          <th>Nifty 50 return</th>
           <th>Phase</th>
-          <th>Zerodha</th>
-          <th>Angel One</th>
-          <th>Combined P&L</th>
-          <th>Combined avg cap</th>
-          <th>ROI (avg)</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td style="font-weight:500;">FY2021-22</td>
+          <td class="red">−₹46,226</td>
+          <td class="muted">114</td>
+          <td class="green">+18.88%</td>
           <td><span class="tag tag-learn">Learning</span></td>
-          <td class="red">-₹46,226</td>
-          <td class="muted">—</td>
-          <td class="red">-₹46,226</td>
-          <td class="muted">₹0.65L</td>
-          <td class="muted">—</td>
         </tr>
         <tr style="background:#fafaf9;">
           <td style="font-weight:500;">FY2022-23</td>
+          <td class="red">−₹75,999</td>
+          <td class="muted">592</td>
+          <td class="red">−0.60%</td>
           <td><span class="tag tag-learn">Learning</span></td>
-          <td class="red">-₹75,999</td>
-          <td class="muted">—</td>
-          <td class="red">-₹75,999</td>
-          <td class="muted">₹5.91L</td>
-          <td class="muted">—</td>
         </tr>
         <tr>
           <td style="font-weight:500;">FY2023-24</td>
+          <td class="green">+₹2,75,524</td>
+          <td class="muted">486+ <span style="font-size:10px;" title="Angel One FY2023-24 count not available from current files">ⓘ</span></td>
+          <td class="green">+28.61%</td>
           <td><span class="tag tag-break">Breakeven</span></td>
-          <td class="green">+₹1,913</td>
-          <td class="green" style="font-weight:500;">+₹2,73,611</td>
-          <td class="green" style="font-weight:500;">+₹2,75,524</td>
-          <td>₹98.08L</td>
-          <td class="green">+2.8%</td>
         </tr>
         <tr style="background:#fafaf9;">
           <td style="font-weight:500;">FY2024-25</td>
+          <td class="green">+₹3,97,791</td>
+          <td class="muted">3,673</td>
+          <td class="green">+5.34%</td>
           <td><span class="tag tag-profit">Profitable</span></td>
-          <td class="green" style="font-weight:500;">+₹2,36,065</td>
-          <td class="green" style="font-weight:500;">+₹1,61,726</td>
-          <td class="green" style="font-weight:500;">+₹3,97,791</td>
-          <td>₹20.28L</td>
-          <td class="green" style="font-weight:500;">+19.6%</td>
         </tr>
         <tr>
-          <td style="font-weight:500;">FY2025-26</td>
+          <td style="font-weight:500;">FY2025-26 <span class="muted" style="font-weight:400;font-size:10px;">(partial)</span></td>
+          <td class="green">+₹1,89,651</td>
+          <td class="muted">419</td>
+          <td class="green">+3.86% <span class="muted" style="font-size:10px;">partial</span></td>
           <td><span class="tag tag-profit">Profitable</span></td>
-          <td class="green" style="font-weight:500;">+₹1,89,651</td>
-          <td class="muted">—</td>
-          <td class="green" style="font-weight:500;">+₹1,89,651</td>
-          <td>₹12.43L</td>
-          <td class="green" style="font-weight:500;">+15.3%</td>
-        </tr>
-        <tr class="total-row">
-          <td>Total</td><td></td>
-          <td class="green">+₹3,05,403</td>
-          <td class="green">+₹4,35,337</td>
-          <td class="green">+₹7,40,740</td>
-          <td colspan="2" class="muted" style="text-align:left;padding-left:10px;">Learning losses recovered; 3 consecutive profitable years</td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td class="green">+₹7,40,741</td>
+          <td>5,284+</td>
+          <td>—</td>
+          <td></td>
+        </tr>
+      </tfoot>
     </table>
-    <p class="note">FY2023-24 combined avg capital high due to Zerodha futures margin (₹68.11L ledger balance). ROI (avg) = Combined net P&L ÷ sum of avg ledger balances. Learning-phase ROI omitted.</p>
+    <p class="note">Nifty 50 annual returns: FY = Apr–Mar. FY2025-26 Nifty estimate through Aug 2025. Zerodha FY2025-26 partial through Aug 2025.</p>
   </div>
 
-  <!-- 4. COMBINED FY BAR CHART -->
+  <!-- ── 3. NIFTY 50 COMPARISON ── -->
+  <h2>vs Nifty 50 benchmark</h2>
+
   <div class="card">
-    <div class="card-title">Combined net P&L by financial year (₹)</div>
-    <div style="position:relative;height:220px;"><canvas id="fyChart"></canvas></div>
+    <div class="card-title">Cumulative equity — Portfolio vs Nifty 50 (base 100, Jul 2023)</div>
+    <div style="position:relative;height:240px;"><canvas id="benchmarkChart"></canvas></div>
+    <div class="legend" style="margin-top:10px;">
+      <span><span class="swatch" style="background:#1a1a18;"></span>Portfolio (combined)</span>
+      <span><span class="swatch" style="background:#3B6EB0;"></span>Nifty 50</span>
+    </div>
+    <p class="note">Nifty 50 monthly returns verified via Yahoo Finance (^NSEI) closing prices. Portfolio P&L is net for Angel One, gross (before charges) for Zerodha.</p>
   </div>
 
-  <!-- 5. BROKER COMPARISON CARDS -->
+  <div class="card">
+    <div class="card-title">Monthly alpha — Portfolio return minus Nifty 50 return</div>
+    <div style="position:relative;height:200px;"><canvas id="alphaChart"></canvas></div>
+    <p class="note">Positive alpha = outperformed Nifty that month. Negative = underperformed.</p>
+  </div>
+
+  <!-- ── 4. QUANT METRICS ── -->
+  <h2>Quantitative metrics — 25 months (Jul 2023 – Aug 2025)</h2>
+
+  <div class="grid-4" id="metricsReturns"></div>
+  <div class="grid-4" id="metricsRisk"></div>
+  <div class="grid-4" id="metricsRiskAdj"></div>
+
+  <!-- ── 5. EQUITY CURVE + DRAWDOWN ── -->
+  <div class="card">
+    <div class="card-title">Portfolio equity curve</div>
+    <div style="position:relative;height:220px;"><canvas id="equityChart"></canvas></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Drawdown from peak</div>
+    <div style="position:relative;height:180px;"><canvas id="ddChart"></canvas></div>
+    <p class="note">Drawdown computed on compounded monthly equity curve.</p>
+  </div>
+
+  <!-- ── 6. MONTHLY RETURNS + HISTOGRAM ── -->
   <div class="grid-2">
     <div class="card" style="margin-bottom:0;">
-      <div class="card-title">Zerodha <span class="broker-badge badge-zr">EKV211</span></div>
-      <div style="font-size:26px;font-weight:500;margin-bottom:1rem;" class="green">+₹3,05,403 <span style="font-size:13px;color:#888780;font-weight:400;">net</span></div>
-      <div class="stat-grid">
-        <div><div class="muted">Period</div><div style="font-weight:500;">FY2021-22 → FY2025-26</div></div>
-        <div><div class="muted">Active years</div><div style="font-weight:500;">5 FYs</div></div>
-        <div><div class="muted">F&O (NSE)</div><div style="font-weight:500;" class="green">+₹3,99,046</div></div>
-        <div><div class="muted">Commodity (MCX)</div><div style="font-weight:500;" class="red">-₹83,775</div></div>
-        <div><div class="muted">Equity (NSE)</div><div style="font-weight:500;" class="red">-₹9,868</div></div>
-        <div><div class="muted">Best ROI</div><div style="font-weight:500;" class="green">+22.3% (FY24-25)</div></div>
-      </div>
-      <div style="border-top:0.5px solid rgba(0,0,0,0.08);padding-top:0.75rem;">
-        <div style="font-size:11px;color:#888780;font-weight:500;margin-bottom:6px;">Contribution to combined P&L</div>
-        <div class="bar-track">
-          <div style="width:41.2%;background:#378ADD;"></div>
-          <div style="width:58.8%;background:#ebebea;"></div>
-        </div>
-        <div class="legend">
-          <span><span class="swatch" style="background:#378ADD;"></span>Zerodha 41.2%</span>
-          <span><span class="swatch" style="background:#ebebea;border:0.5px solid #ccc;"></span>Angel One 58.8%</span>
-        </div>
-      </div>
+      <div class="card-title">Monthly returns (%)</div>
+      <div style="position:relative;height:240px;"><canvas id="monthlyRetChart"></canvas></div>
     </div>
     <div class="card" style="margin-bottom:0;">
-      <div class="card-title">Angel One <span class="broker-badge badge-ao">S51433409</span></div>
-      <div style="font-size:26px;font-weight:500;margin-bottom:1rem;" class="green">+₹4,35,337 <span style="font-size:13px;color:#888780;font-weight:400;">net</span></div>
-      <div class="stat-grid">
-        <div><div class="muted">Period</div><div style="font-weight:500;">Jun 2023 – Aug 2024</div></div>
-        <div><div class="muted">Active months</div><div style="font-weight:500;">15 months</div></div>
-        <div><div class="muted">F&O (NSE)</div><div style="font-weight:500;" class="green">+₹3,49,306</div></div>
-        <div><div class="muted">Equity (NSE)</div><div style="font-weight:500;" class="green">+₹86,031</div></div>
-        <div><div class="muted">Win rate</div><div style="font-weight:500;">53% (745 contracts)</div></div>
-        <div><div class="muted">Best ROI</div><div style="font-weight:500;" class="green">+16.7% (FY24-25)</div></div>
-      </div>
-      <div style="border-top:0.5px solid rgba(0,0,0,0.08);padding-top:0.75rem;">
-        <div style="font-size:11px;color:#888780;font-weight:500;margin-bottom:6px;">Contribution to combined P&L</div>
-        <div class="bar-track">
-          <div style="width:58.8%;background:#D85A30;"></div>
-          <div style="width:41.2%;background:#ebebea;"></div>
-        </div>
-        <div class="legend">
-          <span><span class="swatch" style="background:#D85A30;"></span>Angel One 58.8%</span>
-          <span><span class="swatch" style="background:#ebebea;border:0.5px solid #ccc;"></span>Zerodha 41.2%</span>
-        </div>
-      </div>
+      <div class="card-title">Return distribution</div>
+      <div style="position:relative;height:240px;"><canvas id="histChart"></canvas></div>
     </div>
   </div>
 
-  <!-- 6. SEGMENT TOTALS + F&O BY YEAR -->
-  <div class="grid-2">
-    <div class="card" style="margin-bottom:0;">
-      <div class="card-title">Segment totals — combined (5 years)</div>
-      <div class="row-item">
-        <span><span class="dot" style="background:#7F77DD;"></span>F&O (NSE)</span>
-        <span class="green" style="font-weight:500;">+₹7,48,352</span>
-      </div>
-      <div class="row-item">
-        <span><span class="dot" style="background:#1D9E75;"></span>Equity (NSE)</span>
-        <span class="green">+₹76,163</span>
-      </div>
-      <div class="row-item">
-        <span><span class="dot" style="background:#D85A30;"></span>Commodity (MCX)</span>
-        <span class="red">-₹83,775</span>
-      </div>
-      <div class="row-item" style="border-top:0.5px solid rgba(0,0,0,0.1);margin-top:4px;padding-top:8px;">
-        <span style="font-weight:500;">Net total</span>
-        <span class="green" style="font-weight:600;">+₹7,40,740</span>
-      </div>
-    </div>
-    <div class="card" style="margin-bottom:0;">
-      <div class="card-title">F&O net P&L by year — combined</div>
-      <div class="row-item"><span>FY2021-22</span><span class="red">-₹37,194 <span class="broker-badge badge-zr">ZR</span></span></div>
-      <div class="row-item"><span>FY2022-23</span><span class="red">-₹19,275 <span class="broker-badge badge-zr">ZR</span></span></div>
-      <div class="row-item"><span>FY2023-24</span><span class="green" style="font-weight:500;">+₹3,02,915 <span class="broker-badge badge-zr">ZR</span><span class="broker-badge badge-ao">AO</span></span></div>
-      <div class="row-item"><span>FY2024-25</span><span class="green" style="font-weight:500;">+₹3,12,068 <span class="broker-badge badge-zr">ZR</span><span class="broker-badge badge-ao">AO</span></span></div>
-      <div class="row-item"><span>FY2025-26</span><span class="green" style="font-weight:500;">+₹1,89,839 <span class="broker-badge badge-zr">ZR</span></span></div>
-    </div>
-  </div>
-
-  <!-- 7. ROI CHART -->
+  <!-- ── 7. PERIOD BREAKDOWN ── -->
   <div class="card" style="margin-top:1.5rem;">
-    <div class="card-title">Return on capital — profitable years</div>
-    <div style="position:relative;height:220px;"><canvas id="roiChart"></canvas></div>
-    <p class="note">FY2023-24 & FY2024-25: combined capital (Zerodha + Angel One). FY2025-26: Zerodha only (Angel One exited Aug 2024). ROI (avg) = Net P&L ÷ sum of avg ledger balances.</p>
-  </div>
-
-  <!-- 8. MONTHLY NET P&L CHART (Angel One period) -->
-  <div class="card">
-    <div class="card-title">Monthly net P&L — Angel One active period <span class="broker-badge badge-ao" style="font-size:11px;">Jul 2023 – Aug 2024</span></div>
-    <div style="position:relative;height:260px;"><canvas id="monthlyChart"></canvas></div>
-    <p class="note">Monthly breakdown available for Angel One only. Zerodha monthly data not available — see annual table above.</p>
-  </div>
-
-  <!-- 9. MONTHLY BREAKDOWN TABLE (Angel One) -->
-  <div class="card">
-    <div class="card-title">Monthly breakdown — Angel One</div>
+    <div class="card-title">Period breakdown</div>
     <table>
-      <thead><tr><th>Month</th><th>Realized P&L</th><th>Charges</th><th>Net P&L</th></tr></thead>
-      <tbody id="monthlyTable"></tbody>
-      <tfoot><tr><td>Total (visible)</td><td id="totR" style="text-align:right;"></td><td id="totC" style="text-align:right;"></td><td id="totN" style="text-align:right;"></td></tr></tfoot>
+      <thead><tr><th>Period</th><th>Months</th><th>Net P&L</th><th>Avg monthly</th><th>Std dev</th><th>Win rate</th><th>Best</th><th>Worst</th></tr></thead>
+      <tbody id="periodBody"></tbody>
     </table>
-    <p class="note">* Charges not itemised for pre-Apr 2024 months. App total: ₹4,35,337 net.</p>
   </div>
 
-  <!-- 10. STRATEGY OVERVIEW -->
+  <!-- ── 8. SEGMENT BREAKDOWN ── -->
+  <h2>Segment breakdown</h2>
   <div class="card">
-    <div class="card-title">Strategy overview</div>
-    <div style="font-size:12px;line-height:1.9;color:#444;">
-      <strong>Instruments:</strong> NIFTY & BankNifty options (NSE, both brokers) + commodity futures (MCX via Zerodha, exited FY2023-24)<br>
-      <strong>Approach:</strong> Hedged multi-leg options strategies with margin benefits; 73% positional / 27% intraday (Angel One data)<br>
-      <strong>Capital:</strong> Two separate broker accounts run concurrently in FY2023-24 & FY2024-25; consolidated to Zerodha from Sep 2024<br>
-      <strong>Trajectory:</strong> FY2021-23 learning (Zerodha only), FY2023-24 breakeven + strong Angel One start, FY2024-25 best combined year (+₹3,97,791), FY2025-26 consistent profitability<br>
-      <strong>Commodity exit:</strong> MCX futures exited after cumulative -₹83.8K loss; capital redeployed to NSE options
-    </div>
+    <table>
+      <thead><tr><th>Segment</th><th>Net P&L</th><th>Trades</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:500;">F&O — options &amp; futures</td><td class="green">+₹7,48,352</td><td class="muted">4,696</td><td class="muted">Primary strategy · index + stock options</td></tr>
+        <tr style="background:#fafaf9;"><td style="font-weight:500;">Equity — cash</td><td class="green">+₹76,163</td><td class="muted">~41</td><td class="muted">Positional stock holdings</td></tr>
+        <tr><td style="font-weight:500;">Commodity</td><td class="red">−₹83,775</td><td class="muted">547</td><td class="muted">MCX · early period · discontinued</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td class="green">+₹7,40,740</td><td>5,284+</td><td></td></tr></tfoot>
+    </table>
   </div>
 
-  <!-- 11. RESUME BULLETS -->
+  <!-- ── 9. MONTHLY DETAIL TABLE ── -->
+  <h2>Monthly return detail</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>Month</th><th>Net P&L</th><th>Return %</th><th>Nifty 50 %</th><th>Alpha</th><th>Equity (base 100)</th><th>Drawdown</th></tr></thead>
+      <tbody id="monthDetail"></tbody>
+    </table>
+    <p class="note">Return % = monthly P&L ÷ avg deployed capital. Nifty 50 returns are approximate (NSE monthly closing prices). Alpha = portfolio return − Nifty return.</p>
+  </div>
+
+  <!-- ── 10. RESUME BULLETS ── -->
   <div class="resume-box">
     <div class="label">Resume bullets</div>
-    <div class="resume-bullets">
-      <p><strong style="font-weight:500;">Options trading (Zerodha EKV211 + Angel One S51433409):</strong> Traded NIFTY & BankNifty options across two broker accounts using hedged multi-leg strategies — combined net P&L <strong style="font-weight:500;">+₹7,40,740</strong> across 5 years (FY2021-22 to FY2025-26)</p>
-      <p><strong style="font-weight:500;">ROI on capital:</strong> <strong style="font-weight:500;">+19.6% combined ROI</strong> on avg deployed capital in FY2024-25 (₹20.28L across both accounts); <strong style="font-weight:500;">+15.3%</strong> in FY2025-26; F&O segment contributed +₹7,48,352 net across all years</p>
-      <p><strong style="font-weight:500;">Consistency & recovery:</strong> Recovered 2-year learning-phase losses (-₹1.22L) within a single profitable FY; 3 consecutive profitable years from FY2023-24; equity positions (₹76K net) all profitable with &lt;1 year hold periods</p>
-    </div>
+    <div class="resume-bullets" id="resumeBullets"></div>
   </div>
 
-  <p class="footer">Data: Zerodha Tax P&L (EKV211) + Angel One broker statements (S51433409) · Capital from respective broker ledgers · All figures INR (₹)</p>
+  <p class="footer">Jameel Shaikh · NSE F&O + Equity · Jul 2023 – Aug 2025 · Nifty 50 via Yahoo Finance (^NSEI) · Risk-free rate: India 10Y ~7% p.a.</p>
 
 </div>
 <script>
-const fyLabels = ['FY2021-22','FY2022-23','FY2023-24','FY2024-25','FY2025-26'];
-const fyZR     = [-46226, -75999, 1913, 236065, 189651];
-const fyAO     = [0, 0, 273611, 161726, 0];
-new Chart(document.getElementById('fyChart'), {
-  type: 'bar',
-  data: {
-    labels: fyLabels,
-    datasets: [
-      { label: 'Zerodha', data: fyZR, backgroundColor: fyZR.map(v=>v>=0?'#378ADD':'#D85A30'), borderRadius: 4 },
-      { label: 'Angel One', data: fyAO, backgroundColor: '#1D9E75', borderRadius: 4 }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } } },
-    scales: {
-      x: { stacked: true, ticks: { font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.04)' } },
-      y: { stacked: true, ticks: { callback: v => (v<0?'-':'')+'₹'+(Math.abs(v)/1000).toFixed(0)+'K' }, grid: { color: 'rgba(0,0,0,0.04)' } }
-    }
-  }
-});
-
-new Chart(document.getElementById('roiChart'), {
-  type: 'bar',
-  data: {
-    labels: ['FY2023-24','FY2024-25','FY2025-26'],
-    datasets: [
-      { label: 'ROI on avg capital', data: [2.8, 19.6, 15.3], backgroundColor: '#1D9E75', borderRadius: 4 },
-      { label: 'ROI on peak capital', data: [0.8, 9.5, 8.8], backgroundColor: '#A8D5C2', borderRadius: 4 }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } } },
-    scales: {
-      x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.04)' } },
-      y: { ticks: { callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.04)' } }
-    }
-  }
-});
-
+// ─── PORTFOLIO DATA (25 months combined) ────────────────────────────────────
 const monthly = [
-  {m:"Jul '23",  r:6216.47,    c:null,    n:6216.47},
-  {m:"Aug '23",  r:197214.49,  c:null,    n:197214.49},
-  {m:"Sep '23",  r:-188196.04, c:null,    n:-188196.04},
-  {m:"Oct '23",  r:-10383.06,  c:null,    n:-10383.06},
-  {m:"Nov '23",  r:29869.76,   c:null,    n:29869.76},
-  {m:"Dec '23",  r:129977.77,  c:null,    n:129977.77},
-  {m:"Jan '24",  r:7656.93,    c:null,    n:7656.93},
-  {m:"Feb '24",  r:-25994.37,  c:null,    n:-25994.37},
-  {m:"Mar '24",  r:54044.50,   c:null,    n:54044.50},
-  {m:"Apr '24",  r:69378.75,   c:4157.40, n:65221.35},
-  {m:"May '24",  r:-72330.00,  c:5181.73, n:-77511.73},
-  {m:"Jun '24",  r:41550.00,   c:3297.36, n:38252.64},
-  {m:"Jul '24",  r:36115.00,   c:3987.06, n:32127.94},
-  {m:"Aug '24",  r:26971.85,   c:9366.68, n:17604.57},
+  {m:"Jul '23", pnl:6216.47,    cap:2997000},
+  {m:"Aug '23", pnl:197214.49,  cap:2997000},
+  {m:"Sep '23", pnl:-188196.04, cap:2997000},
+  {m:"Oct '23", pnl:-10383.06,  cap:2997000},
+  {m:"Nov '23", pnl:29869.76,   cap:2997000},
+  {m:"Dec '23", pnl:129977.77,  cap:2997000},
+  {m:"Jan '24", pnl:7656.93,    cap:2997000},
+  {m:"Feb '24", pnl:-25994.37,  cap:2997000},
+  {m:"Mar '24", pnl:108172.00,  cap:4810678},
+  {m:"Apr '24", pnl:108620.10,  cap:2448979},
+  {m:"May '24", pnl:-91195.48,  cap:2285787},
+  {m:"Jun '24", pnl:88796.39,   cap:2140963},
+  {m:"Jul '24", pnl:112962.94,  cap:2128979},
+  {m:"Aug '24", pnl:24039.57,   cap:1556629},
+  {m:"Sep '24", pnl:136102.50,  cap:1070180},
+  {m:"Oct '24", pnl:343885.00,  cap:1257246},
+  {m:"Nov '24", pnl:-287666.25, cap:1086088},
+  {m:"Dec '24", pnl:-33467.50,  cap:951669 },
+  {m:"Jan '25", pnl:-33526.25,  cap:987261 },
+  {m:"Feb '25", pnl:258982.50,  cap:965002 },
+  {m:"Mar '25", pnl:-177221.25, cap:857477 },
+  {m:"May '25", pnl:95842.50,   cap:1212730},
+  {m:"Jun '25", pnl:-27892.50,  cap:1302780},
+  {m:"Jul '25", pnl:19661.25,   cap:1275025},
+  {m:"Aug '25", pnl:122775.00,  cap:1204001},
 ];
-const tbody = document.getElementById('monthlyTable');
-const fmt = n => (n<0?'-':'+')+'₹'+Math.abs(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
-monthly.forEach((d,i) => {
-  const nc = d.n>=0?'#1D9E75':'#D85A30', rc = d.r>=0?'#1D9E75':'#D85A30';
-  const note = d.c==null?'<span style="color:#888780;font-size:10px;"> *</span>':'';
-  tbody.innerHTML += `<tr style="${i%2===1?'background:#fafaf9':''}"><td style="font-weight:500;">${d.m}</td><td style="color:${rc};">${fmt(d.r)}${note}</td><td class="muted">${d.c!=null?'₹'+d.c.toLocaleString('en-IN',{minimumFractionDigits:2}):'—'}</td><td style="color:${nc};font-weight:500;">${fmt(d.n)}${note}</td></tr>`;
-});
-const totR = monthly.reduce((s,d)=>s+d.r,0);
-const totN = monthly.reduce((s,d)=>s+d.n,0);
-const totC = monthly.filter(d=>d.c!=null).reduce((s,d)=>s+d.c,0);
-document.getElementById('totR').textContent = fmt(totR);
-document.getElementById('totC').textContent = '₹'+totC.toLocaleString('en-IN',{minimumFractionDigits:2});
-document.getElementById('totN').textContent = fmt(totN);
 
-new Chart(document.getElementById('monthlyChart'), {
-  type: 'bar',
-  data: { labels: monthly.map(d=>d.m), datasets: [{ data: monthly.map(d=>d.n), backgroundColor: monthly.map(d=>d.n>=0?'#1D9E75':'#D85A30'), borderRadius: 3 }] },
-  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-    scales: {
-      x: { ticks: { font: { size: 10 }, maxRotation: 45, autoSkip: false }, grid: { color: 'rgba(0,0,0,0.04)' } },
-      y: { ticks: { callback: v => (v<0?'-':'')+'₹'+(Math.abs(v)/1000).toFixed(0)+'K' }, grid: { color: 'rgba(0,0,0,0.04)' } }
-    }
-  }
+// ─── NIFTY 50 MONTHLY RETURNS — verified via Yahoo Finance (^NSEI) ───────────
+// Computed from NSE monthly closing prices. Apr '25 skipped (matches portfolio gap).
+const niftyRets = [
+  2.94,   // Jul '23  — 19,189 → 19,754
+  -2.53,  // Aug '23  — 19,754 → 19,254
+  2.00,   // Sep '23  — 19,254 → 19,638
+  -2.84,  // Oct '23  — 19,638 → 19,080
+  5.52,   // Nov '23  — 19,080 → 20,133
+  7.94,   // Dec '23  — 20,133 → 21,731
+  -0.03,  // Jan '24  — 21,731 → 21,726
+  1.18,   // Feb '24  — 21,726 → 21,983
+  1.57,   // Mar '24  — 21,983 → 22,327
+  1.24,   // Apr '24  — 22,327 → 22,605
+  -0.33,  // May '24  — 22,605 → 22,531
+  6.57,   // Jun '24  — 22,531 → 24,011
+  3.92,   // Jul '24  — 24,011 → 24,951
+  1.14,   // Aug '24  — 24,951 → 25,236
+  2.28,   // Sep '24  — 25,236 → 25,811
+  -6.22,  // Oct '24  — 25,811 → 24,205
+  -0.31,  // Nov '24  — 24,205 → 24,131
+  -2.02,  // Dec '24  — 24,131 → 23,645
+  -0.58,  // Jan '25  — 23,645 → 23,508
+  -5.89,  // Feb '25  — 23,508 → 22,125
+  6.30,   // Mar '25  — 22,125 → 23,519
+  1.71,   // May '25  — 24,334 → 24,751 (Apr '25 gap — portfolio has no data)
+  3.10,   // Jun '25  — 24,751 → 25,517
+  -2.93,  // Jul '25  — 25,517 → 24,768
+  -1.38,  // Aug '25  — 24,768 → 24,427
+];
+
+const RF_ANNUAL = 7;
+const labels  = monthly.map(d => d.m);
+const portRets = monthly.map(d => d.pnl / d.cap * 100);
+const n = portRets.length;
+
+// ─── STATS HELPERS ──────────────────────────────────────────────────────────
+const mean   = arr => arr.reduce((s,v)=>s+v,0)/arr.length;
+const stddev = arr => { const m=mean(arr); return Math.sqrt(arr.reduce((s,v)=>s+(v-m)**2,0)/(arr.length-1)); };
+const fmt2   = x => x.toFixed(2);
+const fmtPct = x => (x>=0?'+':'')+x.toFixed(2)+'%';
+const fmtINR = x => (x>=0?'+':'-')+'₹'+Math.abs(Math.round(x)).toLocaleString('en-IN');
+const clr    = v => v >= 0 ? '#1D9E75' : '#D85A30';
+
+// ─── PORTFOLIO STATS ─────────────────────────────────────────────────────────
+const avgRet = mean(portRets);
+const sdRet  = stddev(portRets);
+const annRet = avgRet * 12;
+const annSD  = sdRet * Math.sqrt(12);
+const sharpe = (annRet - RF_ANNUAL) / annSD;
+
+let portCum = [100], peakP = 100, ddArr = [0];
+portRets.forEach(r => {
+  const v = portCum[portCum.length-1] * (1 + r/100);
+  portCum.push(v);
+  peakP = Math.max(peakP, v);
+  ddArr.push((v - peakP) / peakP * 100);
 });
+const maxDD  = Math.min(...ddArr);
+const calmar = maxDD !== 0 ? annRet / Math.abs(maxDD) : 0;
+
+const wins     = portRets.filter(r=>r>0).length;
+const winRate  = wins / n * 100;
+const grossWin = monthly.filter(d=>d.pnl>0).reduce((s,d)=>s+d.pnl,0);
+const grossLoss= Math.abs(monthly.filter(d=>d.pnl<0).reduce((s,d)=>s+d.pnl,0));
+const pf       = grossLoss > 0 ? grossWin / grossLoss : 0;
+const totalPnl = monthly.reduce((s,d)=>s+d.pnl,0);
+const bestIdx  = portRets.indexOf(Math.max(...portRets));
+const worstIdx = portRets.indexOf(Math.min(...portRets));
+
+// Nifty cumulative curve
+let niftyCum = [100];
+niftyRets.forEach(r => niftyCum.push(niftyCum[niftyCum.length-1] * (1 + r/100)));
+
+// Alpha per month
+const alpha = portRets.map((r,i) => r - niftyRets[i]);
+const totalAlpha = portRets.reduce((s,r,i)=>s+(r-niftyRets[i]),0);
+const alphaWins = alpha.filter(a=>a>0).length;
+
+// Nifty stats
+const niftyAvg = mean(niftyRets);
+const niftyAnn = niftyAvg * 12;
+
+// ─── METRIC TILES ───────────────────────────────────────────────────────────
+function tile(label, value, sub, cls=''){
+  return `<div class="metric ${cls}"><div class="metric-label">${label}</div><div class="metric-value">${value}</div>${sub?`<div class="metric-sub">${sub}</div>`:''}</div>`;
+}
+
+document.getElementById('metricsReturns').innerHTML =
+  tile('Avg monthly return', fmtPct(avgRet), 'portfolio · arithmetic mean', avgRet>0?'good':'bad') +
+  tile('Annualised return', fmtPct(annRet), 'avg × 12', annRet>0?'good':'bad') +
+  tile('Best month', fmtPct(Math.max(...portRets)), labels[bestIdx], 'good') +
+  tile('Worst month', fmtPct(Math.min(...portRets)), labels[worstIdx], 'bad');
+
+document.getElementById('metricsRisk').innerHTML =
+  tile('Monthly std dev', fmt2(sdRet)+'%', 'volatility', 'warn') +
+  tile('Annualised std dev', fmt2(annSD)+'%', 'σ × √12', 'warn') +
+  tile('Max drawdown', fmt2(maxDD)+'%', 'peak-to-trough', maxDD > -15 ? 'warn' : 'bad') +
+  tile('Win rate', fmt2(winRate)+'%', wins+'/'+n+' months profitable', winRate>50?'good':'bad');
+
+document.getElementById('metricsRiskAdj').innerHTML =
+  tile('Sharpe ratio', fmt2(sharpe), 'ann. · RF 7%', sharpe>1?'good':sharpe>0.5?'warn':'bad') +
+  tile('Profit factor', fmt2(pf), 'gross wins ÷ gross losses', pf>1.5?'good':pf>1?'warn':'bad') +
+  tile('Calmar ratio', fmt2(calmar), 'ann. return ÷ |max DD|', calmar>1?'good':calmar>0.5?'warn':'bad') +
+  tile('Avg monthly alpha', fmtPct(mean(alpha)), 'vs Nifty 50 · '+alphaWins+'/'+n+' months', mean(alpha)>0?'good':'bad');
+
+// ─── CHARTS ─────────────────────────────────────────────────────────────────
+const chartOpts = {responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+  scales:{x:{ticks:{font:{size:9},maxRotation:45,autoSkip:false},grid:{color:'rgba(0,0,0,0.04)'}},
+          y:{grid:{color:'rgba(0,0,0,0.04)'}}}};
+
+// Benchmark overlay
+new Chart(document.getElementById('benchmarkChart'),{type:'line',
+  data:{labels:['Start',...labels],datasets:[
+    {label:'Portfolio',data:portCum,borderColor:'#1a1a18',borderWidth:2,pointRadius:2,
+      fill:false,tension:0.25},
+    {label:'Nifty 50',data:niftyCum,borderColor:'#3B6EB0',borderWidth:1.5,
+      borderDash:[4,3],pointRadius:0,fill:false,tension:0.25},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:true,position:'top',labels:{font:{size:11},boxWidth:12,padding:16}}},
+    scales:{x:{ticks:{font:{size:9},maxRotation:45,autoSkip:false},grid:{color:'rgba(0,0,0,0.04)'}},
+      y:{ticks:{callback:v=>v.toFixed(0)},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+
+// Alpha bars
+new Chart(document.getElementById('alphaChart'),{type:'bar',
+  data:{labels,datasets:[{data:alpha,
+    backgroundColor:alpha.map(v=>v>=0?'rgba(29,158,117,0.75)':'rgba(216,90,48,0.75)'),borderRadius:3}]},
+  options:{...chartOpts,scales:{x:{ticks:{font:{size:9},maxRotation:45,autoSkip:false},grid:{color:'rgba(0,0,0,0.04)'}},
+    y:{ticks:{callback:v=>v.toFixed(1)+'%'},grid:{color:'rgba(0,0,0,0.04)'},
+      afterDataLimits:axis=>{const m=Math.max(Math.abs(axis.min),Math.abs(axis.max));axis.min=-m;axis.max=m;}}}}});
+
+// Equity curve
+new Chart(document.getElementById('equityChart'),{type:'line',
+  data:{labels:['Start',...labels],datasets:[{data:portCum,borderColor:'#1D9E75',borderWidth:2,
+    pointRadius:3,pointBackgroundColor:portCum.map((v,i)=>i===0?'#888780':v>=portCum[i-1]?'#1D9E75':'#D85A30'),
+    fill:true,backgroundColor:'rgba(29,158,117,0.07)',tension:0.25}]},
+  options:{...chartOpts,scales:{x:{ticks:{font:{size:9},maxRotation:45,autoSkip:false},grid:{color:'rgba(0,0,0,0.04)'}},
+    y:{ticks:{callback:v=>v.toFixed(0)},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+
+// Drawdown
+new Chart(document.getElementById('ddChart'),{type:'line',
+  data:{labels:['Start',...labels],datasets:[{data:ddArr,borderColor:'#D85A30',borderWidth:1.5,
+    pointRadius:2,fill:true,backgroundColor:'rgba(216,90,48,0.1)',tension:0.2}]},
+  options:{...chartOpts,scales:{x:{ticks:{font:{size:9},maxRotation:45,autoSkip:false},grid:{color:'rgba(0,0,0,0.04)'}},
+    y:{ticks:{callback:v=>v.toFixed(1)+'%'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+
+// Monthly returns bar
+new Chart(document.getElementById('monthlyRetChart'),{type:'bar',
+  data:{labels,datasets:[{data:portRets,
+    backgroundColor:portRets.map(v=>v>=0?'#1D9E75':'#D85A30'),borderRadius:3}]},
+  options:{...chartOpts,scales:{x:{ticks:{font:{size:9},maxRotation:45,autoSkip:false},grid:{color:'rgba(0,0,0,0.04)'}},
+    y:{ticks:{callback:v=>v.toFixed(1)+'%'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+
+// Histogram
+const minR=Math.min(...portRets),maxR=Math.max(...portRets),bins=8,bw=(maxR-minR)/bins;
+const counts=Array(bins).fill(0),binLabels=[];
+for(let i=0;i<bins;i++) binLabels.push((minR+i*bw).toFixed(1)+'%');
+portRets.forEach(v=>{let b=Math.min(Math.floor((v-minR)/bw),bins-1);counts[b]++;});
+new Chart(document.getElementById('histChart'),{type:'bar',
+  data:{labels:binLabels,datasets:[{data:counts,
+    backgroundColor:binLabels.map(l=>parseFloat(l)>=0?'rgba(29,158,117,0.7)':'rgba(216,90,48,0.7)'),borderRadius:3}]},
+  options:{...chartOpts,scales:{x:{ticks:{font:{size:9},maxRotation:45},grid:{color:'rgba(0,0,0,0.04)'}},
+    y:{ticks:{stepSize:1},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+
+// ─── PERIOD BREAKDOWN ────────────────────────────────────────────────────────
+function sliceStats(slice, niftySlice) {
+  const r = slice.map(d=>d.pnl/d.cap*100);
+  const tp = slice.reduce((s,d)=>s+d.pnl,0);
+  const nAvg = niftySlice ? mean(niftySlice) : null;
+  return {r, tp, avg:mean(r), sd:r.length>1?stddev(r):0,
+    wr:r.filter(v=>v>0).length/r.length*100,
+    best:Math.max(...r), worst:Math.min(...r), nAvg};
+}
+const periods = [
+  {label:'Full period (25m · Jul\'23–Aug\'25)', s:0,  e:25},
+  {label:'FY2023-24 active (9m)',               s:0,  e:9},
+  {label:'FY2024-25 (12m)',                     s:8,  e:21},
+  {label:'FY2025-26 partial (4m)',              s:21, e:25},
+  {label:'Bull phase (Jul–Dec\'23)',            s:0,  e:6},
+  {label:'Recovery (Jan–Jun\'24)',              s:6,  e:13},
+  {label:'Volatile (Jul\'24–Mar\'25)',          s:13, e:21},
+];
+const pb = document.getElementById('periodBody');
+periods.forEach((p,i) => {
+  const slice = monthly.slice(p.s, p.e);
+  const ns = niftyRets.slice(p.s, p.e);
+  const s = sliceStats(slice, ns);
+  pb.innerHTML += `<tr style="${i%2===1?'background:#fafaf9':''}">
+    <td style="font-weight:500;">${p.label}</td>
+    <td style="text-align:right;">${slice.length}</td>
+    <td style="text-align:right;color:${clr(s.tp)};font-weight:500;">${fmtINR(s.tp)}</td>
+    <td style="text-align:right;color:${clr(s.avg)};">${fmtPct(s.avg)}</td>
+    <td style="text-align:right;color:#888780;">${fmt2(s.sd)}%</td>
+    <td style="text-align:right;">${fmt2(s.wr)}%</td>
+    <td style="text-align:right;color:#1D9E75;">${fmtPct(s.best)}</td>
+    <td style="text-align:right;color:#D85A30;">${fmtPct(s.worst)}</td>
+  </tr>`;
+});
+
+// ─── MONTHLY DETAIL TABLE ────────────────────────────────────────────────────
+const md = document.getElementById('monthDetail');
+let cumV = 100;
+monthly.forEach((d,i) => {
+  const r = portRets[i];
+  const nr = niftyRets[i];
+  const a = r - nr;
+  cumV *= (1 + r/100);
+  md.innerHTML += `<tr style="${i%2===1?'background:#fafaf9':''}">
+    <td style="font-weight:500;">${d.m}</td>
+    <td style="color:${clr(d.pnl)};">${fmtINR(d.pnl)}</td>
+    <td style="text-align:right;color:${clr(r)};font-weight:500;">${fmtPct(r)}</td>
+    <td style="text-align:right;color:${clr(nr)};">${fmtPct(nr)}</td>
+    <td style="text-align:right;color:${clr(a)};font-weight:500;">${fmtPct(a)}</td>
+    <td style="text-align:right;">${cumV.toFixed(1)}</td>
+    <td style="text-align:right;color:#D85A30;">${fmt2(ddArr[i+1])}%</td>
+  </tr>`;
+});
+
+// ─── RESUME BULLETS ──────────────────────────────────────────────────────────
+const niftyFinal = niftyCum[niftyCum.length-1];
+const portFinal  = portCum[portCum.length-1];
+document.getElementById('resumeBullets').innerHTML = `
+  <p><strong style="font-weight:500;">Absolute returns:</strong> Total net P&L <strong style="font-weight:500;">+₹7,40,740</strong> across both brokers over 5 FYs; annualised portfolio return <strong style="font-weight:500;">${fmtPct(annRet)}</strong> on avg deployed capital (25-month combined series)</p>
+  <p><strong style="font-weight:500;">vs Nifty 50:</strong> Portfolio cumulative return <strong style="font-weight:500;">${fmtPct(portFinal-100)}</strong> vs Nifty 50 <strong style="font-weight:500;">${fmtPct(niftyFinal-100)}</strong> over the same 25 months (Jul 2023 – Aug 2025); outperformed in <strong style="font-weight:500;">${alphaWins}/${n}</strong> months; avg monthly alpha <strong style="font-weight:500;">${fmtPct(mean(alpha))}</strong></p>
+  <p><strong style="font-weight:500;">Risk-adjusted:</strong> Sharpe ratio <strong style="font-weight:500;">${fmt2(sharpe)}</strong> (RF 7% p.a.); max drawdown <strong style="font-weight:500;">${fmt2(maxDD)}%</strong>; Calmar ratio <strong style="font-weight:500;">${fmt2(calmar)}</strong>; win rate <strong style="font-weight:500;">${fmt2(winRate)}%</strong> (${wins}/${n} months), profit factor <strong style="font-weight:500;">${fmt2(pf)}</strong></p>
+  <p><strong style="font-weight:500;">Strategy:</strong> Directional F&O (NSE index + stock options) across two broker accounts; capital grew from ₹3.0L (Angel One FY2023-24) to ₹12.43L (Zerodha FY2025-26); profitable in 3 of 5 FYs after 2-year learning phase</p>
+`;
 </script>
 </body>
 </html>
