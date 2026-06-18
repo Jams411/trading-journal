@@ -12,7 +12,7 @@ Personal trading performance across NSE F&O, Currency F&O, MCX Commodity & Equit
 |---|---|
 | Total net P&L | **+₹6,90,051** |
 | Period | FY2021-22 → FY2025-26 (5 years) |
-| Total trades executed | **5,457+** (all realized) |
+| Total trades executed | **5,284+** (all realized) |
 | Best year ROI on avg capital | **+22.3%** (FY2024-25) |
 | Monthly win rate | **64%** (16/25 months) |
 | Sharpe ratio | **0.42** (RF 7% p.a.) |
@@ -28,7 +28,7 @@ Personal trading performance across NSE F&O, Currency F&O, MCX Commodity & Equit
 | Dashboard | Description |
 |---|---|
 | [Overall Portfolio](combined.html) | Combined 25-month series · Nifty benchmark · quant metrics · equity curve |
-| [Zerodha (EKV***)](zerodha.html) | 5-year breakdown · F&O + Currency F&O + Commodity + Equity · 5,226 trades |
+| [Zerodha (EKV***)](zerodha.html) | 5-year breakdown · F&O + Currency F&O + Commodity + Equity · 5,053 trades |
 | [Angel One (S5143****)](angelone.html) | 15-month F&O + Equity · 231+ trades |
 
 ---
@@ -38,11 +38,11 @@ Personal trading performance across NSE F&O, Currency F&O, MCX Commodity & Equit
 | FY | Trades | Net P&L | Nifty 50 | Phase |
 |---|---|---|---|---|
 | FY2021-22 | 114 | −₹46,226 | +18.88% | Learning |
-| FY2022-23 | 743 | −₹1,21,811 | −0.60% | Learning |
-| FY2023-24 | 508+ | +₹2,70,648 | +28.61% | Breakeven |
+| FY2022-23 | 592 | −₹1,21,811 | −0.60% | Learning |
+| FY2023-24 | 486+ | +₹2,70,648 | +28.61% | Breakeven |
 | FY2024-25 | 3,673 | +₹3,97,791 | +5.34% | Profitable |
 | FY2025-26 | 419 | +₹1,89,651 | +3.86% (partial) | Profitable |
-| **Total** | **5,457+** | **+₹6,90,051** | | |
+| **Total** | **5,284+** | **+₹6,90,051** | | |
 
 ---
 
@@ -54,19 +54,19 @@ Personal trading performance across NSE F&O, Currency F&O, MCX Commodity & Equit
 | Equity — cash | ~41 | +₹76,163 | Positional holdings |
 | Commodity (MCX) | 547 | −₹83,775 | FY2021-22 to FY2023-24 · discontinued |
 | Currency F&O (NSE) | 173 | −₹50,689 | USDINR/EURINR/GBPINR · FY2022-23 & FY2023-24 · discontinued · net verified via Zerodha Console |
-| **Total** | **5,457+** | **+₹6,90,051** | |
+| **Total** | **5,284+** | **+₹6,90,051** | |
 
 ---
 
 ## Zerodha (EKV***)
 
-**Period:** FY2021-22 → FY2025-26 · **Total:** 5,226 trades · +₹2,54,714
+**Period:** FY2021-22 → FY2025-26 · **Total:** 5,053 trades · +₹2,54,714
 
 | FY | Trades | Net P&L | Avg Capital | ROI |
 |---|---|---|---|---|
 | FY2021-22 | 114 | −₹46,226 | ₹6,500 | — |
-| FY2022-23 | 743 | −₹1,21,811 | ₹59,145 | — |
-| FY2023-24 | 508 | −₹2,964 | ₹6,81,098 | — |
+| FY2022-23 | 592 | −₹1,21,811 | ₹59,145 | — |
+| FY2023-24 | 486 | −₹2,964 | ₹6,81,098 | — |
 | FY2024-25 | 3,442 | +₹2,36,065 | ₹10,57,237 | +22.3% |
 | FY2025-26 | 419 | +₹1,89,651 | ₹12,43,013 | +15.3% |
 
@@ -112,7 +112,7 @@ Personal trading performance across NSE F&O, Currency F&O, MCX Commodity & Equit
 ## Methodology
 
 - **Source data:** Zerodha Tax P&L statements (5 FYs) + ledger statements · Angel One Trading Insights + P&L statements
-- **Trade counts:** Row counts from Tax P&L / Trading Insights files — realized trades only (no cancelled or rejected orders)
+- **Trade counts:** Row counts from Tax P&L / Trading Insights files — realized trades only (no cancelled or rejected orders). Currency F&O rows (173 trades across FY2022-23 and FY2023-24) are included within Zerodha Tax P&L tradewise exports and are not added again to avoid double-counting.
 - **Capital denominator:** Monthly avg ledger balance (Zerodha) · FY avg balance (Angel One)
 - **Nifty 50:** Verified via Yahoo Finance (^NSEI) monthly closing prices
 - **Zerodha P&L:** Tax P&L is gross (sell − buy before charges). Net figures subtract brokerage, STT, exchange fees, SEBI fees, stamp duty.
