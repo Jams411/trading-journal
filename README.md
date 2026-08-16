@@ -1,6 +1,6 @@
 # Trading Journal — Jameel Shaikh
 
-Personal trading performance across NSE F&O, Currency F&O, MCX Commodity & Equity. Two broker accounts, 5 financial years, all figures verified from source statements.
+Public summary of personal trading performance across NSE F&O, Currency F&O, MCX Commodity & Equity. The repository provides analyzed results and reproducible calculations for the 25-month headline series; the underlying brokerage records used for verification are retained privately.
 
 **Live dashboards:** https://jams411.github.io/trading-journal/
 
@@ -50,11 +50,15 @@ Personal trading performance across NSE F&O, Currency F&O, MCX Commodity & Equit
 
 | Segment | Trades | Net P&L | Notes |
 |---|---|---|---|
-| F&O — index & stock options | 4,696 | +₹7,48,352 | NIFTY & BankNifty · primary strategy |
+| F&O — index & stock options | 4,523 | +₹7,48,352 | NIFTY & BankNifty · primary strategy |
 | Equity — cash | ~41 | +₹76,163 | Positional holdings |
 | Commodity (MCX) | 547 | −₹83,775 | FY2021-22 to FY2023-24 · discontinued |
 | Currency F&O (NSE) | 173 | −₹50,689 | USDINR/EURINR/GBPINR · FY2022-23 & FY2023-24 · discontinued · net verified via Zerodha Console |
 | **Total** | **5,284+** | **+₹6,90,051** | |
+
+### Trading Style
+
+The core options specialization is **multi-leg short-premium strategies**, including spreads, straddles/strangles, short iron butterflies, and calendar spreads. The broader F&O record also includes other directional activity; **4,523 is the complete F&O segment count, not a claim that every trade belonged to one strategy family**.
 
 ---
 
@@ -111,7 +115,9 @@ Personal trading performance across NSE F&O, Currency F&O, MCX Commodity & Equit
 
 ## Methodology
 
-- **Source data:** Zerodha Tax P&L statements (5 FYs) + ledger statements · Angel One Trading Insights + P&L statements
+- **Public repository:** Publishes summarized performance tables, the 25 monthly P&L/capital observations, the corresponding Nifty 50 series, and the calculation code used for the public 25-month headline metrics.
+- **Private verification evidence:** Zerodha Tax P&L and ledger statements plus Angel One Trading Insights and P&L exports were used to verify and reconcile the canonical trading record. These raw brokerage files are retained privately and are not committed to this public repository.
+- **Reproducibility boundary:** A visitor can reproduce the 25-month performance calculations from the public series and code. The repository does not provide the source-level broker files needed to independently reconstruct the full trade history or private account records.
 - **Trade counts:** Row counts from Tax P&L / Trading Insights files — realized trades only (no cancelled or rejected orders). Currency F&O rows (173 trades across FY2022-23 and FY2023-24) are included within Zerodha Tax P&L tradewise exports and are not added again to avoid double-counting.
 - **Capital denominator:** Monthly avg ledger balance (Zerodha) · FY avg balance (Angel One)
 - **Nifty 50:** Verified via Yahoo Finance (^NSEI) monthly closing prices
@@ -119,4 +125,4 @@ Personal trading performance across NSE F&O, Currency F&O, MCX Commodity & Equit
 - **Combined series:** 25 months (Jul 2023 – Aug 2025); Apr 2025 excluded as no trades were executed that month
 - **Quant metrics scope:** Sharpe, drawdown, win rate, profit factor, Calmar all cover the 25-month monthly series (Jul 2023 – Aug 2025). Currency F&O (173 trades, all exited before Jul 2023) appears in lifetime segment totals only and is excluded from the monthly series.
 
-*Data as of Aug 2025. Raw statements available on request.*
+*Public data summarized through Aug 2025. Raw brokerage statements and exports are not published.*
