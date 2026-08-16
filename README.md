@@ -1,128 +1,61 @@
 # Trading Journal — Jameel Shaikh
 
-Public summary of personal trading performance across NSE F&O, Currency F&O, MCX Commodity & Equity. The repository provides analyzed results and reproducible calculations for the 25-month headline series; the underlying brokerage records used for verification are retained privately.
+Public summary of personal trading activity across NSE F&O, Currency F&O, MCX Commodity, and Equity. It separates lifetime broker-account reconciliation from historical public-series calculations that are reproducible from this repository but are not an authoritative continuous net-performance series.
 
 **Live dashboards:** https://jams411.github.io/trading-journal/
 
----
+## Canonical evidence status
 
-## Portfolio Overview
+The previously published **₹690,051.39** is retained only as broker-account adjusted lifetime net P&L across the available broker records. It is an accounting total, not a portfolio return or a continuous monthly performance series.
 
-| Metric | Value |
-|---|---|
-| Total net P&L | **+₹6,90,051** |
-| Period | FY2021-22 → FY2025-26 (5 years) |
-| Total trades executed | **5,284+** (all realized) |
-| Best year ROI on avg capital | **+22.3%** (FY2024-25) |
-| Monthly win rate | **64%** (16/25 months) |
-| Sharpe ratio | **0.42** (RF 7% p.a.) |
-| Max drawdown | **−31.48%** |
-| Profit factor | **2.05** |
-| Calmar ratio | **0.75** |
-| vs Nifty 50 | **+39.48% portfolio vs +23.02% Nifty** (Jul 2023 – Aug 2025) |
+The public 25-observation series mixes Angel One net P&L with Zerodha gross P&L, does not allocate all Zerodha charges by month, cannot date Angel One's full controlling population, and omits April 2025. Its return, benchmark, risk, and drawdown outputs are therefore historical public-series calculations—not canonical verified performance metrics.
 
----
+## Record-count grain
+
+| Scope | Count | Source composition |
+|---|---:|---|
+| F&O realized-record entries | **4,523** | 4,292 Zerodha F&O tax-exit rows + 231 Angel One F&O FIFO closes |
+| Available realized-record entries | **5,284+** | 5,053 Zerodha tax-exit rows + 231 Angel One F&O FIFO closes |
+
+These are mixed-grain record counts, not uniform executions, orders, or trades.
+
+## Strategy evidence
+
+- Broker records support substantial NIFTY and BankNifty options/derivatives activity.
+- Trading-process context includes options Greeks, implied volatility, open-interest analysis, position sizing, and structured trade review; these are not metrics reconstructed from the public series.
+- Multi-leg options experience is retained as bounded strategy context with corroborating evidence from a limited execution subset. The records do not establish lifetime multi-leg prevalence or a lifetime short-premium/options-selling orientation.
+- Currency F&O and MCX Commodity activity was discontinued after underperformance in those segments.
 
 ## Dashboards
 
 | Dashboard | Description |
 |---|---|
-| [Overall Portfolio](combined.html) | Combined 25-month series · Nifty benchmark · quant metrics · equity curve |
-| [Zerodha (EKV***)](zerodha.html) | 5-year breakdown · F&O + Currency F&O + Commodity + Equity · 5,053 trades |
-| [Angel One (S5143****)](angelone.html) | 15-month F&O + Equity · 231+ trades |
+| [Overall Portfolio](combined.html) | Historical 25-observation public series, benchmark comparison, and reproducible calculations—with noncanonical status disclosed |
+| [Zerodha](zerodha.html) | Broker-specific summaries based on Zerodha tax-P&L rows and fiscal charge controls |
+| [Angel One](angelone.html) | Broker-specific summaries; complete controlling aggregates lack realization dates |
 
----
+## Historical public-series calculations
 
-## Year-by-Year
+The repository still reproduces the following outputs from its embedded 25 selected observations so prior public analysis remains inspectable. None is an authoritative combined net-performance claim:
 
-| FY | Trades | Net P&L | Nifty 50 | Phase |
-|---|---|---|---|---|
-| FY2021-22 | 114 | −₹46,226 | +18.88% | Learning |
-| FY2022-23 | 592 | −₹1,21,811 | −0.60% | Learning |
-| FY2023-24 | 486+ | +₹2,70,648 | +28.61% | Breakeven |
-| FY2024-25 | 3,673 | +₹3,97,791 | +5.34% | Profitable |
-| FY2025-26 | 419 | +₹1,89,651 | +3.86% (partial) | Profitable |
-| **Total** | **5,284+** | **+₹6,90,051** | | |
+| Historical calculation | Output | Status |
+|---|---:|---|
+| Portfolio return | +39.48% | Noncanonical mixed-basis selected series |
+| Nifty 50 return | +23.02% | Noncontinuous selected-month chain |
+| Difference | +16.46 percentage points | Noncanonical comparison |
+| Profit factor | 2.05 | Noncanonical mixed-basis calculation |
+| Sharpe ratio | 0.42 | Noncanonical mixed-basis calculation |
+| Calmar ratio | 0.75 | Noncanonical mixed-basis calculation |
+| Maximum drawdown | −31.48% | Noncanonical synthetic-series calculation |
 
----
+**16 of 25 selected public-series observations were positive.** This is not a continuous monthly hit rate or a canonical portfolio-performance statistic.
 
-## Segment Breakdown
+## Methodology and provenance
 
-| Segment | Trades | Net P&L | Notes |
-|---|---|---|---|
-| F&O — index & stock options | 4,523 | +₹7,48,352 | NIFTY & BankNifty · primary strategy |
-| Equity — cash | ~41 | +₹76,163 | Positional holdings |
-| Commodity (MCX) | 547 | −₹83,775 | FY2021-22 to FY2023-24 · discontinued |
-| Currency F&O (NSE) | 173 | −₹50,689 | USDINR/EURINR/GBPINR · FY2022-23 & FY2023-24 · discontinued · net verified via Zerodha Console |
-| **Total** | **5,284+** | **+₹6,90,051** | |
+- **Public repository:** Provides summarized/analyzed trading data and reproduces the historical public-series calculations where applicable.
+- **Private verification evidence:** Broker statements, tax-P&L reports, and trading exports were used to verify and reconcile the canonical record. Raw brokerage files are not published.
+- **Reproducibility boundary:** A visitor can reproduce calculations from the embedded public arrays, but cannot reconstruct the complete broker record or a continuous combined monthly net series from this repository.
+- **Accounting boundary:** Broker accounting bases and charge availability differ across sources; the private reconciliation controls canonical accounting definitions.
+- **Date boundary:** The full Angel One controlling population does not contain realization dates, so no authoritative combined monthly series is currently available.
 
-### Trading Style
-
-The core options specialization is **multi-leg short-premium strategies**, including spreads, straddles/strangles, short iron butterflies, and calendar spreads. The broader F&O record also includes other directional activity; **4,523 is the complete F&O segment count, not a claim that every trade belonged to one strategy family**.
-
----
-
-## Zerodha (EKV***)
-
-**Period:** FY2021-22 → FY2025-26 · **Total:** 5,053 trades · +₹2,54,714
-
-| FY | Trades | Net P&L | Avg Capital | ROI |
-|---|---|---|---|---|
-| FY2021-22 | 114 | −₹46,226 | ₹6,500 | — |
-| FY2022-23 | 592 | −₹1,21,811 | ₹59,145 | — |
-| FY2023-24 | 486 | −₹2,964 | ₹6,81,098 | — |
-| FY2024-25 | 3,442 | +₹2,36,065 | ₹10,57,237 | +22.3% |
-| FY2025-26 | 419 | +₹1,89,651 | ₹12,43,013 | +15.3% |
-
-*Learning-phase ROI omitted — capital base too small to be meaningful.*
-
----
-
-## Angel One (S5143****)
-
-**Period:** Jun 2023 – Aug 2024 · **Total:** 231+ trades · +₹4,35,337
-
-| FY | Months | Trades | Net P&L | Avg Capital | ROI |
-|---|---|---|---|---|---|
-| FY2023-24 | 10 (Jun–Mar) | n/a* | +₹2,73,611 | ₹29.97L | +9.1% |
-| FY2024-25 | 5 (Apr–Aug) | 231 | +₹1,61,726 | ₹9.71L | +16.7% |
-
-*\*FY2023-24 individual trade records not available in current source files (Trading Insights export covers FY2024-25 only). Monthly P&L figures for FY2023-24 are from the Angel One P&L statement, not individual trade data.*
-
-### F&O Monthly P&L
-
-| Month | Net P&L | | Month | Net P&L |
-|---|---|---|---|---|
-| Jul 2023 | +₹6,216 | | Feb 2024 | −₹25,994 |
-| Aug 2023 | +₹1,97,214 | | Mar 2024 | +₹54,045 |
-| Sep 2023 | −₹1,88,196 | | Apr 2024 | +₹65,221 |
-| Oct 2023 | −₹10,383 | | May 2024 | −₹77,512 |
-| Nov 2023 | +₹29,870 | | Jun 2024 | +₹38,253 |
-| Dec 2023 | +₹1,29,978 | | Jul 2024 | +₹32,128 |
-| Jan 2024 | +₹7,657 | | Aug 2024 | +₹17,605 |
-
-### Equity Positions (all profitable)
-
-| Stock | Qty | Avg Buy | Avg Sell | Return | Net P&L |
-|---|---|---|---|---|---|
-| SAIL | 1,000 | ₹110.35 | ₹132.00 | +19.6% | ₹21,385 |
-| PFC | 3,050 | ₹388.57 | ₹400.63 | +3.1% | ₹34,104 |
-| AXISBANK | 300 | ₹1,132 | ₹1,174.85 | +3.8% | ₹12,085 |
-| POWERGRID | 1,000 | ₹214.30 | ₹231.65 | +8.1% | ₹16,855 |
-| HAL | 100 | ₹2,976 | ₹3,000 | +0.8% | ₹1,734 |
-
----
-
-## Methodology
-
-- **Public repository:** Publishes summarized performance tables, the 25 monthly P&L/capital observations, the corresponding Nifty 50 series, and the calculation code used for the public 25-month headline metrics.
-- **Private verification evidence:** Zerodha Tax P&L and ledger statements plus Angel One Trading Insights and P&L exports were used to verify and reconcile the canonical trading record. These raw brokerage files are retained privately and are not committed to this public repository.
-- **Reproducibility boundary:** A visitor can reproduce the 25-month performance calculations from the public series and code. The repository does not provide the source-level broker files needed to independently reconstruct the full trade history or private account records.
-- **Trade counts:** Row counts from Tax P&L / Trading Insights files — realized trades only (no cancelled or rejected orders). Currency F&O rows (173 trades across FY2022-23 and FY2023-24) are included within Zerodha Tax P&L tradewise exports and are not added again to avoid double-counting.
-- **Capital denominator:** Monthly avg ledger balance (Zerodha) · FY avg balance (Angel One)
-- **Nifty 50:** Verified via Yahoo Finance (^NSEI) monthly closing prices
-- **Zerodha P&L:** Tax P&L is gross (sell − buy before charges). Net figures subtract brokerage, STT, exchange fees, SEBI fees, stamp duty.
-- **Combined series:** 25 months (Jul 2023 – Aug 2025); Apr 2025 excluded as no trades were executed that month
-- **Quant metrics scope:** Sharpe, drawdown, win rate, profit factor, Calmar all cover the 25-month monthly series (Jul 2023 – Aug 2025). Currency F&O (173 trades, all exited before Jul 2023) appears in lifetime segment totals only and is excluded from the monthly series.
-
-*Public data summarized through Aug 2025. Raw brokerage statements and exports are not published.*
+*Public summaries contain no raw brokerage statements, account numbers, or private transaction exports.*
