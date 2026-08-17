@@ -66,9 +66,26 @@
   <div class="grid-4">
     <div class="metric good">
       <div class="metric-label">Broker-account adjusted lifetime net P&amp;L</div>
-      <div class="metric-value">+₹6,90,051</div>
-      <div class="metric-sub">5 financial years · all segments included</div>
+      <div class="metric-value">+₹6,87,291</div>
+      <div class="metric-sub">5 financial years · all segments · both brokers' non-trading debits netted</div>
     </div>
+    <div class="metric good">
+      <div class="metric-label">Trading Net P&amp;L</div>
+      <div class="metric-value">+₹6,96,037</div>
+      <div class="metric-sub">After trading charges only, before non-trading account debits</div>
+    </div>
+    <div class="metric good">
+      <div class="metric-label">Index Options net P&amp;L</div>
+      <div class="metric-value">+₹7,43,483</div>
+      <div class="metric-sub">Dominant profit engine · 106.8% of Trading Net P&amp;L</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Mixed-grain realized-record entries</div>
+      <div class="metric-value">5,284+</div>
+      <div class="metric-sub">5,053 Zerodha · 231 Angel One dated FIFO closes</div>
+    </div>
+  </div>
+  <div class="grid-2">
     <div class="metric good">
       <div class="metric-label">Historical best-year ROI proxy</div>
       <div class="metric-value">+22.3%</div>
@@ -79,15 +96,11 @@
       <div class="metric-value">+18.9%</div>
       <div class="metric-sub">Jun 2023 – Aug 2024 · both brokers · avg capital ₹31.3L</div>
     </div>
-    <div class="metric">
-      <div class="metric-label">Mixed-grain realized-record entries</div>
-      <div class="metric-value">5,284+</div>
-      <div class="metric-sub">5,053 Zerodha · 231+ Angel One</div>
-    </div>
   </div>
 
   <!-- ── 2. FY BREAKDOWN TABLE ── -->
-  <h2>Year-by-year performance</h2>
+  <h2>Year-by-year performance — legacy basis</h2>
+  <p class="note" style="margin-top:-0.5rem;margin-bottom:0.75rem;">This FY-by-year breakdown predates the canonical broker-account adjustment and is retained for continuity; its total does not equal the canonical lifetime figures above. See "Canonical evidence status" in the README for the controlling lifetime figures.</p>
   <div class="card">
     <table>
       <thead>
@@ -138,7 +151,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <td>Total</td>
+          <td>Total (legacy basis)</td>
           <td class="green">+₹6,90,051</td>
           <td>5,284+</td>
           <td>—</td>
@@ -146,7 +159,7 @@
         </tr>
       </tfoot>
     </table>
-    <p class="note">Nifty 50 annual returns: FY = Apr–Mar. FY2025-26 Nifty estimate through Aug 2025. Zerodha FY2025-26 partial through Aug 2025.</p>
+    <p class="note">Nifty 50 annual returns: FY = Apr–Mar. FY2025-26 Nifty estimate through Aug 2025. Zerodha FY2025-26 partial through Aug 2025. Legacy-basis total does not net the Angel One non-trading account debits applied to the canonical ₹6,87,291.37 figure above.</p>
   </div>
 
   <!-- ── 3. NIFTY 50 COMPARISON ── -->
@@ -209,18 +222,21 @@
   </div>
 
   <!-- ── 8. SEGMENT BREAKDOWN ── -->
-  <h2>Segment breakdown</h2>
+  <h2>Segment breakdown — canonical, directly charge-adjusted</h2>
   <div class="card">
     <table>
-      <thead><tr><th>Segment</th><th>Broker-account adjusted P&amp;L</th><th>Mixed-grain records</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Segment</th><th>Net P&amp;L</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td style="font-weight:500;">F&amp;O — index &amp; stock options</td><td class="green">+₹7,48,352</td><td class="muted">4,523</td><td class="muted">4,292 Zerodha F&amp;O tax-exit rows + 231 Angel F&amp;O FIFO closes; substantial NIFTY/BankNifty concentration</td></tr>
-        <tr style="background:#fafaf9;"><td style="font-weight:500;">Equity — cash</td><td class="green">+₹76,163</td><td class="muted">~41</td><td class="muted">Positional stock holdings</td></tr>
-        <tr><td style="font-weight:500;">Commodity (MCX)</td><td class="red">−₹83,775</td><td class="muted">547</td><td class="muted">MCX · FY2021-22 to FY2023-24 · discontinued</td></tr>
-        <tr style="background:#fafaf9;"><td style="font-weight:500;">Currency F&O (NSE)</td><td class="red">−₹50,689</td><td class="muted">173</td><td class="muted">USDINR/EURINR/GBPINR · FY2022-23 &amp; FY2023-24 · discontinued · verified via Zerodha Console</td></tr>
+        <tr><td style="font-weight:500;">Index Options</td><td class="green">+₹7,43,483.16</td><td class="muted">Dominant profit engine — 106.8% of Trading Net P&amp;L; substantial NIFTY/BankNifty concentration</td></tr>
+        <tr style="background:#fafaf9;"><td style="font-weight:500;">Equity Options</td><td class="green">+₹6,470.06</td><td class="muted">Single-stock options, both brokers</td></tr>
+        <tr><td style="font-weight:500;">Cash-Equity Delivery</td><td class="green">+₹82,401.24</td><td class="muted">Positional stock holdings, both brokers</td></tr>
+        <tr style="background:#fafaf9;"><td style="font-weight:500;">Cash-Equity Intraday</td><td class="red">−₹757.92</td><td class="muted">Both brokers</td></tr>
+        <tr><td style="font-weight:500;">Currency F&amp;O</td><td class="red">−₹49,333.90</td><td class="muted">Futures −₹31,497.36 · Options ≈ −₹17,836.54 · discontinued after underperformance</td></tr>
+        <tr style="background:#fafaf9;"><td style="font-weight:500;">Commodity (MCX)</td><td class="red">−₹82,163.13</td><td class="muted">Futures −₹61,947.25 · Options ≈ −₹20,215.88 · discontinued after underperformance</td></tr>
       </tbody>
-      <tfoot><tr><td>Total</td><td class="green">+₹6,90,051</td><td>5,284+</td><td></td></tr></tfoot>
+      <tfoot><tr><td>Trading Net P&amp;L</td><td class="green">+₹6,96,036.76</td><td class="muted">Before non-trading account debits — see canonical evidence status in README</td></tr></tfoot>
     </table>
+    <p class="note">No index or equity futures were traded on either broker — all index/stock derivatives activity above is options. Currency and commodity futures did occur (see per-segment split).</p>
   </div>
 
   <!-- ── 9. MONTHLY DETAIL TABLE ── -->
@@ -494,10 +510,10 @@ monthly.forEach((d,i) => {
 const niftyFinal = niftyCum[niftyCum.length-1];
 const portFinal  = portCum[portCum.length-1];
 document.getElementById('resumeBullets').innerHTML = `
-  <p><strong style="font-weight:500;">Accounting control:</strong> Broker-account adjusted lifetime net P&amp;L <strong style="font-weight:500;">+₹6,90,051</strong> across available broker records. This is a lifetime accounting total, not a continuous return series.</p>
+  <p><strong style="font-weight:500;">Accounting control:</strong> Broker-account adjusted lifetime net P&amp;L <strong style="font-weight:500;">+₹6,87,291</strong> across available broker records (Trading Net P&amp;L <strong style="font-weight:500;">+₹6,96,037</strong> before non-trading account debits). This is a lifetime accounting total, not a continuous return series.</p>
   <p><strong style="font-weight:500;">Historical selected-series calculation:</strong> The embedded arrays reproduce portfolio return <strong style="font-weight:500;">${fmtPct(portFinal-100)}</strong>, selected-chain Nifty 50 return <strong style="font-weight:500;">${fmtPct(niftyFinal-100)}</strong>, and their difference. These outputs are noncanonical because the portfolio array mixes broker accounting bases and the selected dates are incomplete.</p>
-  <p><strong style="font-weight:500;">Historical risk calculations:</strong> Sharpe <strong style="font-weight:500;">${fmt2(sharpe)}</strong>, synthetic maximum drawdown <strong style="font-weight:500;">${fmt2(maxDD)}%</strong>, Calmar <strong style="font-weight:500;">${fmt2(calmar)}</strong>, and profit factor <strong style="font-weight:500;">${fmt2(pf)}</strong> reproduce from the same noncanonical selected series. <strong style="font-weight:500;">${wins} of ${n} selected public-series observations were positive.</strong></p>
-  <p><strong style="font-weight:500;">Strategy context:</strong> Records support substantial NIFTY and BankNifty options activity. Multi-leg structures are bounded experience supported by user evidence and a limited corroborating subset; the records do not establish lifetime multi-leg prevalence or a lifetime short-premium orientation. Currency F&amp;O and MCX Commodity activity were discontinued after segment underperformance.</p>
+  <p><strong style="font-weight:500;">Historical risk calculations:</strong> Sharpe <strong style="font-weight:500;">${fmt2(sharpe)}</strong>, synthetic maximum drawdown <strong style="font-weight:500;">${fmt2(maxDD)}%</strong>, Calmar <strong style="font-weight:500;">${fmt2(calmar)}</strong>, and profit factor <strong style="font-weight:500;">${fmt2(pf)}</strong> reproduce from the same noncanonical selected series. <strong style="font-weight:500;">${wins} of ${n} selected public-series observations were positive.</strong> A separate canonical absolute P&amp;L drawdown of <strong style="font-weight:500;">−₹7,10,690.85</strong> (Zerodha F&amp;O, daily-aggregated, trough 2025-01-06) is not interchangeable with the synthetic drawdown above.</p>
+  <p><strong style="font-weight:500;">Strategy context:</strong> Records support substantial NIFTY and BankNifty options activity, with index options the dominant contributor to net P&amp;L (+₹7,43,483). Multi-leg activity is directly evidenced only within a narrow ~2.5-month execution window (46 of 49 sessions showed 2+ distinct contracts; 28 of those showed simultaneous net-long and net-short legs) and does not establish lifetime multi-leg prevalence. Short-premium orientation is not verified, and neither is long-premium orientation. Currency F&amp;O and MCX Commodity activity were discontinued after segment underperformance.</p>
 `;
 </script>
 </body>
