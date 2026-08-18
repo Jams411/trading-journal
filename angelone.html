@@ -5,66 +5,64 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Angel One — Jameel Shaikh</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link rel="stylesheet" href="assets/style.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a18; padding: 2rem 1rem; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #141414; color: #f3f3f3; padding: 2rem 1rem; }
   .container { max-width: 960px; margin: 0 auto; }
   h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
-  .subtitle { font-size: 13px; color: #888780; margin-bottom: 2rem; }
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
-  .metric { background: #ebebea; border-radius: 8px; padding: 1rem; }
-  .metric-label { font-size: 12px; color: #888780; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #a8a8a8; margin-bottom: 2rem; }
+  .metric { background: #202020; border-radius: 8px; padding: 1rem; }
+  .metric-label { font-size: 12px; color: #a8a8a8; margin-bottom: 4px; }
   .metric-value { font-size: 22px; font-weight: 500; }
-  .metric-sub { font-size: 11px; color: #888780; margin-top: 2px; }
-  .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
+  .metric-sub { font-size: 11px; color: #a8a8a8; margin-top: 2px; }
+  .card { background: #1c1c1c; border: 0.5px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
   .card-title { font-size: 13px; font-weight: 500; margin-bottom: 1rem; }
-  .green { color: #1D9E75; }
-  .red { color: #D85A30; }
-  .muted { color: #888780; }
+  .green { color: #3fb950; }
+  .red { color: #f85149; }
+  .muted { color: #a8a8a8; }
   .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-  .row-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 0.5px solid rgba(0,0,0,0.06); font-size: 12px; }
+  .row-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 0.5px solid rgba(255,255,255,0.06); font-size: 12px; }
   .row-item:last-child { border-bottom: none; }
   .bar-track { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 6px 0; }
-  .legend { display: flex; gap: 12px; font-size: 11px; color: #888780; }
+  .legend { display: flex; gap: 12px; font-size: 11px; color: #a8a8a8; }
   .legend span { display: flex; align-items: center; gap: 4px; }
   .swatch { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
-  .eq-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 0.5px solid rgba(0,0,0,0.07); font-size: 12px; }
+  .eq-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 0.5px solid rgba(255,255,255,0.07); font-size: 12px; }
   .eq-row:last-child { border-bottom: none; }
   .tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 500; }
-  .tag-profit { background: #EAF3DE; color: #3B6D11; }
+  .tag-profit { background: rgba(63,185,80,0.12); color: #3fb950; }
   table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  th { padding: 8px 10px; text-align: left; font-weight: 500; font-size: 11px; color: #888780; background: #f5f5f3; }
+  th { padding: 8px 10px; text-align: left; font-weight: 500; font-size: 11px; color: #a8a8a8; background: #141414; }
   th:not(:first-child) { text-align: right; }
-  td { padding: 7px 10px; border-bottom: 0.5px solid rgba(0,0,0,0.05); }
+  td { padding: 7px 10px; border-bottom: 0.5px solid rgba(255,255,255,0.05); }
   td:not(:first-child) { text-align: right; }
-  tfoot td { font-weight: 500; background: #f5f5f3; border-top: 1px solid rgba(0,0,0,0.1); border-bottom: none; }
-  tr.total-row td { font-weight: 600; border-top: 1px solid rgba(0,0,0,0.1); border-bottom: none; background: #fafaf9; }
-  .note { font-size: 11px; color: #888780; margin-top: 8px; }
+  tfoot td { font-weight: 500; background: #141414; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: none; }
+  tr.total-row td { font-weight: 600; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: none; background: #1f1f1f; }
+  .note { font-size: 11px; color: #a8a8a8; margin-top: 8px; }
   .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; margin-bottom: 1rem; }
-  .resume-box { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
-  .resume-box .label { font-size: 12px; font-weight: 500; color: #888780; margin-bottom: 0.75rem; }
-  .resume-bullets { border-left: 2px solid rgba(0,0,0,0.15); padding-left: 1rem; display: flex; flex-direction: column; gap: 10px; }
+  .resume-box { background: #1c1c1c; border: 0.5px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
+  .resume-box .label { font-size: 12px; font-weight: 500; color: #a8a8a8; margin-bottom: 0.75rem; }
+  .resume-bullets { border-left: 2px solid rgba(255,255,255,0.15); padding-left: 1rem; display: flex; flex-direction: column; gap: 10px; }
   .resume-bullets p { font-size: 13px; line-height: 1.7; }
-  .footer { font-size: 11px; color: #888780; margin-top: 1rem; text-align: center; }
-  @media (max-width: 600px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; } }
+  .footer { font-size: 11px; color: #a8a8a8; margin-top: 1rem; text-align: center; }
 </style>
 </head>
 <body>
 <div class="container">
+<p class="breadcrumb"><a href="index.html">← Trading Journal</a></p>
 
   <!-- 1. HEADER -->
   <h1>Angel One</h1>
   <p class="subtitle">Jameel Shaikh · S5143**** · NSE · Jun 2023 – Aug 2024 · FY2023-24 & FY2024-25 (partial)</p>
 
-  <div class="card" style="border-color:#BA7517;background:#FFF9ED;">
+  <div class="card" style="border-color:#d29922;background:#201c10;">
     <div class="card-title">Evidence note</div>
-    <p class="note" style="margin-top:0;color:#633806;">The controlling Angel P&amp;L workbook establishes aggregate gross, charges, and net amounts but does not provide realization dates. Dated Trading Insights rows are a partial FIFO-close subset. This page must not be treated as a complete monthly realized-P&amp;L series.</p>
+    <p class="note" style="margin-top:0;color:#c9a860;">The controlling Angel P&amp;L workbook establishes aggregate gross, charges, and net amounts but does not provide realization dates. Dated Trading Insights rows are a partial FIFO-close subset. This page must not be treated as a complete monthly realized-P&amp;L series.</p>
   </div>
 
   <!-- 2. TOP METRICS -->
-  <div class="grid-4">
+  <div class="grid-3">
     <div class="metric">
       <div class="metric-label">Trading Net P&L (15 months)</div>
       <div class="metric-value green">+₹4,35,337</div>
@@ -80,16 +78,13 @@
       <div class="metric-value green">+9.1%</div>
       <div class="metric-sub">Peak: ₹47.9L (conservative)</div>
     </div>
-    <div class="metric">
-      <div class="metric-label">Dated F&amp;O FIFO closes</div>
-      <div class="metric-value">231</div>
-      <div class="metric-sub">Partial dated subset · not a total trade count</div>
-    </div>
   </div>
+  <p class="note">231 dated F&amp;O FIFO closes (Angel One Trading Insights export — a partial dated subset, not a total trade count; see README for grain definitions).</p>
 
   <!-- 3. YEAR-BY-YEAR PERFORMANCE -->
   <div class="card">
     <div class="card-title">Year-by-year performance</div>
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>FY</th><th>Phase</th><th>Net P&L</th><th>Avg Capital</th><th>ROI (avg)</th><th>Peak Capital</th><th>ROI (peak)</th></tr>
@@ -104,7 +99,7 @@
           <td>₹47.85L</td>
           <td class="green">+5.7%</td>
         </tr>
-        <tr style="background:#fafaf9;">
+        <tr style="background:#1f1f1f;">
           <td style="font-weight:500;">FY2024-25</td>
           <td><span class="tag tag-profit">Profitable</span></td>
           <td class="green" style="font-weight:500;">+₹1,61,726</td>
@@ -123,8 +118,9 @@
         </tr>
       </tbody>
     </table>
+    </div>
     <p class="note">ROI = Net P&L ÷ capital from Angel One broking ledger. Avg = average running balance per FY. Peak = highest single balance. FY2024-25 includes equity exits (₹86K) realized Jun 2024.</p>
-    <p class="note" style="margin-top:6px;border-top:0.5px solid rgba(0,0,0,0.07);padding-top:6px;">⚠ <strong style="font-weight:500;">FY2023-24 note:</strong> Individual trade records are not available for FY2023-24 (Trading Insights export covers FY2024-25 only). Monthly P&L figures for Jun 2023 – Mar 2024 are taken from the Angel One P&L statement, not trade-level data. Trade count for that period is not available.</p>
+    <p class="note" style="margin-top:6px;border-top:0.5px solid rgba(255,255,255,0.07);padding-top:6px;">⚠ <strong style="font-weight:500;">FY2023-24 note:</strong> Individual trade records are not available for FY2023-24 (Trading Insights export covers FY2024-25 only). Monthly P&L figures for Jun 2023 – Mar 2024 are taken from the Angel One P&L statement, not trade-level data. Trade count for that period is not available.</p>
   </div>
 
   <!-- 4. NET P&L BY FINANCIAL YEAR -->
@@ -137,7 +133,7 @@
   <div class="grid-2">
     <div class="card" style="margin-bottom:0;">
       <div class="card-title">F&O — Derivatives</div>
-      <div style="font-size:26px;font-weight:500;margin-bottom:1rem;" class="green">₹3,49,306 <span style="font-size:13px;color:#888780;font-weight:400;">net</span></div>
+      <div style="font-size:26px;font-weight:500;margin-bottom:1rem;" class="green">₹3,49,306 <span style="font-size:13px;color:#a8a8a8;font-weight:400;">net</span></div>
       <div class="stat-grid">
         <div><div class="muted">Gross P&L</div><div style="font-weight:500;">₹4,36,709</div></div>
         <div><div class="muted">Charges</div><div style="font-weight:500;">₹87,403</div></div>
@@ -146,29 +142,29 @@
         <div><div class="muted">Underlyings</div><div style="font-weight:500;">NIFTY, BankNifty</div></div>
         <div><div class="muted">Dated FIFO subset</div><div style="font-weight:500;">231 closes</div></div>
       </div>
-      <div style="border-top:0.5px solid rgba(0,0,0,0.08);padding-top:0.75rem;">
-        <div style="font-size:11px;color:#888780;font-weight:500;margin-bottom:6px;">Style split</div>
+      <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:0.75rem;">
+        <div style="font-size:11px;color:#a8a8a8;font-weight:500;margin-bottom:6px;">Style split</div>
         <div class="bar-track">
-          <div style="width:73.1%;background:#378ADD;"></div>
-          <div style="width:26.9%;background:#B5D4F4;"></div>
+          <div style="width:73.1%;background:#a8a8a8;"></div>
+          <div style="width:26.9%;background:#4a4a4a;"></div>
         </div>
         <div class="legend">
-          <span><span class="swatch" style="background:#378ADD;"></span>Positional 73%</span>
-          <span><span class="swatch" style="background:#B5D4F4;"></span>Intraday 27%</span>
+          <span><span class="swatch" style="background:#a8a8a8;"></span>Positional 73%</span>
+          <span><span class="swatch" style="background:#4a4a4a;"></span>Intraday 27%</span>
         </div>
       </div>
     </div>
     <div class="card" style="margin-bottom:0;">
       <div class="card-title">Equity — Cash</div>
-      <div style="font-size:26px;font-weight:500;margin-bottom:1rem;" class="green">₹86,031 <span style="font-size:13px;color:#888780;font-weight:400;">net</span></div>
+      <div style="font-size:26px;font-weight:500;margin-bottom:1rem;" class="green">₹86,031 <span style="font-size:13px;color:#a8a8a8;font-weight:400;">net</span></div>
       <div class="stat-grid">
         <div><div class="muted">Gross P&L</div><div style="font-weight:500;">₹91,081</div></div>
         <div><div class="muted">Charges</div><div style="font-weight:500;">₹5,050</div></div>
         <div><div class="muted">Style</div><div style="font-weight:500;">Short-term positional</div></div>
         <div><div class="muted">Holding</div><div style="font-weight:500;">&lt;1 year</div></div>
       </div>
-      <div style="border-top:0.5px solid rgba(0,0,0,0.08);padding-top:0.75rem;">
-        <div style="font-size:11px;color:#888780;font-weight:500;margin-bottom:4px;">Positions (all profitable)</div>
+      <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:0.75rem;">
+        <div style="font-size:11px;color:#a8a8a8;font-weight:500;margin-bottom:4px;">Positions (all profitable)</div>
         <div id="eqRows"></div>
       </div>
     </div>
@@ -178,9 +174,9 @@
   <div class="grid-2">
     <div class="card" style="margin-bottom:0;">
       <div class="card-title">Segment totals</div>
-      <div class="row-item"><span><span class="dot" style="background:#378ADD;"></span>F&O (NSE)</span><span class="green" style="font-weight:500;">+₹3,49,306</span></div>
-      <div class="row-item"><span><span class="dot" style="background:#1D9E75;"></span>Equity (NSE)</span><span class="green">+₹86,031</span></div>
-      <div class="row-item" style="border-top:0.5px solid rgba(0,0,0,0.1);margin-top:4px;padding-top:8px;">
+      <div class="row-item"><span><span class="dot" style="background:#3fb950;"></span>F&O (NSE)</span><span class="green" style="font-weight:500;">+₹3,49,306</span></div>
+      <div class="row-item"><span><span class="dot" style="background:#3fb950;"></span>Equity (NSE)</span><span class="green">+₹86,031</span></div>
+      <div class="row-item" style="border-top:0.5px solid rgba(255,255,255,0.1);margin-top:4px;padding-top:8px;">
         <span style="font-weight:500;">Net total</span><span class="green" style="font-weight:600;">+₹4,35,337</span>
       </div>
     </div>
@@ -207,22 +203,24 @@
   <!-- 9. MONTHLY BREAKDOWN TABLE -->
   <div class="card">
     <div class="card-title">Monthly breakdown</div>
+    <div class="table-scroll">
     <table>
       <thead><tr><th>Month</th><th>Realized P&L</th><th>Charges</th><th>Net P&L</th></tr></thead>
       <tbody id="monthlyTable"></tbody>
       <tfoot><tr><td>Total (visible)</td><td id="totR" style="text-align:right;"></td><td id="totC" style="text-align:right;"></td><td id="totN" style="text-align:right;"></td></tr></tfoot>
     </table>
+    </div>
     <p class="note">The controlling Angel aggregates lack realization dates. This historical dated display cannot establish a complete monthly realized-P&amp;L series; the aggregate broker-summary net remains the control.</p>
   </div>
 
   <!-- 10. STRATEGY OVERVIEW -->
   <div class="card">
     <div class="card-title">Strategy overview</div>
-    <div style="font-size:12px;line-height:1.9;color:#444;">
-      <strong>Instrument:</strong> NIFTY & BankNifty options (NSE)<br>
-      <strong>Approach:</strong> Options and derivatives activity with bounded multi-leg strategy experience (46 of 49 sessions in the dated execution window show 2+ distinct contracts); the available subset does not establish lifetime multi-leg prevalence, and neither short-premium nor long-premium orientation is verified<br>
-      <strong>Evidence boundary:</strong> Complete controlling aggregates have no realization dates; dated FIFO closes are a partial subset<br>
-      <strong>Exit:</strong> Stopped trading Angel One after Aug 2024; activity consolidated to Zerodha
+    <div style="font-size:12px;line-height:1.9;color:var(--text-secondary);">
+      <strong style="color:var(--text);">Instrument:</strong> NIFTY & BankNifty options (NSE)<br>
+      <strong style="color:var(--text);">Approach:</strong> Options and derivatives activity with bounded multi-leg strategy experience (46 of 49 sessions in the dated execution window show 2+ distinct contracts); the available subset does not establish lifetime multi-leg prevalence, and neither short-premium nor long-premium orientation is verified<br>
+      <strong style="color:var(--text);">Evidence boundary:</strong> Complete controlling aggregates have no realization dates; dated FIFO closes are a partial subset<br>
+      <strong style="color:var(--text);">Exit:</strong> Stopped trading Angel One after Aug 2024; activity consolidated to Zerodha
     </div>
   </div>
 
@@ -240,6 +238,9 @@
 
 </div>
 <script>
+Chart.defaults.color = '#a8a8a8';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.08)';
+Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
 const equity = [
   {sym:'SAIL',      buy:110.35, sell:132,     qty:1000, net:21384.77},
   {sym:'PFC',       buy:388.57, sell:400.63,  qty:3050, net:34104.13},
@@ -256,22 +257,22 @@ equity.forEach(e => {
 const fyData = [273611, 161726];
 new Chart(document.getElementById('fyChart'), {
   type: 'bar',
-  data: { labels: ['FY2023-24','FY2024-25 (partial)'], datasets: [{ data: fyData, backgroundColor: '#1D9E75', borderRadius: 4 }] },
+  data: { labels: ['FY2023-24','FY2024-25 (partial)'], datasets: [{ data: fyData, backgroundColor: '#3fb950', borderRadius: 4 }] },
   options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-    scales: { x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.04)' } }, y: { ticks: { callback: v => '₹'+(v/1000).toFixed(0)+'K' }, grid: { color: 'rgba(0,0,0,0.04)' } } } }
+    scales: { x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.04)' } }, y: { ticks: { callback: v => '₹'+(v/1000).toFixed(0)+'K' }, grid: { color: 'rgba(255,255,255,0.04)' } } } }
 });
 
 new Chart(document.getElementById('roiChart'), {
   type: 'bar',
   data: { labels: ['FY2023-24','FY2024-25'],
     datasets: [
-      { label: 'ROI on avg capital', data: [9.1, 16.7], backgroundColor: '#1D9E75', borderRadius: 4 },
-      { label: 'ROI on peak capital', data: [5.7, 8.6], backgroundColor: '#A8D5C2', borderRadius: 4 }
+      { label: 'ROI on avg capital', data: [9.1, 16.7], backgroundColor: '#3fb950', borderRadius: 4 },
+      { label: 'ROI on peak capital', data: [5.7, 8.6], backgroundColor: '#2f6b45', borderRadius: 4 }
     ]
   },
   options: { responsive: true, maintainAspectRatio: false,
     plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } } },
-    scales: { x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.04)' } }, y: { ticks: { callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.04)' } } } }
+    scales: { x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.04)' } }, y: { ticks: { callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,0.04)' } } } }
 });
 
 const monthly = [
@@ -293,9 +294,9 @@ const monthly = [
 const tbody = document.getElementById('monthlyTable');
 const fmt = n => (n<0?'-':'+')+'₹'+Math.abs(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
 monthly.forEach((d,i) => {
-  const nc = d.n>=0?'#1D9E75':'#D85A30', rc = d.r>=0?'#1D9E75':'#D85A30';
-  const note = d.c==null?'<span style="color:#888780;font-size:10px;"> *</span>':'';
-  tbody.innerHTML += `<tr style="${i%2===1?'background:#fafaf9':''}"><td style="font-weight:500;">${d.m}</td><td style="color:${rc};">${fmt(d.r)}${note}</td><td class="muted">${d.c!=null?'₹'+d.c.toLocaleString('en-IN',{minimumFractionDigits:2}):'—'}</td><td style="color:${nc};font-weight:500;">${fmt(d.n)}${note}</td></tr>`;
+  const nc = d.n>=0?'#3fb950':'#f85149', rc = d.r>=0?'#3fb950':'#f85149';
+  const note = d.c==null?'<span style="color:#a8a8a8;font-size:10px;"> *</span>':'';
+  tbody.innerHTML += `<tr style="${i%2===1?'background:#1f1f1f':''}"><td style="font-weight:500;">${d.m}</td><td style="color:${rc};">${fmt(d.r)}${note}</td><td class="muted">${d.c!=null?'₹'+d.c.toLocaleString('en-IN',{minimumFractionDigits:2}):'—'}</td><td style="color:${nc};font-weight:500;">${fmt(d.n)}${note}</td></tr>`;
 });
 const totR = monthly.reduce((s,d)=>s+d.r,0);
 const totN = monthly.reduce((s,d)=>s+d.n,0);
@@ -306,9 +307,9 @@ document.getElementById('totN').textContent = fmt(totN);
 
 new Chart(document.getElementById('monthlyChart'), {
   type: 'bar',
-  data: { labels: monthly.map(d=>d.m), datasets: [{ data: monthly.map(d=>d.n), backgroundColor: monthly.map(d=>d.n>=0?'#1D9E75':'#D85A30'), borderRadius: 3 }] },
+  data: { labels: monthly.map(d=>d.m), datasets: [{ data: monthly.map(d=>d.n), backgroundColor: monthly.map(d=>d.n>=0?'#3fb950':'#f85149'), borderRadius: 3 }] },
   options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-    scales: { x: { ticks: { font: { size: 10 }, maxRotation: 45, autoSkip: false }, grid: { color: 'rgba(0,0,0,0.04)' } }, y: { ticks: { callback: v => (v<0?'-':'')+'₹'+(Math.abs(v)/1000).toFixed(0)+'K' }, grid: { color: 'rgba(0,0,0,0.04)' } } } }
+    scales: { x: { ticks: { font: { size: 10 }, maxRotation: 45, autoSkip: false }, grid: { color: 'rgba(255,255,255,0.04)' } }, y: { ticks: { callback: v => (v<0?'-':'')+'₹'+(Math.abs(v)/1000).toFixed(0)+'K' }, grid: { color: 'rgba(255,255,255,0.04)' } } } }
 });
 </script>
 </body>

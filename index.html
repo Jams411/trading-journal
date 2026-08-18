@@ -4,122 +4,705 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trading Journal — Jameel Shaikh</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a18; padding: 2rem 1rem; min-height: 100vh; }
-  .container { max-width: 720px; margin: 0 auto; }
-  .header { margin-bottom: 3rem; }
-  h1 { font-size: 26px; font-weight: 500; margin-bottom: 6px; }
-  .subtitle { font-size: 14px; color: #888780; line-height: 1.6; }
-  .stats-row { display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
-  .stat { }
-  .stat-value { font-size: 22px; font-weight: 500; color: #1D9E75; }
-  .stat-label { font-size: 11px; color: #888780; margin-top: 2px; }
-  h2 { font-size: 11px; font-weight: 500; color: #888780; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; border-bottom: 0.5px solid rgba(0,0,0,0.1); padding-bottom: 8px; }
-  .cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 2.5rem; }
-  .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 14px; padding: 1.25rem 1.5rem; text-decoration: none; color: inherit; display: flex; align-items: center; justify-content: space-between; transition: box-shadow 0.15s, transform 0.15s; }
-  .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); transform: translateY(-1px); }
-  .card-left { }
-  .card-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
-  .card-desc { font-size: 12px; color: #888780; line-height: 1.5; }
-  .card-meta { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-  .tag { font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 500; }
-  .tag-green  { background: #EAF3DE; color: #3B6D11; }
-  .tag-blue   { background: #E8F0FC; color: #2B5CB0; }
-  .tag-purple { background: #F0EDFF; color: #5B4FBF; }
-  .tag-amber  { background: #FFF3DC; color: #8A5C00; }
-  .arrow { font-size: 18px; color: #ccc; flex-shrink: 0; margin-left: 1rem; }
-  .card:hover .arrow { color: #888780; }
-  .footer { font-size: 11px; color: #aaa8a5; text-align: center; margin-top: 2rem; }
-  @media (max-width: 500px) { .stats-row { gap: 1.25rem; } .card { flex-direction: column; align-items: flex-start; } .arrow { display: none; } }
+  /* Narrow editorial/report column, not the dashboard-width container. */
+  .container { max-width: 900px; }
+  body { padding: 3.5rem 1.25rem 5rem; font-size: 16px; line-height: 1.6; }
+
+  /* Readability pass: main title, intro prose. */
+  h1 { font-size: 34px; }
+  p.lede { font-size: 16.5px; line-height: 1.6; }
+  .lede-block { max-width: 660px; margin-top: 1rem; }
+  .lede-block p { font-size: 16.5px; color: var(--text-secondary); line-height: 1.65; }
+
+  /* Genuinely vertical hero — one primary figure, one supporting figure
+     stacked beneath it. No grid/columns for the headline metrics. */
+  .hero-section { margin-top: 2.75rem; }
+  .stat-value {
+    font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+    font-weight: 600; letter-spacing: -0.01em; line-height: 1.1;
+  }
+  .hero-value { font-size: 46px; }
+  .hero-label { font-size: 15px; color: var(--text-secondary); margin-top: 10px; }
+  .hero-secondary { margin-top: 2.25rem; padding-top: 2.25rem; border-top: 1px solid var(--border); display: flex; gap: 2.75rem; flex-wrap: wrap; }
+  .hero-value-sm { font-size: 24px; }
+  .hero-label-sm { font-size: 14px; color: var(--text-secondary); margin-top: 6px; }
+  @media (max-width: 480px) { .hero-value { font-size: 36px; } }
+
+  h2.section-heading { font-size: 23px; font-weight: 600; color: var(--text); text-transform: none; letter-spacing: normal; border-bottom: none; padding-bottom: 0; margin-bottom: 0.35rem; }
+  .section-sub { font-size: 14.5px; color: var(--text-tertiary); margin-bottom: 1.4rem; }
+  section.narrative { margin-top: 4.25rem; }
+
+  .chart-wrap { position: relative; }
+  .chart-tall { height: 360px; }
+  .chart-mid { height: 280px; }
+
+  .compact-metrics { display: flex; gap: 2.5rem; margin-top: 1.4rem; flex-wrap: wrap; }
+  .compact-metrics .cm-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 21px; font-weight: 600; }
+  .compact-metrics .cm-label { font-size: 13px; color: var(--text-tertiary); margin-top: 4px; }
+
+  .risk-callout {
+    margin-top: 1rem; padding: 1.25rem 1.5rem;
+    background: var(--bg-elevated-2); border: 1px solid var(--border); border-left: 3px solid var(--negative);
+    border-radius: var(--radius);
+  }
+  .risk-callout .rc-value { font-family: var(--font-mono); font-size: 28px; font-weight: 600; color: var(--negative); }
+  .risk-callout .rc-label { font-size: 14.5px; color: var(--text); margin-top: 5px; }
+  .risk-callout .rc-sub { font-size: 13.5px; color: var(--text-secondary); margin-top: 2px; }
+  .measure-note { font-size: 14px; color: var(--text-tertiary); margin-top: 0.95rem; line-height: 1.65; }
+
+  .vstat { padding: 1.25rem 0; border-top: 1px solid var(--border); }
+  .vstat:first-child { border-top: none; }
+  .vstat .vs-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 28px; font-weight: 600; }
+  .vstat .vs-label { font-size: 14.5px; color: var(--text-secondary); margin-top: 5px; }
+  .vstat .vs-sub { font-size: 13.5px; color: var(--text-tertiary); margin-top: 2px; }
+
+  .broker-block { padding: 1.5rem 0; border-top: 1px solid var(--border); }
+  .broker-block:first-child { border-top: none; }
+  .broker-block h3 { font-size: 16.5px; font-weight: 600; color: var(--text); margin-bottom: 1rem; }
+  .broker-line { display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem; padding: 6px 0; font-size: 15px; }
+  .broker-line .bl-label { color: var(--text-secondary); }
+  .broker-line .bl-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--text); white-space: nowrap; }
+  @media (max-width: 360px) {
+    .broker-line { flex-direction: column; align-items: flex-start; gap: 2px; }
+  }
+
+  .evidence-narrative p { font-size: 16px; color: var(--text); line-height: 1.7; margin-top: 0.65rem; }
+  .evidence-narrative strong { color: var(--positive); font-weight: 600; }
+  .evidence-narrative strong.amber { color: var(--amber); }
+  .evidence-stats { font-size: 14.5px; color: var(--text-secondary); margin-top: 1rem; line-height: 1.75; }
+  .evidence-disclosure { font-size: 14px; color: var(--text-tertiary); margin-top: 1.5rem; line-height: 1.7; border-top: 1px solid var(--border); padding-top: 1.1rem; }
+
+  .quant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem 2rem; margin-top: 0.5rem; }
+  .quant-grid .q-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 20px; font-weight: 600; }
+  .quant-grid .q-label { font-size: 13px; color: var(--text-tertiary); margin-top: 4px; }
+  @media (max-width: 480px) { .quant-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem 1rem; } }
+
+  /* Additional historical analytics — true CSS Grid, 4/2/1 responsive,
+     shared gap so every card in a row aligns top and bottom with no
+     arbitrary per-card margins. Matches index.html's own type scale. */
+  .hist-metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .hist-metric-grid .hm-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 20px; font-weight: 600; }
+  .hist-metric-grid .hm-label { font-size: 13.5px; color: var(--text-secondary); margin-top: 4px; }
+  .hist-metric-grid .hm-sub { font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
+  @media (max-width: 800px) { .hist-metric-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .hist-metric-grid { grid-template-columns: 1fr; } }
+
+  /* Executive summary block: headline benchmark stats are visually dominant;
+     supporting quant metrics (profit factor, Sharpe, Calmar, MDD, hit-rate)
+     are secondary — same numbers as before, deliberate hierarchy via type scale.
+     Grid, not flex: flex-wrap only wraps once content can't fit, so items sat
+     at their intrinsic width and left a large empty gap on wide cards. Grid
+     with minmax(0,1fr) columns forces each cell to actually share the row. */
+  .qs-headline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 1.75rem; padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .qs-head-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 34px; font-weight: 600; letter-spacing: -0.01em; }
+  .qs-head-value.neu { color: var(--text); }
+  .qs-head-label { font-size: 14px; color: var(--text-secondary); margin-top: 6px; }
+
+  /* Accounting bridge — Gross P&L → Trading Costs → Trading Net P&L.
+     A separate broker-reconciled ₹ view, deliberately sized between the
+     headline return row and the supporting risk-metric row so it doesn't
+     compete with either, and never implies it shares the return series'
+     capital-proxy denominator. Same 3-column grid as the headline row above
+     so Gross P&L/Trading Costs/Trading Net P&L align under Net Return/
+     Nifty 50/Net relative performance. */
+  .qs-accounting-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 1.75rem; padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .qs-acc-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 24px; font-weight: 600; }
+  .qs-acc-value.neu { color: var(--text); }
+  .qs-acc-label { font-size: 13.5px; color: var(--text-secondary); margin-top: 5px; }
+  .qs-acc-sub { font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
+
+  .qs-secondary-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 1.5rem; }
+  .qs-secondary-row .q-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 19px; font-weight: 600; }
+  .qs-secondary-row .q-label { font-size: 13px; color: var(--text-tertiary); margin-top: 4px; }
+
+  @media (max-width: 700px) {
+    .qs-headline { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.5rem; }
+    .qs-accounting-row { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.5rem; }
+    .qs-secondary-row { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 1.25rem; }
+  }
+  @media (max-width: 480px) {
+    .qs-headline { grid-template-columns: 1fr; column-gap: 0; row-gap: 1.25rem; }
+    .qs-accounting-row { grid-template-columns: 1fr; column-gap: 0; row-gap: 1.25rem; }
+    .qs-secondary-row { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.25rem; }
+    .qs-head-value { font-size: 27px; }
+    .qs-acc-value { font-size: 21px; }
+  }
+
+  /* Readability pass: shared components reused here (link-cards, notes) — overridden
+     locally so only this page's rendering changes, not the shared stylesheet. */
+  .link-card-title { font-size: 16px; }
+  .link-card-desc { font-size: 14px; line-height: 1.5; }
+  .note { font-size: 14px; line-height: 1.6; }
+  .disclosure p { font-size: 14.5px; line-height: 1.65; }
+
+  /* Detailed-methodology tables, appended from the retired standalone
+     Historical Methodology & Detail page — reuse the shared table/.card
+     components already used on the broker pages, at index.html's own
+     comfortable text size rather than the smaller scale those used. */
+  .detail-table-wrap table { font-size: 14px; }
+  .detail-table-wrap th { font-size: 12px; }
+  .roi-proxy-row { display: flex; gap: 2.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .roi-proxy-row .rp-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 26px; font-weight: 600; }
+  .roi-proxy-row .rp-label { font-size: 14px; color: var(--text-secondary); margin-top: 5px; }
+  .roi-proxy-row .rp-sub { font-size: 12.5px; color: var(--text-tertiary); margin-top: 2px; }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <div class="header">
+  <!-- ── 1. INTRO ── -->
+  <header>
+    <div class="eyebrow" style="margin-bottom:10px;">Trading Journal</div>
     <h1>Trading Journal</h1>
-    <p class="subtitle">Personal trading activity across NSE F&amp;O, Currency F&amp;O, MCX Commodity &amp; Equity.<br>Lifetime broker accounting is separated from noncanonical historical public-series calculations.</p>
-    <div class="stats-row">
-      <div class="stat">
-        <div class="stat-value">+₹6,87,291</div>
-        <div class="stat-label">Broker-account adjusted lifetime net P&amp;L</div>
+    <p class="lede" style="margin-top:8px;max-width:640px;">Personal trading record across Indian equities and derivatives, reconciled from broker records.</p>
+    <div class="lede-block">
+      <p>Trading Net P&amp;L across the available broker record is ₹6,96,036.76. Index options generated ₹7,43,483.16 net and were the primary profit engine, while currency, commodity, and other segments reduced the combined result.</p>
+    </div>
+  </header>
+
+  <!-- ── 2. CORE RECORD — genuinely vertical, one primary figure ── -->
+  <section class="narrative hero-section">
+    <div class="stat-value pos hero-value">+₹6,96,036.76</div>
+    <div class="hero-label">Trading Net P&amp;L</div>
+    <div class="hero-secondary">
+      <div>
+        <div class="stat-value neutral hero-value-sm">5 years</div>
+        <div class="hero-label-sm">Broker-record coverage · FY2021-22 → FY2025-26</div>
       </div>
-      <div class="stat">
-        <div class="stat-value">+₹6,96,037</div>
-        <div class="stat-label">Trading Net P&amp;L (before non-trading debits)</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">5 years</div>
-        <div class="stat-label">FY2021-22 → FY2025-26 broker coverage</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">+₹7,43,483</div>
-        <div class="stat-label">Index Options net — dominant profit engine</div>
+      <div>
+        <div class="stat-value neutral hero-value-sm">5,284+</div>
+        <div class="hero-label-sm">Realized trading records analyzed</div>
       </div>
     </div>
-    <div class="stats-row" style="margin-top:1rem;">
-      <div class="stat">
-        <div class="stat-value">5,284+</div>
-        <div class="stat-label">Mixed-grain realized-record entries</div>
+    <p class="measure-note" style="margin-top:1rem;">5,053 Zerodha tax-P&amp;L exit rows + 231 Angel One dated FIFO closes — heterogeneous record grains, not a uniform trade count.</p>
+  </section>
+
+  <!-- ── 3. QUANTITATIVE SUMMARY — headline benchmark result dominant,
+       supporting risk/consistency metrics secondary. Moved near the top
+       per executive-summary requirement; same figures as before, just
+       repositioned and re-weighted with typography instead of duplicated. ── -->
+  <section class="narrative">
+    <h2 class="section-heading">Historical quantitative analysis</h2>
+    <p class="section-sub">Selected public-series calculations, after Trading Costs · noncanonical</p>
+    <div class="card">
+      <div class="qs-headline">
+        <div>
+          <div class="qs-head-value pos">+21.28%</div>
+          <div class="qs-head-label">Net Return</div>
+        </div>
+        <div>
+          <div class="qs-head-value neu">+23.02%</div>
+          <div class="qs-head-label">Nifty 50 · benchmark</div>
+        </div>
+        <div>
+          <div class="qs-head-value neg">−1.73pp</div>
+          <div class="qs-head-label">Net relative performance</div>
+        </div>
       </div>
-      <div class="stat">
-        <div class="stat-value">25</div>
-        <div class="stat-label">Selected historical public-series observations</div>
+      <div class="qs-accounting-row">
+        <div>
+          <div class="qs-acc-value pos">₹9.99L</div>
+          <div class="qs-acc-label">Gross P&amp;L</div>
+          <div class="qs-acc-sub">Before Trading Costs · ₹9,98,843.30</div>
+        </div>
+        <div>
+          <div class="qs-acc-value neu">−₹3.03L</div>
+          <div class="qs-acc-label">Trading Costs</div>
+          <div class="qs-acc-sub">₹3,02,806.54</div>
+        </div>
+        <div>
+          <div class="qs-acc-value pos">₹6.96L</div>
+          <div class="qs-acc-label">Trading Net P&amp;L</div>
+          <div class="qs-acc-sub">After Trading Costs · ₹6,96,036.76</div>
+        </div>
       </div>
-      <div class="stat">
-        <div class="stat-value">Not canonical</div>
-        <div class="stat-label">Continuous combined net-performance series</div>
+      <div class="qs-secondary-row">
+        <div><div class="q-value neutral">1.79</div><div class="q-label">Profit factor</div></div>
+        <div><div class="q-value neutral">0.25</div><div class="q-label">Sharpe</div></div>
+        <div><div class="q-value neutral">0.46</div><div class="q-label">Calmar</div></div>
+        <div><div class="q-value neg">−36.44%</div><div class="q-label">Net MDD</div></div>
+        <div><div class="q-value neutral">16/25</div><div class="q-label">Positive observations</div></div>
       </div>
     </div>
-  </div>
+    <p class="measure-note">The accounting row above (Gross P&amp;L → Trading Costs → Trading Net P&amp;L) is a separate, fully broker-reconciled ₹ view across both brokers' lifetime records — it does not share the capital-proxy denominator used for Net Return above and is not a return percentage. ₹9,98,843.30 − ₹3,02,806.54 = ₹6,96,036.76, itemized in Broker Reconciliation below.</p>
+    <p class="measure-note">These figures are P&amp;L <strong style="color:var(--text);">after Trading Costs</strong> for both brokers, corrected from a previously published mixed-basis calculation that combined Angel One's net P&amp;L with Zerodha's gross (pre-cost) P&amp;L for 17 of these 25 months — that earlier version reported +39.48% and an apparent +16.46pp of outperformance, which does not survive on a cost-consistent basis. On a continuous Jul 2023–Aug 2025 Nifty 50 benchmark that does not skip April 2025, net relative performance is −5.99pp. The capital-proxy denominator (an event-weighted mean ledger balance, not time-weighted deployed capital) remains unvalidated for return calculation — these are historical, reproducible figures, not canonical continuous account returns.</p>
+    <p class="measure-note">A before-Trading-Costs (gross) version of this same 25-observation series was investigated and could not be reconstructed: Angel One's dated, realization-timestamped records cover only a ~2.5-month execution window, while its controlling P&amp;L population (the source of gross figures) carries no realization dates at all across the other ~11.5 months this series needs. Publishing an estimated gross figure to fill that gap would not meet this project's evidence standard, so only the after-Trading-Costs series is shown here. Canonical lifetime Gross P&amp;L is reconciled separately in the accounting row above and in Broker Reconciliation below.</p>
+  </section>
 
-  <h2>Dashboards</h2>
-  <div class="cards">
+  <!-- ── 4. PORTFOLIO VS NIFTY 50 ── -->
+  <section class="narrative">
+    <h2 class="section-heading">Portfolio vs Nifty 50</h2>
+    <p class="section-sub">Historical selected-series comparison, after Trading Costs · noncanonical</p>
+    <div class="card chart-wrap">
+      <div class="chart-tall"><canvas id="benchmarkChart"></canvas></div>
+    </div>
+    <p class="measure-note">Chart of the same +21.28% net portfolio return vs +23.02% Nifty 50 result shown above. See the <a href="#detail" style="color:var(--accent);">detailed historical methodology</a> further down this page.</p>
+  </section>
 
-    <a class="card" href="zerodha.html">
-      <div class="card-left">
-        <div class="card-title">Zerodha — EKV***</div>
-        <div class="card-desc">5-year P&L across F&O, Currency F&O, Equity and Commodity. FY2021-22 to FY2025-26.</div>
-        <div class="card-meta">
-          <span class="tag tag-blue">FY2021-22 → FY2025-26</span>
-          <span class="tag tag-blue">5,053 tax-exit rows</span>
-          <span class="tag tag-amber">Account-adjusted net +₹2,54,714</span>
+  <!-- ── 5. DRAWDOWN ── -->
+  <section class="narrative">
+    <h2 class="section-heading">Drawdown</h2>
+    <p class="section-sub">Historical selected-series comparison, after Trading Costs · noncanonical</p>
+    <div class="card chart-wrap">
+      <div class="chart-mid"><canvas id="ddChart"></canvas></div>
+      <div class="compact-metrics" style="margin-top:1rem;">
+        <div><div class="cm-value neg">−36.44%</div><div class="cm-label">Historical selected-series drawdown, after Trading Costs</div></div>
+      </div>
+    </div>
+    <p class="measure-note">This is a <strong style="color:var(--text);">return-based</strong> drawdown computed on the synthetic 25-observation combined-portfolio equity curve, after Trading Costs — the same noncanonical basis as the benchmark comparison above. A separate broker-specific <strong style="color:var(--text);">absolute-rupee</strong> drawdown of −₹7,10,690.85 (Zerodha F&amp;O, daily-aggregated, trough 2025-01-06) is documented in the <a href="#detail" style="color:var(--accent);">detailed historical methodology</a> further down this page, and is not comparable with this synthetic percentage drawdown.</p>
+  </section>
+
+  <!-- ── 6. SEGMENT P&L ── -->
+  <section class="narrative">
+    <h2 class="section-heading">Index options created the value</h2>
+    <p class="section-sub">Net Trading P&amp;L by segment · directly charge-adjusted</p>
+    <div class="card chart-wrap">
+      <div class="chart-tall"><canvas id="segmentChart"></canvas></div>
+    </div>
+    <p class="measure-note">Index options generated ₹7.43L, and losses in other segments reduced the combined result to a total Trading Net P&amp;L of ₹6.96L.</p>
+  </section>
+
+  <!-- ── 7. HISTORICAL PERFORMANCE ANALYTICS — ROI proxies + the metrics not
+       already shown in section 3 above (Sharpe/Calmar/PF/MDD/positive
+       observations are deliberately not repeated here). ── -->
+  <section class="narrative">
+    <h2 class="section-heading">Historical performance analytics</h2>
+    <p class="section-sub">Selected public-series calculations, after Trading Costs · noncanonical</p>
+    <div class="card">
+      <div class="roi-proxy-row">
+        <div>
+          <div class="rp-value pos">+22.3%</div>
+          <div class="rp-label">Historical best-year ROI proxy</div>
+          <div class="rp-sub">FY2024-25 · avg capital ₹10.57L</div>
         </div>
       </div>
-      <div class="arrow">›</div>
-    </a>
-
-    <a class="card" href="angelone.html">
-      <div class="card-left">
-        <div class="card-title">Angel One — S5143****</div>
-        <div class="card-desc">15-month F&O performance. Jun 2023 – Aug 2024. FY2023-24 and FY2024-25 partial.</div>
-        <div class="card-meta">
-          <span class="tag tag-purple">Jun 2023 – Aug 2024</span>
-          <span class="tag tag-purple">231 F&amp;O FIFO closes</span>
-          <span class="tag tag-green">Trading net +₹4,35,337</span>
-        </div>
+      <div class="hist-metric-grid">
+        <div><div class="hm-value pos">+1.41%</div><div class="hm-label">Avg monthly return</div><div class="hm-sub">arithmetic mean</div></div>
+        <div><div class="hm-value pos">+16.92%</div><div class="hm-label">Annualised return</div><div class="hm-sub">avg × 12</div></div>
+        <div><div class="hm-value pos">+26.15%</div><div class="hm-label">Best month</div><div class="hm-sub">Oct '24</div></div>
+        <div><div class="hm-value neg">−27.62%</div><div class="hm-label">Worst month</div><div class="hm-sub">Nov '24</div></div>
+        <div><div class="hm-value neutral">11.32%</div><div class="hm-label">Monthly std dev</div><div class="hm-sub">volatility</div></div>
+        <div><div class="hm-value neutral">39.20%</div><div class="hm-label">Annualised std dev</div><div class="hm-sub">σ × √12</div></div>
+        <div><div class="hm-value pos">+0.52%</div><div class="hm-label">Avg monthly alpha</div><div class="hm-sub">vs Nifty 50 · 12/25 months</div></div>
       </div>
-      <div class="arrow">›</div>
-    </a>
+    </div>
+    <p class="measure-note">Same corrected after-Trading-Costs monthly series and capital-proxy denominator as the summary above. An additional "historical combined ROI proxy" figure that appeared alongside this one in earlier versions of this project is intentionally omitted here: an internal audit found it hard-coded and not independently reproducible from source records, unlike the ROI proxy above.</p>
+  </section>
 
-    <a class="card" href="combined.html">
-      <div class="card-left">
-        <div class="card-title">Overall Portfolio — historical series</div>
-        <div class="card-desc">Historical 25-observation public series and reproducible calculations. Mixed accounting basis and incomplete date continuity make these outputs noncanonical.</div>
-        <div class="card-meta">
-          <span class="tag tag-amber">Historical calculations</span>
-          <span class="tag tag-amber">Mixed accounting basis</span>
-          <span class="tag tag-amber">Date continuity incomplete</span>
-        </div>
+  <!-- ── 8. MONTHLY RETURN PATTERN ── -->
+  <section class="narrative">
+    <h2 class="section-heading">Monthly return pattern</h2>
+    <p class="section-sub">Same 25 corrected observations, after Trading Costs · noncanonical</p>
+    <div class="card chart-wrap">
+      <div class="chart-mid"><canvas id="alphaChart"></canvas></div>
+    </div>
+    <p class="measure-note" style="margin-top:0.6rem;">Monthly alpha — portfolio return minus Nifty 50 return for that month. Positive = outperformed Nifty that month; negative = underperformed.</p>
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div class="card chart-wrap" style="margin-bottom:0;">
+        <div class="chart-mid"><canvas id="monthlyRetChart"></canvas></div>
       </div>
-      <div class="arrow">›</div>
-    </a>
+      <div class="card chart-wrap" style="margin-bottom:0;">
+        <div class="chart-mid"><canvas id="histChart"></canvas></div>
+      </div>
+    </div>
+    <p class="measure-note">Monthly returns (left) and their distribution across the 25 observations (right).</p>
+  </section>
 
-  </div>
+  <!-- ── 9. BROKER RECONCILIATION ── -->
+  <section class="narrative">
+    <h2 class="section-heading">Broker reconciliation</h2>
+    <p class="section-sub">Two broker accounts, reconciled independently</p>
+    <div class="card">
+      <div class="broker-block">
+        <h3>Angel One</h3>
+        <div class="broker-line"><span class="bl-label">Gross P&amp;L</span><span class="bl-value">₹5,27,790.25</span></div>
+        <div class="broker-line"><span class="bl-label">Trading charges</span><span class="bl-value muted">₹92,453.20</span></div>
+        <div class="broker-line"><span class="bl-label">Trading Net P&amp;L</span><span class="bl-value pos">₹4,35,337.05</span></div>
+        <div class="broker-line"><span class="bl-label">Account-adjusted net</span><span class="bl-value tertiary">₹4,32,577.03</span></div>
+      </div>
+      <div class="broker-block">
+        <h3>Zerodha</h3>
+        <div class="broker-line"><span class="bl-label">Gross P&amp;L</span><span class="bl-value">₹4,71,053.05</span></div>
+        <div class="broker-line"><span class="bl-label">Trading charges</span><span class="bl-value muted">₹2,10,353.34</span></div>
+        <div class="broker-line"><span class="bl-label">Trading Net P&amp;L</span><span class="bl-value pos">₹2,60,699.71</span></div>
+        <div class="broker-line"><span class="bl-label">Account-adjusted net</span><span class="bl-value tertiary">₹2,54,714.34</span></div>
+      </div>
+    </div>
+    <p class="note">Trading Net P&amp;L = gross minus trade charges only. Account-adjusted net additionally nets out non-trading account debits (AMC, DP charges, and similar) at each broker.</p>
+  </section>
 
+  <!-- ── 10. STRATEGY EVIDENCE ── -->
+  <section class="narrative">
+    <h2 class="section-heading">Options strategy evidence</h2>
+    <div class="card evidence-narrative">
+      <p><strong>Verified:</strong> Index-options focus — the account's dominant activity and profit driver across the full broker record.</p>
+      <p><strong class="amber">Verified within limited Angel execution window:</strong> Multi-leg options activity.</p>
+      <div class="evidence-stats">
+        46 of 49 sessions in that window showed 2 or more distinct contracts.<br>
+        28 of 46 multi-leg sessions included both a net-long and a net-short leg.
+      </div>
+      <div class="evidence-disclosure">
+        Full-history multi-leg prevalence is not established. Short-premium orientation is not established. Long-premium orientation is not established.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 11. DEEP DIVES — broker-specific pages only. The former "Historical
+       Methodology & Detail" card (→ combined.html) has been removed: its
+       useful content now lives directly on this page in section 12 below.
+       combined.html itself is preserved as an internal/legacy reference,
+       not a normal public navigation destination. ── -->
+  <section class="narrative">
+    <h2 class="section-heading">Deep dives</h2>
+    <div class="link-cards" style="margin-top:1rem;">
+      <a class="link-card" href="zerodha.html">
+        <div>
+          <div class="link-card-title">Zerodha Analysis</div>
+          <div class="link-card-desc">5-year P&amp;L across F&amp;O, Currency F&amp;O, Equity and Commodity. FY2021-22 to FY2025-26.</div>
+        </div>
+        <div class="link-card-arrow">›</div>
+      </a>
+      <a class="link-card" href="angelone.html">
+        <div>
+          <div class="link-card-title">Angel One Analysis</div>
+          <div class="link-card-desc">15-month F&amp;O performance. Jun 2023 – Aug 2024. FY2023-24 and FY2024-25 partial.</div>
+        </div>
+        <div class="link-card-arrow">›</div>
+      </a>
+      <a class="link-card" href="README.md">
+        <div>
+          <div class="link-card-title">Methodology</div>
+          <div class="link-card-desc">Canonical accounting definitions, record-count grains, and evidence-status disclosures.</div>
+        </div>
+        <div class="link-card-arrow">›</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── 12. DETAILED HISTORICAL METHODOLOGY — merged from the former
+       standalone combined.html page. Placed last: recruiter-facing content
+       comes first, full reproducibility detail comes at the bottom. ── -->
+  <section class="narrative" id="detail">
+    <h2 class="section-heading">Detailed historical methodology</h2>
+    <p class="section-sub">Selected-observation detail, period breakdown, and evidence warnings behind every historical figure above</p>
+
+    <div class="card disclosure" style="margin-bottom:2rem;">
+      <p><strong style="color:var(--amber);">Evidence and accounting warning · methodology correction.</strong> The 25 selected observations below are P&amp;L <strong style="color:var(--text);">after Trading Costs</strong> for both brokers, using the same capital-proxy denominator and compounding method throughout. This series was corrected from an earlier version that combined Angel One's net P&amp;L with Zerodha's gross (pre-cost) P&amp;L for 17 of the 25 months, which overstated the compounded return.</p>
+      <p>The earlier mixed-basis version reported <strong style="color:var(--text);">+39.48% portfolio return</strong> and <strong style="color:var(--text);">+16.46 percentage points</strong> of apparent outperformance versus Nifty 50 — that version is retired and does not appear as a current figure anywhere on this site. On the corrected after-costs basis, the portfolio returns <strong style="color:var(--text);">+21.28%</strong> and trails the same 25-month Nifty 50 chain (+23.02%) by <strong style="color:var(--text);">−1.73 percentage points</strong> (−5.99pp against a continuous Jul 2023–Aug 2025 Nifty benchmark that does not skip April 2025).</p>
+      <p>The capital-proxy denominator itself (an event-weighted mean of ledger balances, not time-weighted deployed capital) remains unvalidated for return calculation — April 2025 is still omitted and Angel One's full controlling population still cannot be dated. A genuine before-Trading-Costs (gross) reconstruction of this series was investigated and could not be supported on the same observation dates for the same reason (see Historical Performance section above). These figures remain historical public-series outputs, not authoritative combined net-performance metrics.</p>
+    </div>
+
+    <h3 style="font-size:16.5px;font-weight:600;color:var(--text);margin-bottom:0.75rem;">Year-by-year performance — legacy basis</h3>
+    <p class="measure-note" style="margin-top:0;margin-bottom:0.9rem;">This FY-by-year breakdown predates the canonical broker-account adjustment and is retained for continuity; its total does not equal the canonical lifetime figures above. See the Methodology page for the controlling lifetime figures.</p>
+    <div class="card">
+      <div class="table-scroll detail-table-wrap">
+      <table>
+        <thead><tr><th>Financial Year</th><th>Net P&amp;L</th><th>Record rows/entries</th><th>Nifty 50 return</th><th>Phase</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:500;">FY2021-22</td><td class="neg">−₹46,226</td><td class="muted">114</td><td class="pos">+18.88%</td><td><span class="pill pill-muted">Learning</span></td></tr>
+          <tr><td style="font-weight:500;">FY2022-23</td><td class="neg">−₹1,21,811</td><td class="muted">743</td><td class="neg">−0.60%</td><td><span class="pill pill-muted">Learning</span></td></tr>
+          <tr><td style="font-weight:500;">FY2023-24</td><td class="pos">+₹2,70,648</td><td class="muted">508+</td><td class="pos">+28.61%</td><td><span class="pill pill-muted">Breakeven</span></td></tr>
+          <tr><td style="font-weight:500;">FY2024-25</td><td class="pos">+₹3,97,791</td><td class="muted">3,673</td><td class="pos">+5.34%</td><td><span class="pill pill-pos">Profitable</span></td></tr>
+          <tr><td style="font-weight:500;">FY2025-26 <span class="muted" style="font-weight:400;font-size:12px;">(partial)</span></td><td class="pos">+₹1,89,651</td><td class="muted">419</td><td class="pos">+3.86% <span class="muted" style="font-size:12px;">partial</span></td><td><span class="pill pill-pos">Profitable</span></td></tr>
+        </tbody>
+        <tfoot><tr><td>Total (legacy basis)</td><td class="pos">+₹6,90,051</td><td>5,284+</td><td>—</td><td></td></tr></tfoot>
+      </table>
+      </div>
+      <p class="note">Nifty 50 annual returns: FY = Apr–Mar. FY2025-26 Nifty estimate through Aug 2025. Zerodha FY2025-26 partial through Aug 2025. Legacy-basis total does not net the Angel One non-trading account debits applied to the canonical ₹6,87,291.37 figure above.</p>
+    </div>
+
+    <h3 style="font-size:16.5px;font-weight:600;color:var(--text);margin:2rem 0 0.75rem;">Period breakdown</h3>
+    <div class="card">
+      <div class="table-scroll detail-table-wrap">
+      <table>
+        <thead><tr><th>Period</th><th>Observations</th><th>P&amp;L after Trading Costs</th><th>Avg observation</th><th>Std dev</th><th>Positive share</th><th>Best</th><th>Worst</th></tr></thead>
+        <tbody id="periodBody"></tbody>
+      </table>
+      </div>
+    </div>
+
+    <h3 style="font-size:16.5px;font-weight:600;color:var(--text);margin:2rem 0 0.75rem;">Selected-observation detail</h3>
+    <div class="card">
+      <div class="table-scroll detail-table-wrap">
+      <table>
+        <thead><tr><th>Selected observation</th><th>P&amp;L after Trading Costs</th><th>Return proxy %</th><th>Nifty 50 %</th><th>Difference</th><th>Synthetic equity (base 100)</th><th>Synthetic drawdown</th></tr></thead>
+        <tbody id="monthDetail"></tbody>
+      </table>
+      </div>
+      <p class="note">Return proxy = embedded P&amp;L ÷ capital proxy. These selected observations are not a continuous combined monthly net series; the benchmark difference is therefore not a canonical outperformance measure.</p>
+    </div>
+
+    <h3 style="font-size:16.5px;font-weight:600;color:var(--text);margin:2rem 0 0.75rem;">Historical calculation output — not resume-safe canonical claims</h3>
+    <div class="card" id="resumeBullets" style="font-size:14.5px;line-height:1.7;"></div>
+  </section>
+
+  <!-- ── 13. FOOTER ── -->
   <p class="footer">Public summaries and historical calculations · Canonical reconciliation uses privately retained broker records · Raw brokerage files are not published</p>
 
 </div>
+<script>
+Chart.defaults.color = '#a8a8a8';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.08)';
+Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+Chart.defaults.font.size = 13;
+
+// Small inline plugin: draws the exact rounded P&L value directly beside
+// each horizontal bar — positive values just right of the bar's tip,
+// negative values just right of the zero gridline (bar.base), never
+// crowding the y-axis category labels. No external dependency — Chart.js
+// v4 supports registering a plugin per-chart via the `plugins` array below.
+const inrLabel = v => (v >= 0 ? '+₹' : '−₹') + Math.abs(Math.round(v)).toLocaleString('en-IN');
+const barEndLabels = {
+  id: 'barEndLabels',
+  afterDatasetsDraw(chart) {
+    const { ctx } = chart;
+    const meta = chart.getDatasetMeta(0);
+    const data = chart.data.datasets[0].data;
+    ctx.save();
+    ctx.font = '600 14px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    meta.data.forEach((bar, i) => {
+      const value = data[i];
+      const isPos = value >= 0;
+      ctx.fillStyle = isPos ? '#3fb950' : '#f85149';
+      const x = isPos ? bar.x + 8 : bar.base + 8;
+      ctx.fillText(inrLabel(value), x, bar.y);
+    });
+    ctx.restore();
+  }
+};
+
+// ─── PORTFOLIO DATA (25 months combined) — identical to combined.html ──────
+const monthly = [
+  {m:"Jul '23", pnl:6216.47,    cap:2997000},
+  {m:"Aug '23", pnl:197214.49,  cap:2997000},
+  {m:"Sep '23", pnl:-188196.04, cap:2997000},
+  {m:"Oct '23", pnl:-10383.06,  cap:2997000},
+  {m:"Nov '23", pnl:29869.76,   cap:2997000},
+  {m:"Dec '23", pnl:129977.77,  cap:2997000},
+  {m:"Jan '24", pnl:7656.93,    cap:2997000},
+  {m:"Feb '24", pnl:-25994.37,  cap:2997000},
+  {m:"Mar '24", pnl:97593.50,   cap:4810678},
+  {m:"Apr '24", pnl:103915.93,  cap:2448979},
+  {m:"May '24", pnl:-97353.58,  cap:2285787},
+  {m:"Jun '24", pnl:80895.88,   cap:2140963},
+  {m:"Jul '24", pnl:104439.77,  cap:2128979},
+  {m:"Aug '24", pnl:11987.50,   cap:1556629},
+  {m:"Sep '24", pnl:122591.01,  cap:1070180},
+  {m:"Oct '24", pnl:328782.11,  cap:1257246},
+  {m:"Nov '24", pnl:-300023.66, cap:1086088},
+  {m:"Dec '24", pnl:-44380.85,  cap:951669 },
+  {m:"Jan '25", pnl:-44035.25,  cap:987261 },
+  {m:"Feb '25", pnl:242371.33,  cap:965002 },
+  {m:"Mar '25", pnl:-196709.79, cap:857477 },
+  {m:"May '25", pnl:94143.80,   cap:1212730},
+  {m:"Jun '25", pnl:-35790.79,  cap:1302780},
+  {m:"Jul '25", pnl:14867.56,   cap:1275025},
+  {m:"Aug '25", pnl:116618.07,  cap:1204001},
+];
+
+// ─── NIFTY 50 MONTHLY RETURNS — identical to combined.html ─────────────────
+const niftyRets = [
+  2.94, -2.53, 2.00, -2.84, 5.52, 7.94, -0.03, 1.18, 1.57, 1.24, -0.33, 6.57,
+  3.92, 1.14, 2.28, -6.22, -0.31, -2.02, -0.58, -5.89, 6.30, 1.71, 3.10, -2.93, -1.38,
+];
+
+const labels  = monthly.map(d => d.m);
+const portRets = monthly.map(d => d.pnl / d.cap * 100);
+
+let portCum = [100], peakP = 100, ddArr = [0];
+portRets.forEach(r => {
+  const v = portCum[portCum.length-1] * (1 + r/100);
+  portCum.push(v);
+  peakP = Math.max(peakP, v);
+  ddArr.push((v - peakP) / peakP * 100);
+});
+
+let niftyCum = [100];
+niftyRets.forEach(r => niftyCum.push(niftyCum[niftyCum.length-1] * (1 + r/100)));
+
+const chartOpts = {responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+  scales:{x:{ticks:{font:{size:13},maxRotation:45,autoSkip:true},grid:{color:'rgba(255,255,255,0.04)'}},
+          y:{ticks:{font:{size:13}},grid:{color:'rgba(255,255,255,0.04)'}}}};
+
+// ─── STATS HELPERS — identical formulas to the retired combined.html page,
+// preserved here so every figure below remains independently reproducible. ──
+const RF_ANNUAL = 7;
+const mean   = arr => arr.reduce((s,v)=>s+v,0)/arr.length;
+const stddev = arr => { const m=mean(arr); return Math.sqrt(arr.reduce((s,v)=>s+(v-m)**2,0)/(arr.length-1)); };
+const fmt2   = x => x.toFixed(2);
+const fmtPct = x => (x>=0?'+':'')+x.toFixed(2)+'%';
+const fmtINR = x => (x>=0?'+':'-')+'₹'+Math.abs(Math.round(x)).toLocaleString('en-IN');
+const clr    = v => v >= 0 ? 'var(--positive)' : 'var(--negative)';
+const n = portRets.length;
+
+const avgRet = mean(portRets), sdRet = stddev(portRets), annRet = avgRet*12, annSD = sdRet*Math.sqrt(12);
+const sharpe = (annRet - RF_ANNUAL) / annSD;
+const maxDD  = Math.min(...ddArr);
+const calmar = maxDD !== 0 ? annRet / Math.abs(maxDD) : 0;
+const wins   = portRets.filter(r=>r>0).length;
+const grossWin  = monthly.filter(d=>d.pnl>0).reduce((s,d)=>s+d.pnl,0);
+const grossLoss = Math.abs(monthly.filter(d=>d.pnl<0).reduce((s,d)=>s+d.pnl,0));
+const pf = grossLoss > 0 ? grossWin / grossLoss : 0;
+const alpha = portRets.map((r,i) => r - niftyRets[i]);
+const alphaWins = alpha.filter(a=>a>0).length;
+
+// Monthly alpha chart
+new Chart(document.getElementById('alphaChart'),{type:'bar',
+  data:{labels,datasets:[{data:alpha,
+    backgroundColor:alpha.map(v=>v>=0?'#3fb950':'#f85149'),borderRadius:3}]},
+  options:{...chartOpts,scales:{x:{ticks:{font:{size:13},maxRotation:45,autoSkip:true},grid:{color:'rgba(255,255,255,0.04)'}},
+    y:{ticks:{font:{size:13},callback:v=>v.toFixed(1)+'%'},grid:{color:'rgba(255,255,255,0.04)'},
+      afterDataLimits:axis=>{const m=Math.max(Math.abs(axis.min),Math.abs(axis.max));axis.min=-m;axis.max=m;}}}}});
+
+// Monthly returns bar
+new Chart(document.getElementById('monthlyRetChart'),{type:'bar',
+  data:{labels,datasets:[{data:portRets,
+    backgroundColor:portRets.map(v=>v>=0?'#3fb950':'#f85149'),borderRadius:3}]},
+  options:{...chartOpts,scales:{x:{ticks:{font:{size:12},maxRotation:45,autoSkip:true},grid:{color:'rgba(255,255,255,0.04)'}},
+    y:{ticks:{font:{size:12},callback:v=>v.toFixed(1)+'%'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+
+// Return distribution histogram
+const minR=Math.min(...portRets),maxR=Math.max(...portRets),bins=8,bw=(maxR-minR)/bins;
+const counts=Array(bins).fill(0),binLabels=[];
+for(let i=0;i<bins;i++) binLabels.push((minR+i*bw).toFixed(1)+'%');
+portRets.forEach(v=>{let b=Math.min(Math.floor((v-minR)/bw),bins-1);counts[b]++;});
+new Chart(document.getElementById('histChart'),{type:'bar',
+  data:{labels:binLabels,datasets:[{data:counts,
+    backgroundColor:binLabels.map(l=>parseFloat(l)>=0?'#3fb950':'#f85149'),borderRadius:3}]},
+  options:{...chartOpts,scales:{x:{ticks:{font:{size:11},maxRotation:45},grid:{color:'rgba(255,255,255,0.04)'}},
+    y:{ticks:{font:{size:12},stepSize:1},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+
+// ─── PERIOD BREAKDOWN ────────────────────────────────────────────────────────
+function sliceStats(slice, niftySlice) {
+  const r = slice.map(d=>d.pnl/d.cap*100);
+  return {r, tp: slice.reduce((s,d)=>s+d.pnl,0), avg:mean(r), sd:r.length>1?stddev(r):0,
+    wr:r.filter(v=>v>0).length/r.length*100, best:Math.max(...r), worst:Math.min(...r)};
+}
+const periods = [
+  {label:"Full period (25m · Jul'23–Aug'25)", s:0,  e:25},
+  {label:"FY2023-24 active (9m)",             s:0,  e:9},
+  {label:"FY2024-25 (12m)",                   s:8,  e:21},
+  {label:"FY2025-26 partial (4m)",            s:21, e:25},
+  {label:"Bull phase (Jul–Dec'23)",           s:0,  e:6},
+  {label:"Recovery (Jan–Jun'24)",             s:6,  e:13},
+  {label:"Volatile (Jul'24–Mar'25)",          s:13, e:21},
+];
+const pb = document.getElementById('periodBody');
+periods.forEach((p) => {
+  const slice = monthly.slice(p.s, p.e);
+  const ns = niftyRets.slice(p.s, p.e);
+  const s = sliceStats(slice, ns);
+  pb.innerHTML += `<tr>
+    <td style="font-weight:500;">${p.label}</td>
+    <td class="num">${slice.length}</td>
+    <td class="num" style="color:${clr(s.tp)};font-weight:500;">${fmtINR(s.tp)}</td>
+    <td class="num" style="color:${clr(s.avg)};">${fmtPct(s.avg)}</td>
+    <td class="num muted">${fmt2(s.sd)}%</td>
+    <td class="num">${fmt2(s.wr)}%</td>
+    <td class="num pos">${fmtPct(s.best)}</td>
+    <td class="num neg">${fmtPct(s.worst)}</td>
+  </tr>`;
+});
+
+// ─── MONTHLY DETAIL TABLE ────────────────────────────────────────────────────
+const md = document.getElementById('monthDetail');
+let cumV = 100;
+monthly.forEach((d,i) => {
+  const r = portRets[i], nr = niftyRets[i], a = r - nr;
+  cumV *= (1 + r/100);
+  md.innerHTML += `<tr>
+    <td style="font-weight:500;">${d.m}</td>
+    <td class="num" style="color:${clr(d.pnl)};">${fmtINR(d.pnl)}</td>
+    <td class="num" style="color:${clr(r)};font-weight:500;">${fmtPct(r)}</td>
+    <td class="num" style="color:${clr(nr)};">${fmtPct(nr)}</td>
+    <td class="num" style="color:${clr(a)};font-weight:500;">${fmtPct(a)}</td>
+    <td class="num">${cumV.toFixed(1)}</td>
+    <td class="num neg">${fmt2(ddArr[i+1])}%</td>
+  </tr>`;
+});
+
+// ─── HISTORICAL CALCULATION OUTPUT ──────────────────────────────────────────
+const niftyFinal = niftyCum[niftyCum.length-1];
+const portFinal  = portCum[portCum.length-1];
+document.getElementById('resumeBullets').innerHTML = `
+  <p style="margin-top:0;"><strong style="color:var(--text);">Accounting control:</strong> Broker-account adjusted lifetime net P&amp;L <strong style="color:var(--text);">+₹6,87,291</strong> across available broker records (Trading Net P&amp;L <strong style="color:var(--text);">+₹6,96,037</strong> before non-trading account debits). This is a lifetime accounting total, not a continuous return series.</p>
+  <p style="margin-top:1rem;"><strong style="color:var(--text);">Historical selected-series calculation, after Trading Costs:</strong> The embedded arrays reproduce portfolio return <strong style="color:var(--text);">${fmtPct(portFinal-100)}</strong>, selected-chain Nifty 50 return <strong style="color:var(--text);">${fmtPct(niftyFinal-100)}</strong>, and their difference — a net underperformance versus the same-period benchmark. These outputs are noncanonical because the capital-proxy denominator is an event-weighted mean ledger balance, not a validated time-weighted capital base, and the selected dates omit April 2025.</p>
+  <p style="margin-top:1rem;"><strong style="color:var(--text);">Historical risk calculations:</strong> Sharpe <strong style="color:var(--text);">${fmt2(sharpe)}</strong>, synthetic maximum drawdown <strong style="color:var(--text);">${fmt2(maxDD)}%</strong>, Calmar <strong style="color:var(--text);">${fmt2(calmar)}</strong>, and profit factor <strong style="color:var(--text);">${fmt2(pf)}</strong> reproduce from the same noncanonical selected series. <strong style="color:var(--text);">${wins} of ${n} selected public-series observations were positive.</strong> A separate canonical absolute P&amp;L drawdown of <strong style="color:var(--text);">−₹7,10,690.85</strong> (Zerodha F&amp;O, daily-aggregated, trough 2025-01-06) is not interchangeable with the synthetic drawdown above.</p>
+  <p style="margin-top:1rem;"><strong style="color:var(--text);">Strategy context:</strong> Records support substantial NIFTY and BankNifty options activity, with index options the dominant contributor to net P&amp;L (+₹7,43,483). Multi-leg activity is directly evidenced only within a narrow ~2.5-month execution window and does not establish lifetime multi-leg prevalence. Short-premium orientation is not verified, and neither is long-premium orientation. Currency F&amp;O and MCX Commodity activity were discontinued after segment underperformance.</p>
+`;
+
+// Benchmark overlay — identical logic to combined.html's benchmarkChart
+new Chart(document.getElementById('benchmarkChart'),{type:'line',
+  data:{labels:['Start',...labels],datasets:[
+    {label:'Portfolio',data:portCum,borderColor:'#f3f3f3',borderWidth:2,pointRadius:2,
+      fill:false,tension:0.25},
+    {label:'Nifty 50',data:niftyCum,borderColor:'#a8a8a8',borderWidth:1.5,
+      borderDash:[4,3],pointRadius:0,fill:false,tension:0.25},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:true,position:'top',labels:{font:{size:13},boxWidth:12,padding:16}}},
+    scales:{x:{ticks:{font:{size:13},maxRotation:45,autoSkip:true},grid:{color:'rgba(255,255,255,0.04)'}},
+      y:{ticks:{font:{size:13},callback:v=>v.toFixed(0)},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+
+// Drawdown — identical logic to combined.html's ddChart
+new Chart(document.getElementById('ddChart'),{type:'line',
+  data:{labels:['Start',...labels],datasets:[{data:ddArr,borderColor:'#f85149',borderWidth:1.5,
+    pointRadius:2,fill:true,backgroundColor:'rgba(248,81,73,0.1)',tension:0.2}]},
+  options:{...chartOpts,scales:{x:{ticks:{font:{size:13},maxRotation:45,autoSkip:true},grid:{color:'rgba(255,255,255,0.04)'}},
+    y:{ticks:{font:{size:13},callback:v=>v.toFixed(1)+'%'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+
+// ─── SEGMENT P&L — same canonical figures as the prior homepage chart ──────
+const segments = [
+  { name: 'Index Options',          value: 743483.16 },
+  { name: 'Cash-Equity Delivery',   value: 82401.24 },
+  { name: 'Equity Options',         value: 6470.06 },
+  { name: 'Cash-Equity Intraday',   value: -757.92 },
+  { name: 'Currency F&O',           value: -49333.90 },
+  { name: 'Commodities/MCX',        value: -82163.13 },
+];
+new Chart(document.getElementById('segmentChart'), {
+  type: 'bar',
+  data: {
+    labels: segments.map(s => s.name),
+    datasets: [{
+      data: segments.map(s => s.value),
+      backgroundColor: segments.map(s => s.value >= 0 ? '#3fb950' : '#f85149'),
+      borderRadius: 3,
+      barThickness: 26,
+    }]
+  },
+  plugins: [barEndLabels],
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: { padding: { right: 100, left: 8 } },
+    plugins: { legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1c1c1c', borderColor: '#2a2a2a', borderWidth: 1,
+        titleColor: '#f3f3f3', bodyColor: '#f3f3f3', padding: 10,
+        callbacks: { label: ctx => (ctx.parsed.x >= 0 ? '+₹' : '−₹') + Math.abs(ctx.parsed.x).toLocaleString('en-IN', {minimumFractionDigits: 2}) }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#a8a8a8', font: { size: 14 }, callback: v => (v<0?'−':'') + '₹' + (Math.abs(v)/1000).toFixed(0) + 'K' },
+        grid: { color: '#2a2a2a' },
+        border: { color: '#2a2a2a' },
+      },
+      y: {
+        ticks: { color: '#f3f3f3', font: { size: 14 } },
+        grid: { display: false },
+        border: { color: '#2a2a2a' },
+      }
+    }
+  }
+});
+</script>
 </body>
 </html>

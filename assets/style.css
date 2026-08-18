@@ -1,0 +1,310 @@
+/* ==========================================================================
+   Trading Journal — shared design system
+   Dark analytical dashboard. One token set, reused across every page.
+   ========================================================================== */
+
+:root {
+  --bg: #141414;
+  --bg-elevated: #1c1c1c;
+  --bg-elevated-2: #202020;
+  --border: #2a2a2a;
+  --border-strong: #363636;
+
+  --text: #f3f3f3;
+  --text-secondary: #a8a8a8;
+  --text-tertiary: #6f6f6f;
+
+  --positive: #3fb950;
+  --positive-bg: rgba(63, 185, 80, 0.12);
+  --negative: #f85149;
+  --negative-bg: rgba(248, 81, 73, 0.12);
+  --accent: #6e9fd8;
+  --amber: #d29922;
+  --amber-bg: rgba(210, 153, 34, 0.12);
+
+  --radius: 10px;
+  --radius-sm: 6px;
+  --container: 1080px;
+
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+}
+
+* , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { color-scheme: dark; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding: 3rem 1.25rem 5rem;
+}
+
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.container { max-width: var(--container); margin: 0 auto; }
+.container-narrow { max-width: 720px; margin: 0 auto; }
+
+/* ── Type scale ───────────────────────────────────────────────────────── */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+h1 { font-size: 30px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); }
+h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  margin: 0 0 1.1rem;
+}
+h3 { font-size: 14px; font-weight: 600; color: var(--text); }
+p.lede { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* ── Sections ─────────────────────────────────────────────────────────── */
+section { margin-top: 3.25rem; }
+section:first-of-type { margin-top: 0; }
+
+/* ── Cards ────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+}
+.card + .card { margin-top: 0.75rem; }
+
+/* ── Metric tiles ─────────────────────────────────────────────────────── */
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.metric-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.metric-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.metric-tile {
+  background: var(--bg-elevated);
+  padding: 1.35rem 1.4rem;
+}
+.metric-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 0.55rem;
+}
+.metric-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.metric-value.sm { font-size: 20px; }
+.metric-sub { font-size: 12px; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.5; }
+.metric-value.pos { color: var(--positive); }
+.metric-value.neg { color: var(--negative); }
+.metric-value.neutral { color: var(--text); }
+
+@media (max-width: 800px) {
+  .metric-grid, .metric-grid.cols-3, .metric-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .metric-grid, .metric-grid.cols-3, .metric-grid.cols-2 { grid-template-columns: 1fr; }
+}
+
+/* ── Pills / status tags ──────────────────────────────────────────────── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 3px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--border-strong);
+  white-space: nowrap;
+}
+.pill-pos { color: var(--positive); background: var(--positive-bg); border-color: rgba(63,185,80,0.28); }
+.pill-neg { color: var(--negative); background: var(--negative-bg); border-color: rgba(248,81,73,0.28); }
+.pill-muted { color: var(--text-secondary); background: var(--bg-elevated-2); }
+.pill-amber { color: var(--amber); background: var(--amber-bg); border-color: rgba(210,153,34,0.28); }
+
+/* ── Tables ───────────────────────────────────────────────────────────── */
+/* Wrap any table likely to overflow narrow viewports in <div class="table-scroll">.
+   Scrolls the table horizontally inside its own box instead of widening the page. */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius);
+}
+.table-scroll table { min-width: 560px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th {
+  text-align: left;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+}
+th:not(:first-child), td:not(:first-child) { text-align: right; }
+td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text); }
+tr:last-child td { border-bottom: none; }
+tfoot td { font-weight: 600; border-top: 1px solid var(--border-strong); border-bottom: none; background: var(--bg-elevated-2); }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.pos { color: var(--positive); }
+.neg { color: var(--negative); }
+.muted { color: var(--text-secondary); }
+.tertiary { color: var(--text-tertiary); }
+
+/* ── List of statements ("What the record shows") ────────────────────── */
+.statement-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+.statement-list li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.55;
+}
+.statement-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+}
+
+/* ── Evidence rows (strategy section) ─────────────────────────────────── */
+.evidence-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.evidence-row:last-child { border-bottom: none; }
+.evidence-label { font-size: 13.5px; color: var(--text); max-width: 62%; }
+.evidence-row.emphasis .evidence-label { font-weight: 600; }
+.evidence-row.subdued .evidence-label { color: var(--text-secondary); font-size: 13px; }
+
+@media (max-width: 480px) {
+  .evidence-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .evidence-label { max-width: 100%; }
+  .evidence-row .pill { white-space: normal; }
+}
+
+/* ── Bar chart (segment performance) ──────────────────────────────────── */
+.bar-chart { display: flex; flex-direction: column; gap: 0.85rem; }
+.bar-row { display: grid; grid-template-columns: 150px 1fr 108px; align-items: center; gap: 12px; }
+.bar-row .bar-name { font-size: 12.5px; color: var(--text-secondary); }
+.bar-track { position: relative; height: 22px; background: var(--bg-elevated-2); border-radius: 3px; overflow: hidden; }
+.bar-fill { position: absolute; top: 0; bottom: 0; border-radius: 3px; }
+.bar-fill.pos { background: var(--positive); left: 50%; }
+.bar-fill.neg { background: var(--negative); right: 50%; }
+.bar-zero { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--border-strong); }
+.bar-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 12.5px; text-align: right; }
+
+@media (max-width: 640px) {
+  .bar-row { grid-template-columns: 1fr; gap: 4px; }
+  .bar-row .bar-value { text-align: left; }
+}
+
+/* ── Dashboard link cards ─────────────────────────────────────────────── */
+.link-cards { display: flex; flex-direction: column; gap: 0.75rem; }
+.link-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.4rem;
+  text-decoration: none;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+.link-card:hover { border-color: var(--border-strong); background: var(--bg-elevated-2); }
+.link-card-title { font-size: 14.5px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.link-card-desc { font-size: 12.5px; color: var(--text-secondary); }
+.link-card-meta { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.link-card-arrow { font-size: 17px; color: var(--text-tertiary); flex-shrink: 0; }
+.link-card:hover .link-card-arrow { color: var(--text-secondary); }
+
+@media (max-width: 560px) {
+  .link-card { flex-direction: column; align-items: flex-start; }
+  .link-card-arrow { display: none; }
+}
+
+/* ── Disclosure / noncanonical card ───────────────────────────────────── */
+.disclosure {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  padding: 1.1rem 1.4rem;
+}
+.disclosure p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; }
+.disclosure p + p { margin-top: 0.6rem; }
+
+/* ── Notes / footnotes ────────────────────────────────────────────────── */
+.note { font-size: 11.5px; color: var(--text-tertiary); margin-top: 0.6rem; line-height: 1.55; }
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+.footer {
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  text-align: center;
+  margin-top: 3.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Header / breadcrumb (broker pages) ───────────────────────────────── */
+.breadcrumb { font-size: 12px; color: var(--text-tertiary); margin-bottom: 1.1rem; }
+.breadcrumb a { color: var(--text-secondary); text-decoration: none; }
+.breadcrumb a:hover { color: var(--text); text-decoration: underline; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+/* Grid children are still adjacent DOM siblings, so the stacked-list
+   .card + .card top-margin above also fires here and pushes the second
+   card in each row down, breaking row alignment. Grid gap already spaces
+   cards in both directions, so reset it for any card inside a grid. */
+.grid-2 > .card, .grid-3 > .card, .grid-4 > .card { margin-top: 0; }
+
+/* Tablet: wide grids step down to two columns; grid-2 stays two columns. */
+@media (max-width: 800px) {
+  .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+}
+/* Narrow phone: every card/metric grid collapses to one column. */
+@media (max-width: 480px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}

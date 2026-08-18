@@ -5,68 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zerodha — Jameel Shaikh</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link rel="stylesheet" href="assets/style.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a18; padding: 2rem 1rem; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #141414; color: #f3f3f3; padding: 2rem 1rem; }
   .container { max-width: 960px; margin: 0 auto; }
   h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
-  .subtitle { font-size: 13px; color: #888780; margin-bottom: 2rem; }
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
-  .metric { background: #ebebea; border-radius: 8px; padding: 1rem; }
-  .metric-label { font-size: 12px; color: #888780; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #a8a8a8; margin-bottom: 2rem; }
+  .metric { background: #202020; border-radius: 8px; padding: 1rem; }
+  .metric-label { font-size: 12px; color: #a8a8a8; margin-bottom: 4px; }
   .metric-value { font-size: 22px; font-weight: 500; }
-  .metric-sub { font-size: 11px; color: #888780; margin-top: 2px; }
-  .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
+  .metric-sub { font-size: 11px; color: #a8a8a8; margin-top: 2px; }
+  .card { background: #1c1c1c; border: 0.5px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
   .card-title { font-size: 13px; font-weight: 500; margin-bottom: 1rem; }
-  .green { color: #1D9E75; }
-  .red { color: #D85A30; }
-  .muted { color: #888780; }
+  .green { color: #3fb950; }
+  .red { color: #f85149; }
+  .muted { color: #a8a8a8; }
   .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-  .row-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 0.5px solid rgba(0,0,0,0.06); font-size: 12px; }
+  .row-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 0.5px solid rgba(255,255,255,0.06); font-size: 12px; }
   .row-item:last-child { border-bottom: none; }
   .bar-track { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 6px 0; }
-  .legend { display: flex; gap: 12px; font-size: 11px; color: #888780; }
+  .legend { display: flex; gap: 12px; font-size: 11px; color: #a8a8a8; }
   .legend span { display: flex; align-items: center; gap: 4px; }
   .swatch { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
-  .eq-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 0.5px solid rgba(0,0,0,0.07); font-size: 12px; }
+  .eq-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 0.5px solid rgba(255,255,255,0.07); font-size: 12px; }
   .eq-row:last-child { border-bottom: none; }
   .tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 500; }
-  .tag-learn  { background: #F0EDFF; color: #5B4FBF; }
-  .tag-break  { background: #FFF3DC; color: #8A5C00; }
-  .tag-profit { background: #EAF3DE; color: #3B6D11; }
+  .tag-learn  { background: rgba(168,178,255,0.10); color: #a8a8a8; }
+  .tag-break  { background: rgba(255,255,255,0.08); color: #a8a8a8; }
+  .tag-profit { background: rgba(63,185,80,0.12); color: #3fb950; }
   table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  th { padding: 8px 10px; text-align: left; font-weight: 500; font-size: 11px; color: #888780; background: #f5f5f3; }
+  th { padding: 8px 10px; text-align: left; font-weight: 500; font-size: 11px; color: #a8a8a8; background: #141414; }
   th:not(:first-child) { text-align: right; }
-  td { padding: 7px 10px; border-bottom: 0.5px solid rgba(0,0,0,0.05); }
+  td { padding: 7px 10px; border-bottom: 0.5px solid rgba(255,255,255,0.05); }
   td:not(:first-child) { text-align: right; }
-  tfoot td { font-weight: 500; background: #f5f5f3; border-top: 1px solid rgba(0,0,0,0.1); border-bottom: none; }
-  tr.total-row td { font-weight: 600; border-top: 1px solid rgba(0,0,0,0.1); border-bottom: none; background: #fafaf9; }
-  .note { font-size: 11px; color: #888780; margin-top: 8px; }
+  tfoot td { font-weight: 500; background: #141414; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: none; }
+  tr.total-row td { font-weight: 600; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: none; background: #1f1f1f; }
+  .note { font-size: 11px; color: #a8a8a8; margin-top: 8px; }
   .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; margin-bottom: 1rem; }
-  .resume-box { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
-  .resume-box .label { font-size: 12px; font-weight: 500; color: #888780; margin-bottom: 0.75rem; }
-  .resume-bullets { border-left: 2px solid rgba(0,0,0,0.15); padding-left: 1rem; display: flex; flex-direction: column; gap: 10px; }
+  .resume-box { background: #1c1c1c; border: 0.5px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
+  .resume-box .label { font-size: 12px; font-weight: 500; color: #a8a8a8; margin-bottom: 0.75rem; }
+  .resume-bullets { border-left: 2px solid rgba(255,255,255,0.15); padding-left: 1rem; display: flex; flex-direction: column; gap: 10px; }
   .resume-bullets p { font-size: 13px; line-height: 1.7; }
-  .footer { font-size: 11px; color: #888780; margin-top: 1rem; text-align: center; }
-  @media (max-width: 600px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; } }
+  .footer { font-size: 11px; color: #a8a8a8; margin-top: 1rem; text-align: center; }
 </style>
 </head>
 <body>
 <div class="container">
+<p class="breadcrumb"><a href="index.html">← Trading Journal</a></p>
 
   <!-- 1. HEADER -->
   <h1>Zerodha</h1>
   <p class="subtitle">Jameel Shaikh · EKV*** · NSE F&O + Currency F&O + MCX · FY2021-22 → FY2025-26</p>
 
-  <div class="card" style="border-color:#BA7517;background:#FFF9ED;">
+  <div class="card" style="border-color:#d29922;background:#201c10;">
     <div class="card-title">Evidence note</div>
-    <p class="note" style="margin-top:0;color:#633806;">Tax P&amp;L rows provide dated gross realized P&amp;L. Fiscal charge summaries control exact annual and lifetime net amounts, but a portion of charges cannot be allocated exactly by month. Broker-specific summaries below must not be combined with Angel observations as a continuous monthly net series.</p>
+    <p class="note" style="margin-top:0;color:#c9a860;">Tax P&amp;L rows provide dated gross realized P&amp;L. Fiscal charge summaries control exact annual and lifetime net amounts, but a portion of charges cannot be allocated exactly by month. Broker-specific summaries below must not be combined with Angel observations as a continuous monthly net series.</p>
   </div>
 
   <!-- 2. TOP METRICS -->
-  <div class="grid-4">
+  <div class="grid-3">
     <div class="metric">
       <div class="metric-label">Broker-account adjusted net P&amp;L (5 years)</div>
       <div class="metric-value green">+₹2,54,714</div>
@@ -82,16 +80,13 @@
       <div class="metric-value green">+15.3%</div>
       <div class="metric-sub">Avg deployed: ₹12.43L</div>
     </div>
-    <div class="metric">
-      <div class="metric-label">Realized tax-P&amp;L exit rows</div>
-      <div class="metric-value">5,053</div>
-      <div class="metric-sub">FY2021-22 → FY2025-26 · all realized</div>
-    </div>
   </div>
+  <p class="note">5,053 realized Zerodha tax-P&amp;L exit rows, FY2021-22 → FY2025-26 (FIFO-matched closed lots — not a leg or order count; see README for grain definitions).</p>
 
   <!-- 3. YEAR-BY-YEAR PERFORMANCE -->
   <div class="card">
     <div class="card-title">Year-by-year performance</div>
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>FY</th><th>Phase</th><th>Net P&L</th><th>Avg Capital</th><th>ROI (avg)</th><th>Peak Capital</th><th>ROI (peak)</th></tr>
@@ -103,7 +98,7 @@
           <td class="red">-₹46,226</td>
           <td class="muted">₹0.07L</td><td class="muted">—</td><td class="muted">₹0.40L</td><td class="muted">—</td>
         </tr>
-        <tr style="background:#fafaf9;">
+        <tr style="background:#1f1f1f;">
           <td style="font-weight:500;">FY2022-23</td>
           <td><span class="tag tag-learn">Learning</span></td>
           <td class="red">-₹1,21,811</td>
@@ -115,7 +110,7 @@
           <td class="red">-₹2,964</td>
           <td>₹6.81L</td><td class="muted">—</td><td>₹29.39L</td><td class="muted">—</td>
         </tr>
-        <tr style="background:#fafaf9;">
+        <tr style="background:#1f1f1f;">
           <td style="font-weight:500;">FY2024-25</td>
           <td><span class="tag tag-profit">Profitable</span></td>
           <td class="green" style="font-weight:500;">+₹2,36,065</td>
@@ -134,6 +129,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
     <p class="note">ROI = Net P&L ÷ capital from Zerodha ledger. Learning-phase ROI omitted — capital base too small to be meaningful as a percentage.</p>
   </div>
 
@@ -147,7 +143,7 @@
   <div class="grid-2">
     <div class="card" style="margin-bottom:0;">
       <div class="card-title">F&O — Derivatives</div>
-      <div style="font-size:26px;font-weight:500;margin-bottom:1rem;" class="green">₹3,99,046 <span style="font-size:13px;color:#888780;font-weight:400;">net</span></div>
+      <div style="font-size:26px;font-weight:500;margin-bottom:1rem;" class="green">₹3,99,046 <span style="font-size:13px;color:#a8a8a8;font-weight:400;">net</span></div>
       <div class="stat-grid">
         <div><div class="muted">FY2024-25 P&L</div><div style="font-weight:500;" class="green">+₹2,36,373</div></div>
         <div><div class="muted">FY2025-26 P&L</div><div style="font-weight:500;" class="green">+₹1,89,839</div></div>
@@ -156,17 +152,17 @@
         <div><div class="muted">Profitable FYs</div><div style="font-weight:500;">3 / 5</div></div>
         <div><div class="muted">Learning phase</div><div style="font-weight:500;">FY21–FY23</div></div>
       </div>
-      <div style="border-top:0.5px solid rgba(0,0,0,0.08);padding-top:0.75rem;">
-        <div style="font-size:11px;color:#888780;font-weight:500;margin-bottom:6px;">Approach</div>
+      <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:0.75rem;">
+        <div style="font-size:11px;color:#a8a8a8;font-weight:500;margin-bottom:6px;">Approach</div>
         <div class="bar-track">
-          <div style="width:100%;background:#378ADD;"></div>
+          <div style="width:100%;background:#a8a8a8;"></div>
         </div>
-        <div class="legend"><span><span class="swatch" style="background:#378ADD;"></span>NIFTY/BankNifty options activity</span></div>
+        <div class="legend"><span><span class="swatch" style="background:#a8a8a8;"></span>NIFTY/BankNifty options activity</span></div>
       </div>
     </div>
     <div class="card" style="margin-bottom:0;">
       <div class="card-title">Other segments</div>
-      <div style="font-size:26px;font-weight:500;margin-bottom:1rem;" class="red">-₹1,44,323 <span style="font-size:13px;color:#888780;font-weight:400;">net</span></div>
+      <div style="font-size:26px;font-weight:500;margin-bottom:1rem;" class="red">-₹1,44,323 <span style="font-size:13px;color:#a8a8a8;font-weight:400;">net</span></div>
       <div class="stat-grid">
         <div><div class="muted">Commodity (MCX)</div><div style="font-weight:500;" class="red">-₹83,775</div></div>
         <div><div class="muted">Currency F&O (NSE)</div><div style="font-weight:500;" class="red">-₹50,689</div></div>
@@ -175,9 +171,9 @@
         <div><div class="muted">Commodity exit</div><div style="font-weight:500;">After FY2023-24</div></div>
         <div><div class="muted">Equity style</div><div style="font-weight:500;">Incidental</div></div>
       </div>
-      <div style="border-top:0.5px solid rgba(0,0,0,0.08);padding-top:0.75rem;">
-        <div style="font-size:11px;color:#888780;font-weight:500;margin-bottom:4px;">Decision</div>
-        <div class="eq-row" style="font-size:11px;color:#888780;">Both Currency F&O and MCX Commodity exited after losses. Focus consolidated to NSE index options.</div>
+      <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:0.75rem;">
+        <div style="font-size:11px;color:#a8a8a8;font-weight:500;margin-bottom:4px;">Decision</div>
+        <div class="eq-row" style="font-size:11px;color:#a8a8a8;">Both Currency F&O and MCX Commodity exited after losses. Focus consolidated to NSE index options.</div>
       </div>
     </div>
   </div>
@@ -186,11 +182,11 @@
   <div class="grid-2">
     <div class="card" style="margin-bottom:0;">
       <div class="card-title">Segment totals (5 years)</div>
-      <div class="row-item"><span><span class="dot" style="background:#7F77DD;"></span>F&O (NSE)</span><span class="green" style="font-weight:500;">+₹3,99,046</span></div>
-      <div class="row-item"><span><span class="dot" style="background:#D85A30;"></span>Commodity (MCX)</span><span class="red">-₹83,775</span></div>
-      <div class="row-item"><span><span class="dot" style="background:#E8A020;"></span>Currency F&O (NSE)</span><span class="red">-₹50,689</span></div>
-      <div class="row-item"><span><span class="dot" style="background:#378ADD;"></span>Equity (NSE)</span><span class="red">-₹9,868</span></div>
-      <div class="row-item" style="border-top:0.5px solid rgba(0,0,0,0.1);margin-top:4px;padding-top:8px;">
+      <div class="row-item"><span><span class="dot" style="background:#3fb950;"></span>F&O (NSE)</span><span class="green" style="font-weight:500;">+₹3,99,046</span></div>
+      <div class="row-item"><span><span class="dot" style="background:#f85149;"></span>Commodity (MCX)</span><span class="red">-₹83,775</span></div>
+      <div class="row-item"><span><span class="dot" style="background:#f85149;"></span>Currency F&O (NSE)</span><span class="red">-₹50,689</span></div>
+      <div class="row-item"><span><span class="dot" style="background:#f85149;"></span>Equity (NSE)</span><span class="red">-₹9,868</span></div>
+      <div class="row-item" style="border-top:0.5px solid rgba(255,255,255,0.1);margin-top:4px;padding-top:8px;">
         <span style="font-weight:500;">Net total</span><span class="green" style="font-weight:600;">+₹2,54,714</span>
       </div>
     </div>
@@ -221,27 +217,29 @@
   <!-- 9. ANNUAL BREAKDOWN TABLE (replaces monthly table) -->
   <div class="card">
     <div class="card-title">Annual breakdown — all segments</div>
+    <div class="table-scroll">
     <table>
       <thead><tr><th>FY</th><th>F&O (NSE)</th><th>Currency F&O</th><th>Commodity (MCX)</th><th>Equity (NSE)</th><th>Net P&L</th></tr></thead>
       <tbody>
         <tr><td style="font-weight:500;">FY2021-22</td><td class="red">-₹37,194</td><td class="muted">—</td><td class="red">-₹8,969</td><td class="red">-₹63</td><td class="red">-₹46,226</td></tr>
-        <tr style="background:#fafaf9;"><td style="font-weight:500;">FY2022-23</td><td class="red">-₹19,275</td><td class="red">-₹45,812</td><td class="red">-₹55,178</td><td class="red">-₹1,546</td><td class="red">-₹1,21,811</td></tr>
+        <tr style="background:#1f1f1f;"><td style="font-weight:500;">FY2022-23</td><td class="red">-₹19,275</td><td class="red">-₹45,812</td><td class="red">-₹55,178</td><td class="red">-₹1,546</td><td class="red">-₹1,21,811</td></tr>
         <tr><td style="font-weight:500;">FY2023-24</td><td class="green">+₹29,304</td><td class="red">-₹4,877</td><td class="red">-₹19,628</td><td class="red">-₹7,763</td><td class="red">-₹2,964</td></tr>
-        <tr style="background:#fafaf9;"><td style="font-weight:500;">FY2024-25</td><td class="green" style="font-weight:500;">+₹2,36,373</td><td class="muted">—</td><td class="muted">—</td><td class="red">-₹308</td><td class="green" style="font-weight:500;">+₹2,36,065</td></tr>
+        <tr style="background:#1f1f1f;"><td style="font-weight:500;">FY2024-25</td><td class="green" style="font-weight:500;">+₹2,36,373</td><td class="muted">—</td><td class="muted">—</td><td class="red">-₹308</td><td class="green" style="font-weight:500;">+₹2,36,065</td></tr>
         <tr><td style="font-weight:500;">FY2025-26</td><td class="green" style="font-weight:500;">+₹1,89,839</td><td class="muted">—</td><td class="muted">—</td><td class="red">-₹188</td><td class="green" style="font-weight:500;">+₹1,89,651</td></tr>
       </tbody>
       <tfoot><tr><td>Total</td><td class="green">+₹3,99,046</td><td class="red">-₹50,689</td><td class="red">-₹83,775</td><td class="red">-₹9,868</td><td class="green">+₹2,54,714</td></tr></tfoot>
     </table>
+    </div>
   </div>
 
   <!-- 10. STRATEGY OVERVIEW -->
   <div class="card">
     <div class="card-title">Strategy overview</div>
-    <div style="font-size:12px;line-height:1.9;color:#444;">
-      <strong>Instrument:</strong> NIFTY & BankNifty options (NSE) + currency futures/options (NSE, exited FY2023-24) + commodity futures (MCX, exited FY2023-24)<br>
-      <strong>Approach:</strong> Options and derivatives activity with bounded multi-leg strategy experience; Zerodha records contain no leg-level execution data, so available records do not establish lifetime multi-leg prevalence, and neither short-premium nor long-premium orientation is verified<br>
-      <strong>Trajectory:</strong> FY2021-22 → FY2022-23 learning across multiple segments, FY2023-24 consolidation to NSE options, FY2024-25 → FY2025-26 consistent profitability<br>
-      <strong>Segment exits:</strong> Currency F&amp;O (-₹50,689 across 173 tax-exit rows) and MCX Commodity (-₹83,775) both exited after FY2023-24; focus consolidated to NSE index options
+    <div style="font-size:12px;line-height:1.9;color:var(--text-secondary);">
+      <strong style="color:var(--text);">Instrument:</strong> NIFTY & BankNifty options (NSE) + currency futures/options (NSE, exited FY2023-24) + commodity futures (MCX, exited FY2023-24)<br>
+      <strong style="color:var(--text);">Approach:</strong> Options and derivatives activity with bounded multi-leg strategy experience; Zerodha records contain no leg-level execution data, so available records do not establish lifetime multi-leg prevalence, and neither short-premium nor long-premium orientation is verified<br>
+      <strong style="color:var(--text);">Trajectory:</strong> FY2021-22 → FY2022-23 learning across multiple segments, FY2023-24 consolidation to NSE options, FY2024-25 → FY2025-26 consistent profitability<br>
+      <strong style="color:var(--text);">Segment exits:</strong> Currency F&amp;O (-₹50,689 across 173 tax-exit rows) and MCX Commodity (-₹83,775) both exited after FY2023-24; focus consolidated to NSE index options
     </div>
   </div>
 
@@ -259,34 +257,37 @@
 
 </div>
 <script>
+Chart.defaults.color = '#a8a8a8';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.08)';
+Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
 const fyLabels = ['FY2021-22','FY2022-23','FY2023-24','FY2024-25','FY2025-26'];
 const fyData   = [-46226, -121811, -2964, 236065, 189651];
 new Chart(document.getElementById('fyChart'), {
   type: 'bar',
-  data: { labels: fyLabels, datasets: [{ data: fyData, backgroundColor: fyData.map(v=>v>=0?'#1D9E75':'#D85A30'), borderRadius: 4 }] },
+  data: { labels: fyLabels, datasets: [{ data: fyData, backgroundColor: fyData.map(v=>v>=0?'#3fb950':'#f85149'), borderRadius: 4 }] },
   options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-    scales: { x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.04)' } }, y: { ticks: { callback: v => (v<0?'-':'')+'₹'+(Math.abs(v)/1000).toFixed(0)+'K' }, grid: { color: 'rgba(0,0,0,0.04)' } } } }
+    scales: { x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.04)' } }, y: { ticks: { callback: v => (v<0?'-':'')+'₹'+(Math.abs(v)/1000).toFixed(0)+'K' }, grid: { color: 'rgba(255,255,255,0.04)' } } } }
 });
 
 new Chart(document.getElementById('roiChart'), {
   type: 'bar',
   data: { labels: ['FY2024-25','FY2025-26'],
     datasets: [
-      { label: 'ROI on avg capital', data: [22.3, 15.3], backgroundColor: '#1D9E75', borderRadius: 4 },
-      { label: 'ROI on peak capital', data: [10.4, 8.8], backgroundColor: '#A8D5C2', borderRadius: 4 }
+      { label: 'ROI on avg capital', data: [22.3, 15.3], backgroundColor: '#3fb950', borderRadius: 4 },
+      { label: 'ROI on peak capital', data: [10.4, 8.8], backgroundColor: '#2f6b45', borderRadius: 4 }
     ]
   },
   options: { responsive: true, maintainAspectRatio: false,
     plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } } },
-    scales: { x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.04)' } }, y: { ticks: { callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.04)' } } } }
+    scales: { x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.04)' } }, y: { ticks: { callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,0.04)' } } } }
 });
 
 const fnoByYear = [-37194, -19275, 29304, 236373, 189839];
 new Chart(document.getElementById('annualTrendChart'), {
   type: 'bar',
-  data: { labels: fyLabels, datasets: [{ label: 'F&O net P&L', data: fnoByYear, backgroundColor: fnoByYear.map(v=>v>=0?'#1D9E75':'#D85A30'), borderRadius: 4 }] },
+  data: { labels: fyLabels, datasets: [{ label: 'F&O net P&L', data: fnoByYear, backgroundColor: fnoByYear.map(v=>v>=0?'#3fb950':'#f85149'), borderRadius: 4 }] },
   options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-    scales: { x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.04)' } }, y: { ticks: { callback: v => (v<0?'-':'')+'₹'+(Math.abs(v)/1000).toFixed(0)+'K' }, grid: { color: 'rgba(0,0,0,0.04)' } } } }
+    scales: { x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.04)' } }, y: { ticks: { callback: v => (v<0?'-':'')+'₹'+(Math.abs(v)/1000).toFixed(0)+'K' }, grid: { color: 'rgba(255,255,255,0.04)' } } } }
 });
 </script>
 </body>
